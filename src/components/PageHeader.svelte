@@ -18,27 +18,29 @@
   </nav>
 </div>
 
-<style>
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: calc(100vw - 3rem);
-  padding: 1.5rem;
-  background-color: var(--color1);
-}
+<style lang="scss">
+  @use "/src/lib/config.scss";
 
-.header-img {
-  height: 1.25rem;
-}
+  .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100vw - 3rem);
+    padding: 1.5rem;
+    background-color: config.$color1;
+  }
 
-.header > nav {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: end;
-  align-items: center;
-  color: blue;
-  column-gap: 2rem;
-}
+  .header-img {
+    height: 1.25rem;
+  }
+
+  .header > nav {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: end;
+    align-items: center;
+    color: blue;
+    column-gap: 2rem;
+  }
 </style>
