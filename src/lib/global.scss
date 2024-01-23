@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Filson Pro";
+  src: url("/FilsonProHeavy.ttf");
+}
+
+@font-face {
+  font-family: Moderat;
+  src: url("/ModeratMedium.ttf");
+}
+
+:root {
+  font-size: 16px;
+  font-family: Moderat;
+}
+
 * {
   margin: 0;
   padding: 0;

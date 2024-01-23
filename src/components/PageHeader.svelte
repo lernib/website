@@ -26,7 +26,6 @@
   align-items: center;
   width: calc(100vw - 3rem);
   padding: 1.5rem;
-  font-size: 0.75rem;
   background-color: var(--color1);
 }
 
