@@ -1,0 +1,39 @@
+<script lang="ts">
+  import PageHero from '$components/PageHero.svelte'
+</script>
+
+
+<PageHero half>
+  <div class="hero-center">
+    <h1>
+      Plans &amp; Pricing
+    </h1>
+    <h2>
+      Pick the best plan for your needs. Upgrade at any time. No
+      <br />
+      hidden charges, no questions, no hassle.
+    </h2>
+  </div>
+</PageHero>
+
+<style lang="scss">
+  .hero-center {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    > h1 {
+      font-size: 5rem;
+      text-align: center;
+      font-family: "Filson Pro";
+    }
+    
+    > h2 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+  }
+</style>
