@@ -1,5 +1,6 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
+  import Benefit from './Benefit.svelte'
 </script>
 
 <PageHero>
@@ -43,7 +44,68 @@
     <img src="/positive-mixed-race-male-female-look-joyfully-each-other-work-research.jpg"
       alt="Happy tutor and student" />
   </div>
-  <div />
+  <div>
+    <Benefit
+      src="/icons/natural.svg"
+      title="Natural"
+    >
+      We teach like a caring parent,
+      <br />
+      and never like a monotone
+      <br />
+      lecture hall professor.
+    </Benefit>
+    <Benefit
+      src="/icons/efficient.svg"
+      title="Efficient"
+    >
+      We use simple examples and
+      <br />
+      real-life scenarios to teach
+      <br />
+      things in a fraction of the time.
+    </Benefit>
+    <Benefit
+      src="/icons/flexible.svg"
+      title="Flexible"
+    >
+      Our tutoring sessions have no
+      <br />
+      default structure. What's on
+      <br />
+      your mind?
+    </Benefit>
+    <Benefit
+      src="/icons/direct.svg"
+      title="Direct"
+    >
+      We don't waste time, or push
+      <br />
+      you to spend more than you
+      <br />
+      actually should
+    </Benefit>
+    <Benefit
+      src="/icons/inspiring.svg"
+      title="Inspiring"
+    >
+      Do you have any long-term
+      <br />
+      goals? We give you advice on
+      <br />
+      how to achieve them.
+    </Benefit>
+    <Benefit
+      src="/icons/accomodating.svg"
+      title="Accomodating"
+    >
+      We work well with various
+      <br />
+      learning differences, from
+      <br />
+      ADHD to Dyslexia.
+    </Benefit>
+  </div>
 </div>
 <div class="subjects">
   <h1>
@@ -119,35 +181,43 @@
   .benefits {
     width: 100vw;
     height: 90vh;
-    background-color: var(--color1_2);
+    background-color: config.$color1_2;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: start;
     padding-top: 2rem;
-  }
+    column-gap: 4rem;
 
-  .benefits > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: start;
-    width: 45%;
-  }
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      width: 45%;
+    }
 
-  .benefits h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-  }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
 
-  .benefits span {
-    font-size: 1.25rem;
-  }
+    span {
+      font-size: 1.25rem;
+    }
 
-  .benefits > div:first-child img {
-    width: 75%;
-    margin-top: 2rem;
-    border-radius: 2rem;
+    > div:first-child img {
+      width: 75%;
+      margin-top: 2rem;
+      border-radius: 2rem;
+    }
+
+    > div:last-child {
+      display: grid;
+      grid-template-rows: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+      align-self: stretch;
+    }
   }
 
   .subjects {
