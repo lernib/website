@@ -18,6 +18,9 @@
       <a href={url}>{text}</a>
     {/each}
   </nav>
+  <button>
+    Get Started
+  </button>
 </div>
 
 <style lang="scss">
@@ -42,7 +45,22 @@
     flex-direction: row-reverse;
     justify-content: end;
     align-items: center;
-    color: blue;
     column-gap: 2rem;
+
+    a {
+      padding: 0.5em 1em;
+      border: 3px solid config.$color2;
+      border-radius: 9999px;
+      font-weight: bold;
+    }
+  }
+
+  button {
+    background-color: config.$color2;
+    color: config.$color1;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 9999px;
+    font-weight: bold;
   }
 </style>
