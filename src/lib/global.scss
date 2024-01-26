@@ -1,11 +1,29 @@
 @font-face {
   font-family: "Filson Pro";
   src: url("/FilsonProHeavy.ttf");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @font-face {
   font-family: Moderat;
   src: url("/ModeratMedium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Moderat;
+  src: url("/ModeratBold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Moderat;
+  src: url("/ModeratBlack.ttf");
+  font-weight: 900;
+  font-style: normal;
 }
 
 :root {

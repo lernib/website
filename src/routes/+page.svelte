@@ -1,9 +1,8 @@
 <script lang="ts">
-  import PageHeader from '$components/PageHeader.svelte'
+  import PageHero from '$components/PageHero.svelte'
 </script>
 
-<div class="hero">
-  <PageHeader />
+<PageHero>
   <div class="hero-center">
     <h1>
       Learn faster and better
@@ -24,7 +23,7 @@
   <span class="hero-promo">
     Get your first session free of charge. Contact us to get started.
   </span>
-</div>
+</PageHero>
 <div class="benefits">
   <div>
     <h1>
@@ -72,20 +71,6 @@
   @use "/src/lib/config";
 
   :global(body) {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-  }
-
-  .hero {
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    background-image: url("/herobg.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: start;

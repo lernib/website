@@ -7,10 +7,12 @@
 </script>
 
 <div class="header">
-  <img class="header-img"
-    src="/logo128.png"
-    alt="logo"
-  />
+  <a href="/">
+    <img class="header-img"
+      src="/logo128.png"
+      alt="logo"
+    />
+  </a>
   <nav>
     {#each LINKS as [url, text]}
       <a href={url}>{text}</a>
