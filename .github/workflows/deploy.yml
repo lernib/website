@@ -45,8 +45,7 @@ jobs:
   deploy:
     name: Deploy to AWS
     needs: build
-    runs-on: ubuntu-latest
-    environment: Dev
+    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
     permissions:
       id-token: write
       contents: read
