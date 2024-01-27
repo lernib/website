@@ -33,7 +33,11 @@ jobs:
       run: npm ci
     - name: Build SvelteKit
       run: npm run build
+    - name: Remove old artifacts
+      run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/ --recursive
     - name: Copy build artifacts to S3
-      run: aws s3 cp build s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/ --recursive
+      run: aws s3 cp build s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/build/ --recursive
     - name: Copy static assets to S3
       run: aws s3 cp static s3://${{ secrets.AWS_BUCKET_NAME }}/static/ --recursive
+    - name: Copy package.json to S3
+      run: aws s3 cp package.json s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/package.json
