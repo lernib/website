@@ -1,8 +1,6 @@
 #!/bin/bash
 set -xe
 
-
-
 ##############################
 # INSTALL HTTPD
 ##############################
@@ -13,9 +11,9 @@ yum install httpd -y
 # CONFIGURE HTTPD
 ##############################
 rm -f /etc/httpd/conf/httpd.conf
-cp /usr/local/codedeployresources/httpd.conf /etc/http/conf/httpd.conf
-cp /usr/local/codedeployresources/site.conf /etc/http/conf.d/site.conf
-cp /usr/local/codedeployresources/site-ssl.conf /etc/http/conf.d/site-ssl.conf.disabled
+cp /usr/local/codedeployresources/httpd.conf /etc/httpd/conf/httpd.conf
+cp /usr/local/codedeployresources/site.conf /etc/httpd/conf.d/site.conf
+cp /usr/local/codedeployresources/site-ssl.conf /etc/httpd/conf.d/site-ssl.conf.disabled
 
 yum install certbot -y
 certbot certonly --apache --non-interactive --agree-tos --email support@lernib.com -d lernib.com -d www.lernib.com
