@@ -9,7 +9,7 @@ Restart=always
 RestartSec=1
 User=ec2-user
 ExecStart=/bin/bash -l -c 'exec "$@"' _ node build
-WorkingDirectory=/var/app
+WorkingDirectory=/home/ec2-user/app
 
 [Install]
 WantedBy=multi-user.target
