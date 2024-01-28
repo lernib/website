@@ -8,6 +8,9 @@ hooks:
     - location: aws/scripts/before-install.sh
       timeout: 300
       runas: root
+    - location: aws/scripts/before-install-nopriv.sh
+      timeout: 300
+      runas: ec2-user
   AfterInstall:
     - location: aws/scripts/after-install.sh
       timeout: 300
