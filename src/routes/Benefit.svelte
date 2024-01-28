@@ -10,12 +10,22 @@
 </div>
 
 <style lang="scss">
+  @use "/src/lib/config";
+
   div {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
     row-gap: 0.5rem;
+
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      justify-content: start;
+      align-items: start;
+      margin-top: 0;
+    }
   }
 
   h1 {

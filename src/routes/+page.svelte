@@ -7,7 +7,7 @@
   <div class="hero-center">
     <h1>
       Learn faster and better
-      <br />
+      <br class="nomobile" />
       through personalized
       <br />
       tutoring
@@ -22,7 +22,9 @@
     <a href="/get-started">Get Started</a>
   </div>
   <span class="hero-promo">
-    Get your first session free of charge. Contact us to get started.
+    Get your first session free of charge.
+    <br class="mobile" />
+    Contact us to get started.
   </span>
 </PageHero>
 <div class="benefits">
@@ -143,19 +145,35 @@
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+
+    justify-content: start;
+    margin-top: 2.5rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      justify-content: center;
+      margin-top: 0;
+    }
     
     > h1 {
-      font-size: 5rem;
+      font-size: 2.5rem;
       text-align: center;
       font-family: "Filson Pro";
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 5rem;
+      }
     }
     
     > h2 {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       text-align: center;
+      margin: 0 2rem;
       margin-top: 1.5rem;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 1.5rem;
+      }
     }
     
     > a {
@@ -176,47 +194,91 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    margin-top: 3rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      margin-top: 0;
+    }
   }
 
   .benefits {
     width: 100vw;
-    height: 90vh;
     background-color: config.$color1_2;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: start;
     padding-top: 2rem;
     column-gap: 4rem;
 
+    height: fit-content;
+    flex-direction: column;
+    align-items: center;
+
+    @include config.for-size(tablet-portrait-up) {
+      height: 90vh;
+      flex-direction: row;
+      align-items: start;
+    }
+
     > div {
       display: flex;
       flex-direction: column;
       justify-content: start;
-      align-items: start;
-      width: 45%;
+      padding: 0 2.5rem;
+
+      align-items: center;
+
+      @include config.for-size(tablet-portrait-up) {
+        align-items: start;
+        width: 45%;
+      }
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: bold;
+      text-align: center;
+
+      @include config.for-size(tablet-portrait-up) {
+        text-align: start;
+        font-size: 2.5rem;
+      }
     }
 
     span {
-      font-size: 1.25rem;
+      margin-top: 1.5em;
+      text-align: center;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 1.25rem;
+        text-align: start;
+        margin-top: 0;
+      }
     }
 
     > div:first-child img {
-      width: 75%;
       margin-top: 2rem;
       border-radius: 2rem;
+      width: 100%;
+
+      @include config.for-size(tablet-portrait-up) {
+        width: 75%;
+      }
     }
 
     > div:last-child {
-      display: grid;
-      grid-template-rows: repeat(3, 1fr);
-      grid-template-columns: repeat(2, 1fr);
-      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+
+      @include config.for-size(tablet-portrait-up) {
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        align-self: stretch;
+      }
     }
   }
 

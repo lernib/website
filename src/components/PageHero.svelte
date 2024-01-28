@@ -4,18 +4,20 @@
   export let half = false;
 </script>
 
-<div class="hero" style="max-height: {half ? '50vh' : '100vh'}">
+<div class="hero" style="{half ? 'max-height: 50vh' : ''}">
   <PageHeader />
   <slot />
 </div>
 
 
 <style lang="scss">
+  @use "/src/lib/config.scss";
+
   .hero {
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
     max-width: 100vw;
-    max-height: 100vh;
+    max-height: fit-content;
     background-image: url("/herobg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -23,5 +25,10 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
+
+    @include config.for-size(tablet-portrait-up) {
+      max-height: 100vh;
+      height: 100vh;
+    }
   }
 </style>
