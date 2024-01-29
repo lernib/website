@@ -6,8 +6,10 @@
 <PageHero>
   <div class="hero-center">
     <h1>
-      Learn faster and better
-      <br class="nomobile" />
+      Learn faster and
+      <br class="nomobile tablet-portrait" />
+      better
+      <br class="nomobile notablet-portrait" />
       through personalized
       <br />
       tutoring
@@ -150,7 +152,7 @@
     justify-content: start;
     margin-top: 2.5rem;
 
-    @include config.for-size(tablet-portrait-up) {
+    @include config.for-size(tablet-landscape-up) {
       justify-content: center;
       margin-top: 0;
     }
@@ -161,6 +163,10 @@
       font-family: "Filson Pro", sans-serif;
 
       @include config.for-size(tablet-portrait-up) {
+        font-size: 4rem;
+      }
+
+      @include config.for-size(tablet-landscape-up) {
         font-size: 5rem;
       }
     }
@@ -197,7 +203,7 @@
     text-align: center;
     margin-top: 3rem;
 
-    @include config.for-size(tablet-portrait-up) {
+    @include config.for-size(tablet-landscape-up) {
       margin-top: 0;
     }
   }
@@ -216,9 +222,12 @@
     align-items: center;
 
     @include config.for-size(tablet-portrait-up) {
-      height: 90vh;
       flex-direction: row;
       align-items: start;
+    }
+
+    @include config.for-size(tablet-landscape-up) {
+      height: 90vh;
     }
 
     > div {
@@ -262,7 +271,7 @@
       border-radius: 2rem;
       width: 100%;
 
-      @include config.for-size(tablet-portrait-up) {
+      @include config.for-size(tablet-landscape-up) {
         width: 75%;
       }
     }
@@ -275,9 +284,16 @@
 
       @include config.for-size(tablet-portrait-up) {
         display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: 1fr;
+        align-self: stretch;
+        flex-grow: 1;
+      }
+
+      @include config.for-size(tablet-landscape-up) {
         grid-template-rows: repeat(3, 1fr);
         grid-template-columns: repeat(2, 1fr);
-        align-self: stretch;
+        flex-grow: 0;
       }
     }
   }
@@ -292,6 +308,15 @@
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
+    margin-top: 2rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      margin-top: 3rem;
+    }
+
+    @include config.for-size(tablet-landscape-up) {
+      margin-top: 0;
+    }
   }
 
   .our-aim {

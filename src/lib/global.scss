@@ -54,4 +54,14 @@
   .mobile {
     display: none;
   }
+
+  .notablet-portrait {
+    display: none;
+  }
+}
+
+@include config.for-size(tablet-landscape-up) {
+  .tablet-portrait {
+    display: none;
+  }
 }
