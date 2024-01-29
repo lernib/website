@@ -17,9 +17,9 @@
       alt="logo"
     />
   </a>
-  <nav>
+  <nav class="nomobile">
     {#each LINKS as [url, text]}
-      <a href={url}>{text}</a>
+      <a href={url} class="nomobile">{text}</a>
     {/each}
   </nav>
   <a href={SIGNIN_URL} class="signin-button">

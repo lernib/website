@@ -1,3 +1,5 @@
+@use "/src/lib/config.scss";
+
 @font-face {
   font-family: "Filson Pro";
   src: url("/FilsonProHeavy.ttf");
@@ -28,7 +30,7 @@
 
 :root {
   font-size: 16px;
-  font-family: Moderat;
+  font-family: Moderat, sans-serif;
 }
 
 * {
@@ -40,4 +42,26 @@
   font-family: inherit;
   font-style: inherit;
   color: inherit;
+}
+
+@include config.for-size(phone-only) {
+  .nomobile {
+    display: none;
+  }
+}
+
+@include config.for-size(tablet-portrait-up) {
+  .mobile {
+    display: none;
+  }
+
+  .notablet-portrait {
+    display: none;
+  }
+}
+
+@include config.for-size(tablet-landscape-up) {
+  .tablet-portrait {
+    display: none;
+  }
 }
