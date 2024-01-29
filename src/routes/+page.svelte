@@ -1,7 +1,12 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
   import Benefit from './Benefit.svelte'
+  import SuccessTile from './SuccessTile.svelte'
 </script>
+
+<svelte:head>
+  <title>Homepage | Lernib</title>
+</svelte:head>
 
 <PageHero>
   <div class="hero-center">
@@ -131,6 +136,37 @@
 </div>
 <div class="success">
   <h1>Success stories from past students</h1>
+  <div class="tiles">
+    <SuccessTile first>
+      <span>
+        Lernib has successfully
+        <br />
+        tutored over
+        <br />
+        1000
+        <br />
+        students to achieve
+        <br />
+        their goals and unlock
+        <br />
+        their full potential.
+      </span>
+    </SuccessTile>
+    <SuccessTile name="Logan Horton">
+      Logan was hesitant to work with a tutor but
+      after meeting Carlos he was more optimistic
+      and willing to work with someone. I really
+      appreciate Carlos taking time to get to know
+      Logan and sharing his own experiences in
+      learning.
+    </SuccessTile>
+    <SuccessTile name="Skylar Peng">
+      Carlos is a very professional tutor.
+      He trained my six-year-old daughter,
+      basic skills of coding and helped her
+      become interested in codine through coding games.
+    </SuccessTile>
+  </div>
 </div>
 
 <style lang="scss">
@@ -221,13 +257,14 @@
     flex-direction: column;
     align-items: center;
 
-    @include config.for-size(tablet-portrait-up) {
+    @include config.for-size(tablet-portrait) {
       flex-direction: row;
       align-items: start;
     }
 
     @include config.for-size(tablet-landscape-up) {
       height: 90vh;
+      flex-direction: row;
     }
 
     > div {
@@ -347,11 +384,36 @@
   .success {
     width: 100%;
     padding: 2rem 0;
-  }
 
-  .success h1 {
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    
+    h1 {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 3rem;
+    }
+
+    .tiles {
+      width: fit-content;
+      display: grid;
+      margin: 0 3rem;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(4, 1fr);
+
+      @include config.for-size(tablet-portrait) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
+
+      @include config.for-size(tablet-landscape-up) {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr;
+      }
+    }
   }
 </style>
