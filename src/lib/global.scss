@@ -50,7 +50,7 @@
   }
 }
 
-@include config.for-size(tablet-portrait-up) {
+@include config.for-size(tablet-portrait) {
   .mobile {
     display: none;
   }
@@ -61,7 +61,7 @@
 }
 
 @include config.for-size(tablet-landscape-up) {
-  .tablet-portrait {
+  .mobile, .tablet-portrait {
     display: none;
   }
 }
