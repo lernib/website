@@ -4,6 +4,10 @@
   import SuccessTile from './SuccessTile.svelte'
 </script>
 
+<svelte:head>
+  <title>Homepage | Lernib</title>
+</svelte:head>
+
 <PageHero>
   <div class="hero-center">
     <h1>

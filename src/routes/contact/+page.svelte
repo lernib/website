@@ -2,6 +2,9 @@
   import PageHero from '$components/PageHero.svelte'
 </script>
 
+<svelte:head>
+  <title>Contact | Lernib</title>
+</svelte:head>
 
 <PageHero half>
   <div class="hero-center">
