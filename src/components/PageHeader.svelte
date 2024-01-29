@@ -1,9 +1,13 @@
 <script lang="ts">
+  import { HOMEPAGE_URL } from "$lib/config"
+
   const LINKS = [
     ["/contact", "Contact"],
     ["/pricing", "Pricing"],
     ["/about", "About"]
   ]
+
+  const SIGNIN_URL = `https://auth.lernib.com/oauth2/authorize?client_id=432a81mkvmou1q654j2lmvc5uu&response_type=code&scope=email+openid+phone&redirect_uri=${HOMEPAGE_URL}`
 </script>
 
 <div class="header">
@@ -18,9 +22,9 @@
       <a href={url}>{text}</a>
     {/each}
   </nav>
-  <button>
+  <a href={SIGNIN_URL} class="signin-button">
     Get Started
-  </button>
+  </a>
 </div>
 
 <style lang="scss">
@@ -55,7 +59,7 @@
     }
   }
 
-  button {
+  .signin-button {
     background-color: config.$color2;
     color: config.$color1;
     padding: 0.75em 1.5em;
