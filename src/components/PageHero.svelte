@@ -27,8 +27,7 @@
     align-items: center;
 
     @include config.for-size(tablet-portrait-up) {
-      max-height: 100vh;
-      height: 100vh;
+      min-height: 100vh;
     }
   }
 </style>

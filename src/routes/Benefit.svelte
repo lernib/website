@@ -24,6 +24,9 @@
     @include config.for-size(tablet-portrait-up) {
       justify-content: start;
       align-items: start;
+    }
+
+    @include config.for-size(tablet-landscape-up) {
       margin-top: 0;
     }
   }
