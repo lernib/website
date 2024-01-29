@@ -158,7 +158,7 @@
     > h1 {
       font-size: 2.5rem;
       text-align: center;
-      font-family: "Filson Pro";
+      font-family: "Filson Pro", sans-serif;
 
       @include config.for-size(tablet-portrait-up) {
         font-size: 5rem;

@@ -29,7 +29,7 @@
     > h1 {
       font-size: 5rem;
       text-align: center;
-      font-family: "Filson Pro";
+      font-family: "Filson Pro", sans-serif;
     }
     
     > h2 {
