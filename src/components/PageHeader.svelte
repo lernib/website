@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { getSigninUrl } from "$lib/config"
+  import { authStore } from "$lib/stores"
+
   const LINKS = [
     ["/contact", "Contact"],
     ["/pricing", "Pricing"],
@@ -18,9 +21,15 @@
       <a href={url} class="nomobile">{text}</a>
     {/each}
   </nav>
-  <button>
-    Get Started
-  </button>
+  {#if !$authStore}
+    <a href={getSigninUrl()} class="signin-button">
+      Get Started
+    </a>
+  {:else}
+    <a href="/auth?action=logout">
+      {$authStore['cognito:username']}
+    </a>
+  {/if}
 </div>
 
 <style lang="scss">
@@ -55,7 +64,7 @@
     }
   }
 
-  button {
+  .signin-button {
     background-color: config.$color2;
     color: config.$color1;
     padding: 0.75em 1.5em;
