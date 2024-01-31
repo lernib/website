@@ -10,10 +10,6 @@
   ]
 
   const SIGNIN_URL = `https://auth.lernib.com/oauth2/authorize?client_id=${env.PUBLIC_COGNITO_CLIENT_ID}&response_type=code&scope=email+openid+phone&redirect_uri=${REDIRECT_URL}`
-
-  if ($authStore) {
-    console.log($authStore);
-  }
 </script>
 
 <div class="header">
@@ -33,9 +29,9 @@
       Get Started
     </a>
   {:else}
-    <span>
+    <a href="/auth?action=logout">
       {$authStore['cognito:username']}
-    </span>
+    </a>
   {/if}
 </div>
 
