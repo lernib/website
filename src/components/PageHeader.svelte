@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getSigninUrl } from "$lib/config"
+  import { getSigninUrl, getSignoutUrl } from "$lib/config"
   import { authStore } from "$lib/stores"
 
   const LINKS = [
@@ -26,7 +26,7 @@
       Get Started
     </a>
   {:else}
-    <a href="/auth?action=logout">
+    <a href={getSignoutUrl()}>
       {$authStore['cognito:username']}
     </a>
   {/if}
