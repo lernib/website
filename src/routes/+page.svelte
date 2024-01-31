@@ -1,7 +1,7 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
-  import Benefit from './Benefit.svelte'
-  import SuccessTile from './SuccessTile.svelte'
+  import Benefit from '$components/Benefit.svelte'
+  import SuccessTile from '$components/SuccessTile.svelte'
 </script>
 
 <svelte:head>

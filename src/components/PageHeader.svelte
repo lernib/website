@@ -1,6 +1,7 @@
 <script lang="ts">
   import { REDIRECT_URL } from "$lib/config"
   import { env } from "$env/dynamic/public"
+  import { authStore } from "$lib/stores"
 
   const LINKS = [
     ["/contact", "Contact"],
@@ -9,6 +10,10 @@
   ]
 
   const SIGNIN_URL = `https://auth.lernib.com/oauth2/authorize?client_id=${env.PUBLIC_COGNITO_CLIENT_ID}&response_type=code&scope=email+openid+phone&redirect_uri=${REDIRECT_URL}`
+
+  if ($authStore) {
+    console.log($authStore);
+  }
 </script>
 
 <div class="header">
@@ -23,9 +28,15 @@
       <a href={url} class="nomobile">{text}</a>
     {/each}
   </nav>
-  <a href={SIGNIN_URL} class="signin-button">
-    Get Started
-  </a>
+  {#if !$authStore}
+    <a href={SIGNIN_URL} class="signin-button">
+      Get Started
+    </a>
+  {:else}
+    <span>
+      {$authStore['cognito:username']}
+    </span>
+  {/if}
 </div>
 
 <style lang="scss">
