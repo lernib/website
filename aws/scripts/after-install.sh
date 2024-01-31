@@ -22,5 +22,9 @@ mv /etc/httpd/conf.d/site-ssl.conf.disabled /etc/httpd/conf.d/site-ssl.conf
 systemctl restart httpd
 
 mv /usr/local/codedeployresources/site.service /etc/systemd/system/site.service
+
 systemctl enable site
 systemctl start site
+
+systemctl enable httpd
+systemctl start httpd
