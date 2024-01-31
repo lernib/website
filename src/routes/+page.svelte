@@ -1,7 +1,7 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
-  import Benefit from './Benefit.svelte'
-  import SuccessTile from './SuccessTile.svelte'
+  import Benefit from '$components/Benefit.svelte'
+  import SuccessTile from '$components/SuccessTile.svelte'
 </script>
 
 <svelte:head>
@@ -35,24 +35,6 @@
   </span>
 </PageHero>
 <div class="benefits">
-  <div>
-    <h1>
-      Benefits of
-      <br />
-      learning with us
-    </h1>
-    <span>
-      We specialize in cases where students have unique
-      or unusual requirements. To ensure you get the right
-      support, we start by understanding your needs. Then
-      we search our roster of 40,000+ experts to find a
-      tutor who "gets" you, who can personalize a learning
-      plan for you, and who can help you reach your goal
-      with confidence.
-    </span>
-    <img src="/positive-mixed-race-male-female-look-joyfully-each-other-work-research.jpg"
-      alt="Happy tutor and student" />
-  </div>
   <div>
     <Benefit
       src="/icons/natural.svg"
@@ -116,13 +98,13 @@
     </Benefit>
   </div>
 </div>
-<div class="subjects">
+<!-- <div class="subjects">
   <h1>
     Find excellent tutors
     <br />
     in any of the following categories
   </h1>
-</div>
+</div> -->
 <div class="our-aim">
   <div class="aim-panel">
     <h1>
@@ -267,92 +249,29 @@
       flex-direction: row;
     }
 
-    > div {
+    > div:first-child {
       display: flex;
       flex-direction: column;
       justify-content: start;
-      padding: 0 2.5rem;
-
       align-items: center;
-
-      @include config.for-size(tablet-portrait-up) {
-        align-items: start;
-        width: 45%;
-      }
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: bold;
-      text-align: center;
-
-      @include config.for-size(tablet-portrait-up) {
-        text-align: start;
-        font-size: 2.5rem;
-      }
-    }
-
-    span {
-      margin-top: 1.5em;
-      text-align: center;
-
-      @include config.for-size(tablet-portrait-up) {
-        font-size: 1.25rem;
-        text-align: start;
-        margin-top: 0;
-      }
-    }
-
-    > div:first-child img {
-      margin-top: 2rem;
-      border-radius: 2rem;
       width: 100%;
-
-      @include config.for-size(tablet-landscape-up) {
-        width: 75%;
-      }
-    }
-
-    > div:last-child {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center;
 
       @include config.for-size(tablet-portrait-up) {
         display: grid;
-        grid-template-rows: repeat(6, 1fr);
-        grid-template-columns: 1fr;
         align-self: stretch;
-        flex-grow: 1;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        align-items: center;
+        row-gap: 2rem;
       }
 
       @include config.for-size(tablet-landscape-up) {
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: repeat(2, 1fr);
-        flex-grow: 0;
+        width: fit-content;
+        column-gap: 10rem;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
-    }
-  }
-
-  .subjects {
-    width: 100%;
-    padding: 2rem 0;
-    background-color: config.$color1_2;
-  }
-
-  .subjects h1 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 2rem;
-
-    @include config.for-size(tablet-portrait-up) {
-      margin-top: 3rem;
-    }
-
-    @include config.for-size(tablet-landscape-up) {
-      margin-top: 0;
     }
   }
 

@@ -21,7 +21,7 @@
     align-items: center;
     margin-top: 3rem;
 
-    @include config.for-size(tablet-portrait-up) {
+    @include config.for-size(tablet-portrait) {
       justify-content: start;
       align-items: start;
     }
