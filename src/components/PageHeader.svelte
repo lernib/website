@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { REDIRECT_URL } from "$lib/config"
-  import { env } from "$env/dynamic/public"
+  import { getSigninUrl } from "$lib/config"
   import { authStore } from "$lib/stores"
 
   const LINKS = [
@@ -8,8 +7,6 @@
     ["/pricing", "Pricing"],
     ["/about", "About"]
   ]
-
-  const SIGNIN_URL = `https://auth.lernib.com/oauth2/authorize?client_id=${env.PUBLIC_COGNITO_CLIENT_ID}&response_type=code&scope=email+openid+phone&redirect_uri=${REDIRECT_URL}`
 </script>
 
 <div class="header">
@@ -25,7 +22,7 @@
     {/each}
   </nav>
   {#if !$authStore}
-    <a href={SIGNIN_URL} class="signin-button">
+    <a href={getSigninUrl()} class="signin-button">
       Get Started
     </a>
   {:else}

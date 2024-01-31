@@ -1,5 +1,5 @@
-import { env } from "$env/dynamic/private"
-import { env as env_public } from "$env/dynamic/public"
+import * as config from '$lib/config'
+import * as secrets from '$lib/secrets'
 
 interface Tokens {
 	access_token: string;
@@ -38,9 +38,9 @@ type TokenOptions = TokenOptionsCode | TokenOptionsRefresh;
  * @see https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html
  */
 export async function getTokens(options: TokenOptions) {
-	const baseUrl = env.COGNITO_BASE_URI;
-	const clientId = env_public.PUBLIC_COGNITO_CLIENT_ID;
-	const clientSecret = env.COGNITO_CLIENT_SECRET;
+	const baseUrl = config.COGNITO_BASE_URI;
+	const clientId = config.COGNITO_CLIENT_ID;
+	const clientSecret = secrets.COGNITO_CLIENT_SECRET;
 
 	// Generate the Authorization header value (basic auth) using the client ID and secret.
 	const authHeader = btoa(`${clientId}:${clientSecret}`);
@@ -55,7 +55,7 @@ export async function getTokens(options: TokenOptions) {
 		grant_type: options.code ? "authorization_code" : "refresh_token",
 		client_id: clientId,
 		client_secret: clientSecret,
-		redirect_uri: getRedirectUrl()
+		redirect_uri: config.getRedirectUrl()
 	};
 
 	// Add the code or refresh token to the body object depending on the options.
@@ -79,11 +79,4 @@ export async function getTokens(options: TokenOptions) {
 	});
 
 	return (await response.json()) as Tokens;
-}
-
-/**
- * Make sure that the redirect URL is always the same as the one configured in Cognito.
- */
-function getRedirectUrl(): string {
-	return new URL("/auth", env_public.PUBLIC_DOMAIN).toString();
 }
