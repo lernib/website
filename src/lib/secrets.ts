@@ -1,5 +1,5 @@
 import { env } from '$env/dynamic/private'
-import { dev } from '$app/environment'
+import { dev, building } from '$app/environment'
 import {
   SecretsManagerClient,
   GetSecretValueCommand
@@ -9,6 +9,10 @@ import {
 export const COGNITO_CLIENT_SECRET = await getCognitoClientSecret()
 
 async function getCognitoClientSecret(): Promise<string> {
+  if (building) {
+    return ''
+  }
+
   if (dev) {
     return env.COGNITO_CLIENT_SECRET;
   } else {
