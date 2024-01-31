@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { HOMEPAGE_URL } from "$lib/config"
+  import { REDIRECT_URL } from "$lib/config"
+  import { env } from "$env/dynamic/public"
 
   const LINKS = [
     ["/contact", "Contact"],
@@ -7,7 +8,7 @@
     ["/about", "About"]
   ]
 
-  const SIGNIN_URL = `https://auth.lernib.com/oauth2/authorize?client_id=432a81mkvmou1q654j2lmvc5uu&response_type=code&scope=email+openid+phone&redirect_uri=${HOMEPAGE_URL}`
+  const SIGNIN_URL = `https://auth.lernib.com/oauth2/authorize?client_id=${env.PUBLIC_COGNITO_CLIENT_ID}&response_type=code&scope=email+openid+phone&redirect_uri=${REDIRECT_URL}`
 </script>
 
 <div class="header">

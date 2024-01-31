@@ -249,28 +249,6 @@
       flex-direction: row;
     }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: bold;
-      text-align: center;
-
-      @include config.for-size(tablet-portrait-up) {
-        text-align: start;
-        font-size: 2.5rem;
-      }
-    }
-
-    span {
-      margin-top: 1.5em;
-      text-align: center;
-
-      @include config.for-size(tablet-portrait-up) {
-        font-size: 1.25rem;
-        text-align: start;
-        margin-top: 0;
-      }
-    }
-
     > div:first-child {
       display: flex;
       flex-direction: column;
@@ -294,27 +272,6 @@
         grid-template-rows: repeat(2, 1fr);
         grid-template-columns: repeat(3, 1fr);
       }
-    }
-  }
-
-  .subjects {
-    width: 100%;
-    padding: 2rem 0;
-    background-color: config.$color1_2;
-  }
-
-  .subjects h1 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-top: 2rem;
-
-    @include config.for-size(tablet-portrait-up) {
-      margin-top: 3rem;
-    }
-
-    @include config.for-size(tablet-landscape-up) {
-      margin-top: 0;
     }
   }
 
