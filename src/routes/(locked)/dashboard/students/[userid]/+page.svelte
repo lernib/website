@@ -3,6 +3,19 @@
   import { TIMEZONES } from "$lib/config";
 
   export let data: PageServerData;
+
+  async function sendRequestToUpdate() {
+    console.log(await fetch(`/dashboard/students/${data.student.userid}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        ...data.student,
+        timezone: "-5"
+      })
+    }).then(res => res.status))
+  }
 </script>
 
 <main>
@@ -39,6 +52,9 @@
       </td>
     </tr>
   </table>
+  <button on:click={sendRequestToUpdate}>
+    Update with EST
+  </button>
 </main>
 
 <style lang="scss">
@@ -59,5 +75,10 @@
 
   td:not(:last-child) {
     padding-right: 4rem;
+  }
+
+  button {
+    padding: 0.5rem;
+    margin-top: 1rem;
   }
 </style>
