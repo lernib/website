@@ -1,8 +1,22 @@
 <script lang="ts">
   import type { PageServerData } from "./$types";
   import { TIMEZONES } from "$lib/config";
+  import { invalidateAll } from "$app/navigation";
 
   export let data: PageServerData;
+
+  const TIMEZONE_OPTS = [
+    ["-5", "EST"],
+    ["-6", "CST"],
+    ["-7", "MST"],
+    ["-8", "PST"],
+    ["NA", "Unknown"]
+  ]
+
+  let edit = false;
+  let edit_student_name: string = data.student.student_name;
+  let edit_client_name: string = data.student.client_name;
+  let selected: string = data.student.timezone;
 
   async function sendRequestToUpdate() {
     console.log(await fetch(`/dashboard/students/${data.student.userid}`, {
@@ -11,10 +25,22 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        ...data.student,
-        timezone: "-5"
+        student_name: edit_student_name,
+        client_name: edit_client_name,
+        timezone: selected
       })
     }).then(res => res.status))
+
+    edit = false;
+    invalidateAll()
+  }
+
+  function setView() {
+    edit = false;
+  }
+
+  function setEdit() {
+    edit = true;
   }
 </script>
 
@@ -32,7 +58,14 @@
         Client Name
       </td>
       <td>
-        {data.student.client_name}
+        {#if edit}
+          <input
+            type="text"
+            bind:value={edit_client_name}
+          />
+        {:else}
+          {data.student.client_name}
+        {/if}
       </td>
     </tr>
     <tr>
@@ -40,7 +73,14 @@
         Student Name
       </td>
       <td>
-        {data.student.student_name}
+        {#if edit}
+          <input
+            type="text"
+            bind:value={edit_student_name}
+          />
+        {:else}
+          {data.student.student_name}
+        {/if}
       </td>
     </tr>
     <tr>
@@ -48,13 +88,32 @@
         Timezone
       </td>
       <td>
-        {TIMEZONES[data.student.timezone]}
+        {#if edit}
+          <select bind:value={selected}>
+            {#each TIMEZONE_OPTS as [val, txt]}
+              <option value={val}>
+                {txt}
+              </option>
+            {/each}
+          </select>
+        {:else}
+          {TIMEZONES[data.student.timezone]}
+        {/if}
       </td>
     </tr>
   </table>
-  <button on:click={sendRequestToUpdate}>
-    Update with EST
-  </button>
+  {#if edit}
+    <button on:click={setView}>
+      Cancel
+    </button>
+    <button on:click={sendRequestToUpdate}>
+      Update
+    </button>
+  {:else}
+    <button on:click={setEdit}>
+      Edit
+    </button>
+  {/if}
 </main>
 
 <style lang="scss">
