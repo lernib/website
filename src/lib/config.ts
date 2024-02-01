@@ -36,3 +36,11 @@ export function getSignoutUrl(): string {
 export function getRedirectUrl(): string {
 	return new URL("/auth", DOMAIN).toString();
 }
+
+export const TIMEZONES = {
+  "-5": "EST",
+  "-6": "CST",
+  "-7": "MST",
+  "-8": "PST",
+  "NA": "Unknown"
+}

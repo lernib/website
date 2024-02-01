@@ -80,3 +80,20 @@ export async function getTokens(options: TokenOptions) {
 
 	return (await response.json()) as Tokens;
 }
+
+export async function verifyTokens(access_token: string): Promise<boolean> {
+	const url = new URL("/oauth2/userInfo", config.COGNITO_BASE_URI);
+
+	const response = await fetch(url.toString(), {
+		headers: {
+			"Content-Type": "application/x-amz-json-1.1",
+			Authorization: `Bearer ${access_token}`
+		}
+	})
+
+	if (!response.ok) {
+		console.error(await response.text())
+	}
+
+	return response.ok
+}
