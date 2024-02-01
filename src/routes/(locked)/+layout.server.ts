@@ -1,7 +1,7 @@
 import type { LayoutServerLoad } from "./$types";
-import { verifyTokens } from "$lib/auth/helpers";
-import { redirect } from "@sveltejs/kit";
 import { getSigninUrl } from "$lib/config";
+import { redirect } from "@sveltejs/kit";
+import { verifyTokens } from "$lib/auth/helpers";
 
 export const prerender = false;
 
