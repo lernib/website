@@ -154,7 +154,7 @@
 <style lang="scss">
   @use "/src/lib/config";
 
-  :global(body) {
+  :global(.sk-core) {
     display: flex;
     flex-direction: column;
     justify-content: start;
