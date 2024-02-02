@@ -2,10 +2,12 @@
   import type { PageServerData } from "./$types";
   import { TIMEZONES } from "$lib/config";
   import { invalidateAll } from "$app/navigation";
+  import EditableText from "$components/widgets/form/EditableText.svelte";
+  import EditableOption from "$components/widgets/form/EditableOption.svelte";
 
   export let data: PageServerData;
 
-  const TIMEZONE_OPTS = [
+  const TIMEZONE_OPTS: [string, string][] = [
     ["-5", "EST"],
     ["-6", "CST"],
     ["-7", "MST"],
@@ -62,14 +64,7 @@
         Client Name
       </td>
       <td>
-        {#if edit}
-          <input
-            type="text"
-            bind:value={edit_client_name}
-          />
-        {:else}
-          {data.student.client_name}
-        {/if}
+        <EditableText {edit} bind:value={edit_client_name} />
       </td>
     </tr>
     <tr>
@@ -77,14 +72,7 @@
         Student Name
       </td>
       <td>
-        {#if edit}
-          <input
-            type="text"
-            bind:value={edit_student_name}
-          />
-        {:else}
-          {data.student.student_name}
-        {/if}
+        <EditableText {edit} bind:value={edit_student_name} />
       </td>
     </tr>
     <tr>
@@ -92,17 +80,7 @@
         Timezone
       </td>
       <td>
-        {#if edit}
-          <select bind:value={selected}>
-            {#each TIMEZONE_OPTS as [val, txt]}
-              <option value={val}>
-                {txt}
-              </option>
-            {/each}
-          </select>
-        {:else}
-          {TIMEZONES[data.student.timezone]}
-        {/if}
+        <EditableOption {edit} bind:value={selected} options={TIMEZONE_OPTS} />
       </td>
     </tr>
   </table>
