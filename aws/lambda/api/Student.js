@@ -17,8 +17,11 @@ async function get_handler(event) {
 
 async function post_handler(event) {
 	let contents = JSON.parse(event.body)
+
+	const keys = Object.keys(contents)
+
 	let updateCommand = Object.entries(contents).reduce((acc, [key]) => {
-		let next = `${key} = :${key.toLowerCase()}`;
+		let next = `#${String.fromCharCode(keys.indexOf(key) + 'A'.charCodeAt(0))} = :${key.toLowerCase()}`;
 
 		if (acc != 'SET ') {
 			next = `, ${next}`
@@ -28,7 +31,14 @@ async function post_handler(event) {
 	}, 'SET ')
 
 	let expressionValues = Object.entries(contents).reduce((acc, [key, value]) => {
-		acc[key.toLowerCase()] = value
+		acc[`:${key.toLowerCase()}`] = value
+		return acc
+	}, {})
+
+	let expressionKeys = keys.reduce((acc, [key], idx) => {
+		acc[`#${
+			String.fromCharCode(idx + 'A'.charCodeAt(0))
+		}`] = key
 		return acc
 	}, {})
 
@@ -38,11 +48,12 @@ async function post_handler(event) {
 			Key: {
 				userid: event.pathParameters.id
 			},
-			UpdateCommand: updateCommand,
+			UpdateExpression: updateCommand,
 			ExpressionAttributeValues: expressionValues,
+			ExpressionAttributeNames: expressionKeys,
 			ReturnValues: "ALL_NEW"
 		})
-	)
+	).then(res => res.Item)
 }
 
 /**
