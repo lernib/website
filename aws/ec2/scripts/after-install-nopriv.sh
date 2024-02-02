@@ -1,8 +1,8 @@
 #!/bin/bash
 
 mkdir ~/app
-aws s3 cp s3://lernib-bucket.build/static/ ~/app --recursive
-aws s3 cp s3://lernib-bucket.build/artifacts/ ~/app --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/static/ ~/app --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/artifacts/ ~/app --recursive
 
 ##############################
 # INSTALL NODE
