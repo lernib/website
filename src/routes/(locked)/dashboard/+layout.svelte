@@ -1,8 +1,6 @@
 <script lang="ts">
   import { getSignoutUrl } from "$lib/config";
 
-  export const prerender = true;
-
   const sidebarOptions = [
     {
       inner: "Students",
@@ -24,6 +22,10 @@
       </a>
     {/each}
   </nav>
+
+  <a class="sign-out" href={getSignoutUrl()}>
+    Sign Out
+  </a>
 </div>
 <slot />
 
@@ -43,7 +45,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    min-width: 15rem;
+    padding: 2.5rem;
     background-color: color.invert(config.$color1);
     color: config.$color1;
 
@@ -62,7 +64,16 @@
 
     > img {
       width: 10rem;
-      margin-top: 2.5rem;
+    }
+
+    .sign-out {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+      row-gap: 1.5rem;
+      margin-top: auto;
+      font-size: 1em;
     }
   }
 </style>
