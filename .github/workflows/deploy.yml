@@ -34,13 +34,13 @@ jobs:
     - name: Build SvelteKit
       run: npm run build
     - name: Remove old artifacts
-      run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/ --recursive
+      run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/ --recursive
     - name: Copy build artifacts to S3
-      run: aws s3 cp build s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/build/ --recursive
+      run: aws s3 cp build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/artifacts/build/ --recursive
     - name: Copy static assets to S3
-      run: aws s3 cp static s3://${{ secrets.AWS_BUCKET_NAME }}/static/ --recursive
+      run: aws s3 cp static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/static/ --recursive
     - name: Copy package.json to S3
-      run: aws s3 cp package.json s3://${{ secrets.AWS_BUCKET_NAME }}/artifacts/package.json
+      run: aws s3 cp package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/artifacts/package.json
 
   deploy:
     name: Deploy to AWS
@@ -59,6 +59,5 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_DEPLOY_ROLE }}
           role-session-name: myGithubActions
       - run: |
-          echo "Deploying branch ${{ env.GITHUB_REF }} to ${{ github.event.inputs.environment }}"
           commit_hash=`git rev-parse HEAD`
           aws deploy create-deployment --application-name "LernibDeploy-Website" --deployment-group-name "LernibDeployGroup-Website" --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
