@@ -44,6 +44,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>{data.student.student_name} | Lernib</title>
+</svelte:head>
+
 <main>
   <h1>
     {data.student.student_name}

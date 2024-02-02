@@ -4,6 +4,10 @@
   export let data: PageServerData;
 </script>
 
+<svelte:head>
+  <title>Students | Lernib</title>
+</svelte:head>
+
 <main>
   <table
     cellspacing=0
