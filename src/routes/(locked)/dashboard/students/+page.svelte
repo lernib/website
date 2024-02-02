@@ -1,8 +1,6 @@
 <script lang="ts">
   import type { PageServerData } from "./$types";
 
-  export const prerender = false;
-
   export let data: PageServerData;
 </script>
 
