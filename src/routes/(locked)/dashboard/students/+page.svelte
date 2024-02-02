@@ -40,7 +40,7 @@
   }
 
   tr:nth-child(2n) {
-    background-color: color.adjust(config.$color1, $lightness: 30)
+    background-color: color.adjust(config.$color1, $lightness: 30%)
   }
 
   td {
