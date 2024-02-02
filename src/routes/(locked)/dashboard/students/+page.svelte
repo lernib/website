@@ -4,6 +4,10 @@
   export let data: PageServerData;
 </script>
 
+<svelte:head>
+  <title>Students | Lernib</title>
+</svelte:head>
+
 <main>
   <table
     cellspacing=0
@@ -40,7 +44,7 @@
   }
 
   tr:nth-child(2n) {
-    background-color: color.adjust(config.$color1, $lightness: 30)
+    background-color: color.adjust(config.$color1, $lightness: 30%)
   }
 
   td {
