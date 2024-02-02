@@ -4,6 +4,7 @@
   import { invalidateAll } from "$app/navigation";
   import EditableText from "$components/widgets/form/EditableText.svelte";
   import EditableOption from "$components/widgets/form/EditableOption.svelte";
+  import EditableButton from "$components/widgets/form/EditableButton.svelte";
 
   export let data: PageServerData;
 
@@ -84,18 +85,26 @@
       </td>
     </tr>
   </table>
-  {#if edit}
-    <button on:click={setView}>
-      Cancel
-    </button>
-    <button on:click={sendRequestToUpdate}>
-      Update
-    </button>
-  {:else}
-    <button on:click={setEdit}>
-      Edit
-    </button>
-  {/if}
+  <div class="contacts">
+    <div class="top">
+      <h2>
+        Contacts
+      </h2>
+
+      <EditableButton {edit} click={() => {}}>
+        Add
+      </EditableButton>
+    </div>
+  </div>
+  <EditableButton {edit} click={setView}>
+    Cancel
+  </EditableButton>
+  <EditableButton {edit} click={sendRequestToUpdate}>
+    Update
+  </EditableButton>
+  <EditableButton edit={!edit} click={setEdit}>
+    Edit
+  </EditableButton>
 </main>
 
 <style lang="scss">
@@ -118,8 +127,19 @@
     padding-right: 4rem;
   }
 
-  button {
-    padding: 0.5rem;
-    margin-top: 1rem;
+  .contacts {
+    margin-top: 1.25rem;
+
+    > .top {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      column-gap: 2rem;
+
+      h2 {
+        font-size: 2rem;
+      }
+    }
   }
 </style>
