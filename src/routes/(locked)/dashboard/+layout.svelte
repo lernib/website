@@ -42,12 +42,16 @@
 
   .sidebar {
     display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     padding: 2.5rem;
     background-color: color.invert(config.$color1);
     color: config.$color1;
+    max-height: calc(100vh - 5rem);
 
     > nav {
       display: flex;
