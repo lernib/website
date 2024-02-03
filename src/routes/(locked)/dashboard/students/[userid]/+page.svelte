@@ -8,13 +8,7 @@
 
   export let data: PageServerData;
 
-  const TIMEZONE_OPTS: [string, string][] = [
-    ["-5", "EST"],
-    ["-6", "CST"],
-    ["-7", "MST"],
-    ["-8", "PST"],
-    ["NA", "Unknown"]
-  ]
+  const TIMEZONE_OPTS = Object.entries(TIMEZONES)
 
   let edit = false;
   let edit_student_name: string = data.student.student_name;
