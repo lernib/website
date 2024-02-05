@@ -1,7 +1,5 @@
 import type { LayoutServerLoad } from "./$types";
 import { verifyTokens } from "$lib/auth/helpers";
-import { redirect } from "@sveltejs/kit";
-import { getSigninUrl } from "$lib/config";
 
 export const prerender = false;
 
@@ -18,5 +16,7 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
     }
   }
 
-  throw redirect(307, getSigninUrl())
+  return {
+    userdata: null
+  }
 }
