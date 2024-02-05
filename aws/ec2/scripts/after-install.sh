@@ -24,6 +24,7 @@ systemctl restart httpd
 mv /usr/local/codedeployresources/site.service /etc/systemd/system/site.service
 
 systemctl enable site
+systemctl restart site
 systemctl start site
 
 systemctl enable httpd
