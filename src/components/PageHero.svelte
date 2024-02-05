@@ -4,7 +4,7 @@
   export let half = false;
 </script>
 
-<div class="hero" style="{half ? 'max-height: 50vh' : ''}">
+<div class="hero" style="{half ? '--height: 50vh' : '--height: 100vh'}">
   <PageHeader />
   <slot />
 </div>
@@ -27,7 +27,7 @@
     align-items: center;
 
     @include config.for-size(tablet-portrait-up) {
-      min-height: 100vh;
+      min-height: var(--height);
     }
   }
 </style>

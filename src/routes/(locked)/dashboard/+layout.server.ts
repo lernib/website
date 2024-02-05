@@ -1,18 +1,18 @@
 import { idTokenPayload } from '$lib/auth/helpers';
 import { redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types'
+import type { LayoutServerLoad } from './$types'
 
 
-export const load: PageServerLoad = async ({ cookies }) => {
+export const load: LayoutServerLoad = async ({ cookies }) => {
   const idToken = await idTokenPayload(cookies.get('id_token'));
 
   if (idToken) {
     const roles = idToken['cognito:groups']
 
     if (roles?.includes('maintenance')) {
-      redirect(307, '/dashboard')
+      return {}
     }
   }
 
-  return {}
+  redirect(307, '/dashboard')
 }

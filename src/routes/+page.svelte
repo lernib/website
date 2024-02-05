@@ -105,7 +105,7 @@
     in any of the following categories
   </h1>
 </div> -->
-<div class="our-aim">
+<!-- <div class="our-aim">
   <div class="aim-panel">
     <h1>
       Our aim is to help students
@@ -115,7 +115,7 @@
       to unlock their true potential
     </h1>
   </div>
-</div>
+</div> -->
 <div class="success">
   <h1>Success stories from past students</h1>
   <div class="tiles">
@@ -275,30 +275,30 @@
     }
   }
 
-  .our-aim {
-    width: 100%;
-    padding: 2rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  // .our-aim {
+  //   width: 100%;
+  //   padding: 2rem 0;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
 
-  .aim-panel {
-    width: 75%;
-    padding: 2rem 0;
-    background: config.$color1_2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2rem;
-  }
+  // .aim-panel {
+  //   width: 75%;
+  //   padding: 2rem 0;
+  //   background: config.$color1_2;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  //   border-radius: 2rem;
+  // }
 
-  .aim-panel > h1 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
+  // .aim-panel > h1 {
+  //   text-align: center;
+  //   font-weight: bold;
+  //   font-size: 1.5rem;
+  // }
 
   .success {
     width: 100%;
