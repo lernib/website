@@ -4,7 +4,7 @@
   import "$lib/global.scss"
 
   export let data: LayoutData
-  authStore.set(data.userdata)
+  authStore.set(data.ident)
 </script>
 
 

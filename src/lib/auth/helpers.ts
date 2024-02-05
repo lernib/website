@@ -1,3 +1,5 @@
+import type { CognitoAccessTokenPayload, CognitoIdTokenPayload } from 'aws-jwt-verify/jwt-model';
+import { CognitoJwtVerifier } from 'aws-jwt-verify';
 import * as config from '$lib/config'
 import * as secrets from '$lib/secrets'
 
@@ -30,6 +32,18 @@ interface TokenOptionsRefresh {
 }
 
 type TokenOptions = TokenOptionsCode | TokenOptionsRefresh;
+
+const cognitoAccessVerifier = CognitoJwtVerifier.create({
+	userPoolId: config.COGNITO_USER_POOL_ID,
+	clientId: config.COGNITO_CLIENT_ID,
+	tokenUse: 'access'
+});
+
+const cognitoIdVerifier = CognitoJwtVerifier.create({
+	userPoolId: config.COGNITO_USER_POOL_ID,
+	clientId: config.COGNITO_CLIENT_ID,
+	tokenUse: 'id'
+})
 
 /**
  * This function can either generate tokens from a code or from a refresh token.
@@ -81,6 +95,9 @@ export async function getTokens(options: TokenOptions) {
 	return (await response.json()) as Tokens;
 }
 
+/**
+ * @deprecated Use isValidXToken instead.
+ */
 export async function verifyTokens(access_token: string): Promise<boolean> {
 	const url = new URL("/oauth2/userInfo", config.COGNITO_BASE_URI);
 
@@ -96,4 +113,28 @@ export async function verifyTokens(access_token: string): Promise<boolean> {
 	}
 
 	return response.ok
+}
+
+export async function accessTokenPayload(access_token: string | void): Promise<CognitoAccessTokenPayload | null> {
+	if (!access_token) {
+		return null;
+	}
+
+	try {
+		return await cognitoAccessVerifier.verify(access_token);
+	} catch {
+		return null;
+	}
+}
+
+export async function idTokenPayload(id_token: string | void): Promise<CognitoIdTokenPayload | null> {
+	if (!id_token) {
+		return null;
+	}
+
+	try {
+		return await cognitoIdVerifier.verify(id_token);
+	} catch {
+		return null;
+	}
 }
