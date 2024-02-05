@@ -23,11 +23,11 @@
   </nav>
   {#if !$authStore}
     <a href={getSigninUrl()} class="signin-button">
-      Get Started
+      Sign In
     </a>
   {:else}
-    <a href={getSignoutUrl()}>
-      {$authStore['cognito:username']}
+    <a href={getSignoutUrl()} class="signin-button">
+      Sign Out
     </a>
   {/if}
 </div>
