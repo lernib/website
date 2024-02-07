@@ -150,7 +150,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem 0;
 
     h1 {
       font-size: 2rem;
