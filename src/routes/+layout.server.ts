@@ -1,7 +1,5 @@
 import type { LayoutServerLoad } from "./$types";
 import { idTokenPayload } from "$lib/auth/helpers";
-import { getSigninUrl } from "$lib/config";
-import { redirect } from "@sveltejs/kit";
 
 export const prerender = false;
 
@@ -12,5 +10,7 @@ export const load: LayoutServerLoad = async ({ cookies }) => {
     ident: idToken
   }
 
-  redirect(307, getSigninUrl())
+  return {
+    ident: null
+  }
 }

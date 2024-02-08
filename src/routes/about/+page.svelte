@@ -1,5 +1,6 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
+  import ValueTile from '$components/ValueTile.svelte'
 </script>
 
 <svelte:head>
@@ -59,6 +60,26 @@
   <h1>
     Our Values
   </h1>
+  <div class="values-grid">
+    <ValueTile title="Empathy" idx={1}>
+      When it comes to choosing a tutor, you want
+      someone who listens and really gets you. We
+      take the time to do just that, bringing empathy
+      to every interaction we have.
+    </ValueTile>
+    <ValueTile title="Quality" idx={2}>
+      You want to learn a new skill or brush up on an
+      old one - and then you want to go for your goals.
+      We're committed to providing quality support to
+      help along the way.
+    </ValueTile>
+    <ValueTile title="Family" idx={3}>
+      You're more than just a client to us; you're part
+      of the Lernib family. We care about you as a person,
+      and that helps us tap into the best learning plan
+      for you. 
+    </ValueTile>
+  </div>
 </div>
 
 <style lang="scss">
@@ -129,12 +150,21 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    margin-top: 2rem;
+    margin: 2rem 0;
 
     h1 {
       font-size: 2rem;
       font-weight: 900;
+      margin-bottom: 2rem;
     }
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 15rem;
+    margin: 0 5rem;
+    column-gap: 3rem;
   }
 
   // .approach {
