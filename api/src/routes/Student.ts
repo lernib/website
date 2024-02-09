@@ -15,7 +15,7 @@ router.get('/:userid', async (req, res) => {
 	).then(res => res.Item);
 
 	if (!data) {
-		res.status(404).send();
+		return res.status(404).end();
 	}
 
 	res.status(200).json(data);
@@ -61,7 +61,7 @@ router.post('/:userid', async (req, res) => {
 		})
 	);
 
-	res.status(200).send();
+	return res.status(200).end();
 });
 
 export default router;
