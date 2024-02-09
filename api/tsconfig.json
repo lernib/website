@@ -1,0 +1,11 @@
+{
+  "extends": "@tsconfig/node-lts/tsconfig.json",
+  "include": [
+    "src/**/*.ts"
+  ],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "outDir": "dist"
+  }
+}
