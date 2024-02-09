@@ -15,7 +15,6 @@
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.56.0",
     "nodemon": "^3.0.3",
-    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.8",
     "typescript": "^5.3.3"
   },

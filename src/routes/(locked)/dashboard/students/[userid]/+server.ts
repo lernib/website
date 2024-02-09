@@ -1,5 +1,6 @@
 import type { RequestHandler } from "./$types";
 import { accessTokenPayload } from "$lib/auth/helpers";
+import { API_DOMAIN } from "$lib/config";
 import { error } from "@sveltejs/kit";
 
 
@@ -13,7 +14,7 @@ export const POST: RequestHandler = async ({ request, params, cookies }) => {
       timezone
     } = await request.json();
 
-    const response = await fetch(`https://api.lernib.com/dev/students/${params.userid}`, {
+    const response = await fetch(new URL(`/students/${params.userid}`, API_DOMAIN), {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
