@@ -2,6 +2,7 @@
   "name": "@lernib/api",
   "version": "0.1.0",
   "private": true,
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc && tsc-alias",
     "start": "nodemon src/index.ts",

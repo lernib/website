@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "nx exec -- eslint ."
+    "lint": "nx exec -- eslint src"
   },
   "devDependencies": {
     "@aws-sdk/lib-dynamodb": "^3.506.0",

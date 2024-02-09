@@ -1,8 +1,13 @@
 #!/bin/bash
 
 mkdir ~/app
-aws s3 cp s3://lernib-bucket.build/ec2/static/ ~/app --recursive
-aws s3 cp s3://lernib-bucket.build/ec2/artifacts/ ~/app --recursive
+mkdir ~/api
+
+aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/static/ ~/app --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/artifacts/ ~/app --recursive
+
+aws s3 cp s3://lernib-bucket.build/ec2/api/static/ ~/app --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/api/artifacts/ ~/app --recursive
 
 ##############################
 # INSTALL NODE
@@ -12,4 +17,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 nvm install 20
 
 cd ~/app
+npm i --production
+
+cd ~/api
 npm i --production

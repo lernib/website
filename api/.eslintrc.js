@@ -47,5 +47,8 @@ module.exports = {
 			'always'
 		],
 		'@typescript-eslint/no-explicit-any': 'warn'
-	}
+	},
+	'ignorePatterns': [
+		'dist/**/*.js'
+	]
 };

@@ -1,6 +1,5 @@
 <script lang="ts">
   import { page } from '$app/stores'
-  import { browser } from '$app/environment'
 </script>
 
 <div>
