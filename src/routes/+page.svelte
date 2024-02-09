@@ -26,7 +26,7 @@
       <br />
       consistently ace their exams!
     </h2>
-    <a href="/get-started">Get Started</a>
+    <a href="/about">Learn More</a>
   </div>
   <span class="hero-promo">
     Get your first session free of charge.

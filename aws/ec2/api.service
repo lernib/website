@@ -1,0 +1,15 @@
+[Unit]
+Description=Lernib API
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=ec2-user
+ExecStart=/bin/bash -l -c 'exec "$@"' _ node .
+WorkingDirectory=/home/ec2-user/api
+
+[Install]
+WantedBy=multi-user.target
