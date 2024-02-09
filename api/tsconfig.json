@@ -6,6 +6,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "NodeNext",
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "$routes/*": ["./src/routes/*"],
+      "$services/*": ["./src/services/*"]
+    }
   }
 }

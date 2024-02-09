@@ -1,4 +1,5 @@
 module.exports = {
+	'root': true,
 	'env': {
 		'es2021': true,
 		'node': true
@@ -44,6 +45,7 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
-		]
+		],
+		'@typescript-eslint/no-explicit-any': 'warn'
 	}
 };
