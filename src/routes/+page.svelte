@@ -123,9 +123,7 @@
       <span>
         Lernib has successfully
         <br />
-        tutored over
-        <br />
-        1000
+        tutored many
         <br />
         students to achieve
         <br />
