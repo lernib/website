@@ -6,8 +6,8 @@ mkdir ~/api
 aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/static/ ~/app --recursive
 aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/artifacts/ ~/app --recursive
 
-aws s3 cp s3://lernib-bucket.build/ec2/api/static/ ~/app --recursive
-aws s3 cp s3://lernib-bucket.build/ec2/api/artifacts/ ~/app --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/api/static/ ~/api --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/api/artifacts/ ~/api --recursive
 
 ##############################
 # INSTALL NODE
