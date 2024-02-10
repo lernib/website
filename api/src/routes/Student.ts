@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
-import { dynamo, TABLE_NAME } from '$services/db';
+import { dynamo, TABLES } from '$services/db';
 
 const router = Router();
 
 router.get('/:userid', async (req, res) => {
 	const data = await dynamo.send(
 		new GetCommand({
-			TableName: TABLE_NAME,
+			TableName: TABLES.students,
 			Key: {
 				userid: req.params.userid
 			}
@@ -50,7 +50,7 @@ router.post('/:userid', async (req, res) => {
 
 	await dynamo.send(
 		new UpdateCommand({
-			TableName: TABLE_NAME,
+			TableName: TABLES.students,
 			Key: {
 				userid: req.params.userid
 			},

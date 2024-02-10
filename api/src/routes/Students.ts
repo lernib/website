@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { ScanCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
-import { dynamo, TABLE_NAME } from '$services/db';
+import { dynamo, TABLES } from '$services/db';
 import studentRouter from './Student';
 
 const router = Router();
@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', async (req, res) => {
 	const data = await dynamo.send(
 		new ScanCommand({
-			TableName: TABLE_NAME
+			TableName: TABLES.students
 		})
 	).then(res => res.Items);
 
@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
 
 	await dynamo.send(
 		new PutCommand({
-			TableName: TABLE_NAME,
+			TableName: TABLES.students,
 			Item: contents
 		})
 	);

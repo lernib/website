@@ -5,6 +5,10 @@
     {
       inner: "Students",
       href: "/dashboard/students"
+    },
+    {
+      inner: "Calendar",
+      href: "/dashboard/calendar"
     }
   ]
 </script>
