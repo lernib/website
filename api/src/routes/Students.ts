@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-	const contents = JSON.parse(req.body);
+	const contents = req.body;
 
 	await dynamo.send(
 		new PutCommand({

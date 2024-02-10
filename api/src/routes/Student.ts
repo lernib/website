@@ -22,7 +22,7 @@ router.get('/:userid', async (req, res) => {
 });
 
 router.post('/:userid', async (req, res) => {
-	const contents = JSON.parse(req.body);
+	const contents = req.body;
 
 	const keys = Object.keys(contents);
 
@@ -41,7 +41,7 @@ router.post('/:userid', async (req, res) => {
 		return acc;
 	}, {});
 
-	const expressionKeys = keys.reduce((acc: any, [key], idx) => {
+	const expressionKeys = keys.reduce((acc: any, key, idx) => {
 		acc[`#${
 			String.fromCharCode(idx + 'A'.charCodeAt(0))
 		}`] = key;

@@ -3,6 +3,7 @@ import Express from 'express';
 import studentsRouter from '$routes/Students';
 
 const app = Express();
+app.use(Express.json());
 
 app.use('/students', studentsRouter);
 
