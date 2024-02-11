@@ -8,6 +8,7 @@
     "module": "NodeNext",
     "outDir": "dist",
     "baseUrl": ".",
+    "sourceMap": true,
     "paths": {
       "$routes/*": ["./src/routes/*"],
       "$services/*": ["./src/services/*"]

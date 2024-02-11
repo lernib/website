@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
-import { dynamo, TABLE_NAME } from '$services/db';
+import { dynamo, TABLES } from '$services/db';
 
 const router = Router();
 
 router.get('/:userid', async (req, res) => {
 	const data = await dynamo.send(
 		new GetCommand({
-			TableName: TABLE_NAME,
+			TableName: TABLES.students,
 			Key: {
 				userid: req.params.userid
 			}
@@ -22,7 +22,7 @@ router.get('/:userid', async (req, res) => {
 });
 
 router.post('/:userid', async (req, res) => {
-	const contents = JSON.parse(req.body);
+	const contents = req.body;
 
 	const keys = Object.keys(contents);
 
@@ -41,7 +41,7 @@ router.post('/:userid', async (req, res) => {
 		return acc;
 	}, {});
 
-	const expressionKeys = keys.reduce((acc: any, [key], idx) => {
+	const expressionKeys = keys.reduce((acc: any, key, idx) => {
 		acc[`#${
 			String.fromCharCode(idx + 'A'.charCodeAt(0))
 		}`] = key;
@@ -50,7 +50,7 @@ router.post('/:userid', async (req, res) => {
 
 	await dynamo.send(
 		new UpdateCommand({
-			TableName: TABLE_NAME,
+			TableName: TABLES.students,
 			Key: {
 				userid: req.params.userid
 			},
