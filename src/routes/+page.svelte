@@ -29,9 +29,12 @@
     <a href="/about">Learn More</a>
   </div>
   <span class="hero-promo">
-    Get your first session free of charge.
+    Get your first session free of charge.&MediumSpace;
     <br class="mobile" />
-    Contact us to get started.
+    <a href="/contact" class="promo-link">
+      Contact us
+    </a>
+    &ThinSpace;to get started.
   </span>
 </PageHero>
 <div class="benefits">
@@ -332,5 +335,9 @@
         grid-template-rows: 1fr;
       }
     }
+  }
+
+  .promo-link {
+    color: blue;
   }
 </style>
