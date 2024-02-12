@@ -12,7 +12,15 @@ const routerPostBody = z.object({
 });
 
 router.post('/', async (req, res) => {
-	const body = routerPostBody.parse(req.body);
+	let body;
+
+	try {
+		body = routerPostBody.parse(req.body);
+	} catch {
+		res.status(400).send();
+		return;
+	}
+
 	const message = `You got a new message!
 
 Name: ${body.name}
