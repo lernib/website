@@ -1,5 +1,30 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
+  import { API_DOMAIN } from '$lib/config';
+  import type { EventHandler } from 'svelte/elements';
+
+  const onFormSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async e => {
+    const formData = new FormData(e.currentTarget);
+
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const content = formData.get('content');
+
+    console.log(await fetch(
+      new URL('/contact', API_DOMAIN),
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          content
+        })
+      }
+    ).then(res => res.status))
+  };
 </script>
 
 <svelte:head>
@@ -21,6 +46,13 @@
   </div>
 </PageHero>
 
+<form on:submit|preventDefault={onFormSubmit}>
+  <input type="text" name="name" placeholder="Name" />
+  <input type="text" name="email" placeholder="Email" />
+  <textarea name="content" placeholder="Text Content" rows=10 cols=50 />
+  <button type="submit">Submit</button>
+</form>
+
 <style lang="scss">
   .hero-center {
     flex-grow: 1;
@@ -40,5 +72,12 @@
       text-align: center;
       margin-top: 1.5rem;
     }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
   }
 </style>
