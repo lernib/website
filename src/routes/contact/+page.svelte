@@ -1,5 +1,6 @@
 <script lang="ts">
   import PageHero from '$components/PageHero.svelte'
+  import { goto } from '$app/navigation'
   import { API_DOMAIN } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
 
@@ -10,20 +11,24 @@
     const email = formData.get('email');
     const content = formData.get('content');
 
-    console.log(await fetch(
-      new URL('/contact', API_DOMAIN),
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          content
-        })
-      }
-    ).then(res => res.status))
+    if (name && email && content) {
+      console.log(await fetch(
+        new URL('/contact', API_DOMAIN),
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            content
+          })
+        }
+      ).then(res => res.status));
+
+      goto('/');
+    }
   };
 </script>
 
