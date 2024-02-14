@@ -5,6 +5,9 @@
     },
     "lint": {
       "cache": true
+    },
+    "check": {
+      "cache": true
     }
   },
   "affected": {

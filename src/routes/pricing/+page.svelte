@@ -1,6 +1,7 @@
 <script lang="ts">
   import Footer from '$components/section/Footer.svelte';
-import PageHero from '$components/section/Hero.svelte'
+  import PageHero from '$components/section/Hero.svelte'
+  import Price from '$components/Price.svelte';
 </script>
 
 <svelte:head>
@@ -19,6 +20,21 @@ import PageHero from '$components/section/Hero.svelte'
     </h2>
   </div>
 </PageHero>
+<main>
+  <Price price={20} name="Group">
+    Group tutoring is in the works. When done, it will
+    <br />
+    be a more affordable but less personalized alternative
+    to dedicated tutoring.
+  </Price>
+  <Price price={35} name="1-on-1">
+    Private tutoring is ready to go! We offer 1-on-1 tutoring
+    <br />
+    for various subjects, from computer science to SAT testing.
+    <br />
+    The first session is on us. Contact us to get started!
+  </Price>
+</main>
 <Footer />
 
 <style lang="scss">
@@ -40,5 +56,14 @@ import PageHero from '$components/section/Hero.svelte'
       text-align: center;
       margin-top: 1.5rem;
     }
+  }
+
+  main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5rem 0;
+    column-gap: 4rem;
   }
 </style>
