@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PageHero from '$components/PageHero.svelte'
+  import PageHero from '$components/section/Hero.svelte'
   import { goto } from '$app/navigation'
   import { API_DOMAIN } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
