@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PageHeader from '$components/PageHeader.svelte'
+  import PageHeader from '$components/section/Header.svelte'
 
   export let half = false;
 </script>
