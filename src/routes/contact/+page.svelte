@@ -1,8 +1,9 @@
 <script lang="ts">
-  import PageHero from '$components/PageHero.svelte'
+  import PageHero from '$components/section/Hero.svelte'
   import { goto } from '$app/navigation'
   import { API_DOMAIN } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
+  import Footer from '$components/section/Footer.svelte';
 
   const onFormSubmit: EventHandler<SubmitEvent, HTMLFormElement> = async e => {
     const formData = new FormData(e.currentTarget);
@@ -64,6 +65,7 @@
     <button type="submit">Submit</button>
   </form>
 </div>
+<Footer />
 
 <style lang="scss">
   @use '/src/lib/config';

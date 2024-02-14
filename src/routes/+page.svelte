@@ -1,7 +1,8 @@
 <script lang="ts">
-  import PageHero from '$components/PageHero.svelte'
+  import PageHero from '$components/section/Hero.svelte'
   import Benefit from '$components/Benefit.svelte'
   import SuccessTile from '$components/SuccessTile.svelte'
+  import Footer from '$components/section/Footer.svelte';
 </script>
 
 <svelte:head>
@@ -11,9 +12,9 @@
 <PageHero>
   <div class="hero-center">
     <h1>
-      Learn faster and
+      Learn <span class="title-span n1">faster</span> and
       <br class="nomobile tablet-portrait" />
-      better
+      <span class="title-span n2">better</span>
       <br class="nomobile notablet-portrait" />
       through personalized
       <br />
@@ -151,9 +152,11 @@
     </SuccessTile>
   </div>
 </div>
+<Footer />
 
 <style lang="scss">
   @use "/src/lib/config";
+  @use "sass:color";
 
   :global(.sk-core) {
     display: flex;
@@ -339,5 +342,23 @@
 
   .promo-link {
     color: blue;
+  }
+
+  @mixin title-span($col) {
+    border: 3px dashed $col;
+    border-radius: 1rem;
+    color: $col;
+    background-color: color.adjust($col, $lightness: 30%);
+    padding: 3px 9px;
+    display: inline;
+    background-position: 0px 0px, 200px 100px, 0px 100px, 200px 0px;
+  }
+
+  .title-span.n1 {
+    @include title-span(config.$color3);
+  }
+
+  .title-span.n2 {
+    @include title-span(config.$color5)
   }
 </style>

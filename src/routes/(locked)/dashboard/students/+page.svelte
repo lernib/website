@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageServerData } from "./$types";
-  import Modal from "$components/layouts/Modal.svelte";
+  import Modal from "$components/section/Modal.svelte";
   import EditableText from "$components/widgets/form/EditableText.svelte";
   import EditableOption from "$components/widgets/form/EditableOption.svelte";
   import EditableButton from "$components/widgets/form/EditableButton.svelte";

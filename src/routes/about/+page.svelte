@@ -1,6 +1,7 @@
 <script lang="ts">
-  import PageHero from '$components/PageHero.svelte'
+  import PageHero from '$components/section/Hero.svelte'
   import ValueTile from '$components/ValueTile.svelte'
+  import Footer from '$components/section/Footer.svelte';
 </script>
 
 <svelte:head>
@@ -81,6 +82,7 @@
     </ValueTile>
   </div>
 </div>
+<Footer />
 
 <style lang="scss">
   @use '/src/lib/config';
