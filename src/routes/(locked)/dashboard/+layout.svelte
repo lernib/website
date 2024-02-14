@@ -14,10 +14,12 @@
 </script>
 
 <div class="sidebar">
-  <img
-    src="/logo128_white.png"
-    alt="Logo"
-  />
+  <a href="/" data-sveltekit-reload>
+    <img
+      src="/logo128_white.png"
+      alt="Logo"
+    />
+  </a>
 
   <nav>
     {#each sidebarOptions as opt}
@@ -70,7 +72,7 @@
       }
     }
 
-    > img {
+    img {
       width: 10rem;
     }
 

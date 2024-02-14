@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Dropdown from "$components/section/Dropdown.svelte";
   import { getSigninUrl, getSignoutUrl } from "$lib/config"
   import { authStore } from "$lib/stores"
 
@@ -26,9 +27,20 @@
       Sign In
     </a>
   {:else}
-    <a href={getSignoutUrl()} class="signin-button">
-      Sign Out
-    </a>
+    <Dropdown>
+      <img
+        src="/avatar.svg"
+        alt="Avatar"
+        class="avatar"
+        slot="focus"
+      />
+      <a href="/dashboard" class="signedin-button">
+        Dashboard
+      </a>
+      <a href={getSignoutUrl()} class="signedin-button">
+        Sign Out
+      </a>
+    </Dropdown>
   {/if}
 </div>
 
@@ -71,5 +83,19 @@
     border: none;
     border-radius: 9999px;
     font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .signedin-button {
+    color: black;
+    padding: 0.75em 1.5em;
+    border: none;
+    border-radius: 9999px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  .avatar {
+    height: 3rem;
   }
 </style>
