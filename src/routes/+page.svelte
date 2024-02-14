@@ -2,6 +2,7 @@
   import PageHero from '$components/section/Hero.svelte'
   import Benefit from '$components/Benefit.svelte'
   import SuccessTile from '$components/SuccessTile.svelte'
+  import Footer from '$components/section/Footer.svelte';
 </script>
 
 <svelte:head>
@@ -151,6 +152,7 @@
     </SuccessTile>
   </div>
 </div>
+<Footer />
 
 <style lang="scss">
   @use "/src/lib/config";

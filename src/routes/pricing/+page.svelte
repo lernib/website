@@ -1,5 +1,6 @@
 <script lang="ts">
-  import PageHero from '$components/section/Hero.svelte'
+  import Footer from '$components/section/Footer.svelte';
+import PageHero from '$components/section/Hero.svelte'
 </script>
 
 <svelte:head>
@@ -18,6 +19,7 @@
     </h2>
   </div>
 </PageHero>
+<Footer />
 
 <style lang="scss">
   .hero-center {
