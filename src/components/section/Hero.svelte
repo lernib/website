@@ -26,6 +26,10 @@
     justify-content: start;
     align-items: center;
 
+    @include config.for-size(phone-only) {
+      min-height: var(--height);
+    }
+
     @include config.for-size(tablet-portrait-up) {
       min-height: var(--height);
     }
