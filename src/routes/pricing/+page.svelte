@@ -15,7 +15,7 @@
     </h1>
     <h2>
       Pick the best plan for your needs. Upgrade at any time. No
-      <br />
+      <br class="nomobile" />
       hidden charges, no questions, no hassle.
     </h2>
   </div>
@@ -38,6 +38,8 @@
 <Footer />
 
 <style lang="scss">
+  @use '/src/lib/config';
+
   .hero-center {
     flex-grow: 1;
     display: flex;
@@ -46,24 +48,39 @@
     align-items: center;
     
     > h1 {
-      font-size: 5rem;
       text-align: center;
       font-family: "Filson Pro", sans-serif;
+      font-size: 2.5rem;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 5rem;
+      }
     }
     
     > h2 {
-      font-size: 1.5rem;
       text-align: center;
       margin-top: 1.5rem;
+      font-size: 1.25rem;
+      margin: 0 2rem;
+      margin-top: 1rem;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 1.5rem;
+      }
     }
   }
 
   main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     margin: 5rem 0;
     column-gap: 4rem;
+    row-gap: 4rem;
+
+    @include config.for-size(tablet-landscape-up) {
+      flex-direction: row;
+    }
   }
 </style>

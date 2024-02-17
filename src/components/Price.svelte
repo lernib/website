@@ -21,11 +21,16 @@
   @use '/src/lib/config';
 
   .price {
-    width: 100%;
     height: 20rem;
     background-color: config.$color1_2;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 2rem;
+    margin: 0 2rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      width: 100%;
+      margin: 0;
+    }
 
     h2 {
       font-weight: 900;
