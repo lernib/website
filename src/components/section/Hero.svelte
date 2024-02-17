@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PageHeader from '$components/section/Header.svelte'
+  import PageHeader from '$components/section/Header.svelte';
 
   export let half = false;
 </script>
@@ -18,7 +18,7 @@
     height: fit-content;
     max-width: 100vw;
     max-height: fit-content;
-    background-image: url("/herobg.jpg");
+    background-image: url('/herobg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;

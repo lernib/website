@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { localWebresAsset } from '$lib/config';
   import PageHero from '$components/section/Hero.svelte'
   import Benefit from '$components/Benefit.svelte'
   import SuccessTile from '$components/SuccessTile.svelte'
@@ -41,7 +42,7 @@
 <div class="benefits">
   <div>
     <Benefit
-      src="/icons/natural.svg"
+      src={localWebresAsset("/icons/natural.svg")}
       title="Natural"
     >
       We teach like a caring parent,
@@ -51,7 +52,7 @@
       lecture hall professor.
     </Benefit>
     <Benefit
-      src="/icons/efficient.svg"
+      src={localWebresAsset("/icons/efficient.svg")}
       title="Efficient"
     >
       We use simple examples and
@@ -61,7 +62,7 @@
       things in a fraction of the time.
     </Benefit>
     <Benefit
-      src="/icons/flexible.svg"
+      src={localWebresAsset("/icons/flexible.svg")}
       title="Flexible"
     >
       Our tutoring sessions have no
@@ -71,7 +72,7 @@
       your mind?
     </Benefit>
     <Benefit
-      src="/icons/direct.svg"
+      src={localWebresAsset("/icons/direct.svg")}
       title="Direct"
     >
       We don't waste time, or push
@@ -81,7 +82,7 @@
       actually should
     </Benefit>
     <Benefit
-      src="/icons/inspiring.svg"
+      src={localWebresAsset("/icons/inspiring.svg")}
       title="Inspiring"
     >
       Do you have any long-term
@@ -91,7 +92,7 @@
       how to achieve them.
     </Benefit>
     <Benefit
-      src="/icons/accomodating.svg"
+      src={localWebresAsset("/icons/accomodating.svg")}
       title="Accomodating"
     >
       We work well with various
@@ -233,7 +234,7 @@
       margin-top: 0;
     }
 
-    > span, a {
+    > a {
       display: inline;
     }
   }
