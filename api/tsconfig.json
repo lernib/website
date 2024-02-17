@@ -5,13 +5,15 @@
   ],
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "outDir": "dist",
     "baseUrl": ".",
     "sourceMap": true,
     "paths": {
       "$routes/*": ["./src/routes/*"],
-      "$services/*": ["./src/services/*"]
+      "$services/*": ["./src/services/*"],
+      "$utilities/*": ["./src/utilities/*"]
     }
   }
 }

@@ -15,7 +15,7 @@ router.get('/:userid', async (req, res) => {
 	).then(res => res.Item);
 
 	if (!data) {
-		return res.status(404).end();
+		return res.status(500).end();
 	}
 
 	res.status(200).json(data);

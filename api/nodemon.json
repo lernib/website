@@ -1,5 +1,5 @@
 {
   "execMap": {
-    "ts": "npm run build && node ."
+    "ts": "tsx"
   }
 }
