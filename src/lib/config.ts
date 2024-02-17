@@ -3,6 +3,7 @@ import { dev } from '$app/environment'
 
 export const DOMAIN = dev ? 'http://localhost:5173' : 'https://lernib.com'
 export const API_DOMAIN = dev ? 'http://localhost:3001' : 'https://api.lernib.com'
+export const WEBRES_DOMAIN = dev ? '' : 'https://webres.lernib.com'
 export const COGNITO_BASE_URI = 'https://auth.lernib.com'
 export const COGNITO_CLIENT_ID = '5gcpvrejmvp27lukikktdi021p'
 export const COGNITO_USER_POOL_ID = 'us-east-1_YGpBl2H1U'
@@ -44,4 +45,8 @@ export const TIMEZONES = {
   "-7": "MST",
   "-8": "PST",
   "NA": "Unknown"
+}
+
+export function localWebresAsset(url: string): string {
+  return dev ? (`${WEBRES_DOMAIN}/static${url}`) : url
 }

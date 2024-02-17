@@ -1,7 +1,7 @@
 <script lang="ts">
   import PageHero from '$components/section/Hero.svelte'
   import { goto } from '$app/navigation'
-  import { API_DOMAIN } from '$lib/config';
+  import { API_DOMAIN, localWebresAsset } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
   import Footer from '$components/section/Footer.svelte';
 
@@ -54,7 +54,7 @@
 
 <div class="form-area">
   <img
-    src="/portrait-woman-video-call-with-laptop-headphones-while-working-from-home-concept.jpg"
+    src={localWebresAsset("/portrait-woman-video-call-with-laptop-headphones-while-working-from-home-concept.jpg")}
     alt="Woman video calling from home"
   />
   <form on:submit|preventDefault={onFormSubmit}>

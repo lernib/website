@@ -1,6 +1,6 @@
 <script lang="ts">
   import Dropdown from "$components/section/Dropdown.svelte";
-  import { getSigninUrl, getSignoutUrl } from "$lib/config"
+  import { getSigninUrl, getSignoutUrl, localWebresAsset } from "$lib/config"
   import { authStore } from "$lib/stores"
 
   const LINKS = [
@@ -13,7 +13,7 @@
 <div class="header">
   <a href="/">
     <img class="header-img"
-      src="/logo128.png"
+      src={localWebresAsset("/logo128.png")}
       alt="logo"
     />
   </a>
@@ -29,7 +29,7 @@
   {:else}
     <Dropdown>
       <img
-        src="/avatar.svg"
+        src={localWebresAsset("/avatar.svg")}
         alt="Avatar"
         class="avatar"
         slot="focus"

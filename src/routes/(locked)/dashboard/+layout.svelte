@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getSignoutUrl } from "$lib/config";
+  import { getSignoutUrl, localWebresAsset } from "$lib/config";
 
   const sidebarOptions = [
     {
@@ -16,7 +16,7 @@
 <div class="sidebar">
   <a href="/" data-sveltekit-reload>
     <img
-      src="/logo128_white.png"
+      src={localWebresAsset("/logo128_white.png")}
       alt="Logo"
     />
   </a>

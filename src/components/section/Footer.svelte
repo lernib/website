@@ -1,6 +1,10 @@
+<script lang="ts">
+  import { localWebresAsset } from "$lib/config";
+</script>
+
 <footer>
   <div class="n1">
-    <img src="/logo128_white.png" alt="logo" />
+    <img src={localWebresAsset("/logo128_white.png")} alt="logo" />
     <p>
       Connect with excellent tutors on our
       platform. Learn the way you want, wherever
