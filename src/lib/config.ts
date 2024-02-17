@@ -48,5 +48,5 @@ export const TIMEZONES = {
 }
 
 export function localWebresAsset(url: string): string {
-  return dev ? (`${WEBRES_DOMAIN}/static${url}`) : url
+  return !dev ? (`${WEBRES_DOMAIN}/static${url}`) : url
 }
