@@ -27,17 +27,23 @@
 
   footer {
     background-color: config.$color2;
-    width: calc(100% - 20rem);
     height: fit-content;
     min-height: 10rem;
     margin-top: 3rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     color: config.$color1;
-    padding: 3rem 10rem 6rem;
+    padding: 3rem;
     column-gap: 5rem;
+    row-gap: 5rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      width: calc(100% - 20rem);
+      flex-direction: row;
+      padding: 3rem 10rem 6rem;
+    }
 
     h2 {
       font-weight: 900;

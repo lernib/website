@@ -13,7 +13,7 @@
   <div class="hero-center">
     <h1>
       Learn <span class="title-span n1">faster</span> and
-      <br class="nomobile tablet-portrait" />
+      <br class="nomobile tablet-portrait n2" />
       <span class="title-span n2">better</span>
       <br class="nomobile notablet-portrait" />
       through personalized
@@ -30,12 +30,12 @@
     <a href="/about">Learn More</a>
   </div>
   <span class="hero-promo">
-    Get your first session free of charge.&MediumSpace;
+    Get your first session free of charge.
     <br class="mobile" />
     <a href="/contact" class="promo-link">
       Contact us
     </a>
-    &ThinSpace;to get started.
+    to get started.
   </span>
 </PageHero>
 <div class="benefits">
@@ -219,14 +219,22 @@
     width: 100%;
     padding: 1em 0;
     background-color: config.$color4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     text-align: center;
     margin-top: 3rem;
 
+    @include config.for-size(mobile-only) {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
     @include config.for-size(tablet-landscape-up) {
       margin-top: 0;
+    }
+
+    > span, a {
+      display: inline;
     }
   }
 
@@ -277,6 +285,8 @@
         grid-template-columns: repeat(3, 1fr);
       }
     }
+
+    padding-bottom: 2rem;
   }
 
   // .our-aim {
@@ -326,7 +336,7 @@
       margin: 0 3rem;
       gap: 1rem;
       grid-template-columns: 1fr;
-      grid-template-rows: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
 
       @include config.for-size(tablet-portrait) {
         grid-template-columns: repeat(2, 1fr);
@@ -350,7 +360,7 @@
     color: $col;
     background-color: color.adjust($col, $lightness: 30%);
     padding: 3px 9px;
-    display: inline;
+    display: inline-block;
     background-position: 0px 0px, 200px 100px, 0px 100px, 200px 0px;
   }
 
@@ -359,6 +369,11 @@
   }
 
   .title-span.n2 {
-    @include title-span(config.$color5)
+    @include title-span(config.$color5);
+    margin-top: 1rem;
+
+    @include config.for-size(tablet-landscape-up) {
+      margin-top: 0;
+    }
   }
 </style>

@@ -95,9 +95,13 @@
     align-items: center;
     
     > h1 {
-      font-size: 5rem;
       text-align: center;
       font-family: "Filson Pro", sans-serif;
+      font-size: 4rem;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 5rem;
+      }
     }
     
     > h2 {
@@ -109,17 +113,29 @@
 
   .stories {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
     margin-top: 3rem;
     column-gap: 2rem;
+    row-gap: 2rem;
+    padding: 1rem;
+    align-self: stretch;
+
+    @include config.for-size(tablet-portrait-up) {
+      width: calc(100% - 2rem);
+      flex-direction: row;
+    }
 
     > div {
-      width: calc(40% - 4rem);
+      align-self: stretch;
       padding: 2rem;
       border-radius: 2rem;
+      align-self: stretch;
+
+      @include config.for-size(tablet-portrait-up) {
+        width: calc(40% - 2rem);
+      }
 
       h2 {
         font-size: 2rem;
@@ -163,10 +179,18 @@
 
   .values-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 15rem;
-    margin: 0 5rem;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     column-gap: 3rem;
+    margin: 0 2rem;
+    row-gap: 2rem;
+
+    @include config.for-size(tablet-landscape-up) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      margin: 0 5rem;
+      row-gap: 0;
+    }
   }
 
   // .approach {

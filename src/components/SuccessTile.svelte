@@ -5,7 +5,7 @@
 
 <div>
   <slot />
-  <span>
+  <span class={name ? "name" : ""}>
     {#if !first}
       {name}
     {/if}
@@ -17,7 +17,6 @@
 
   div {
     max-width: 350px;
-    aspect-ratio: 1 / 1;
     border-radius: 2rem;
     font-size: 1.5rem;
     padding: 2rem;
@@ -46,10 +45,19 @@
       justify-content: start;
       align-items: start;
 
-      span {
+      .name {
         margin-top: auto;
         font-weight: bold;
+        display: block;
+
+        @include config.for-size(phone-only) {
+          padding-top: 2rem;
+        }
       }
+    }
+
+    @include config.for-size(tablet-portrait-up) {
+      aspect-ratio: 1 / 1;
     }
   }
 </style>
