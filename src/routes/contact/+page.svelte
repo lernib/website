@@ -2,6 +2,7 @@
   import PageHero from '$components/section/Hero.svelte'
   import { goto } from '$app/navigation'
   import { notifyStore } from '$lib/stores';
+
   import { API_DOMAIN, localWebresAsset } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
   import Footer from '$components/section/Footer.svelte';
