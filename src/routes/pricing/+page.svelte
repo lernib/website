@@ -40,6 +40,13 @@
 <style lang="scss">
   @use '/src/lib/config';
 
+  :global(.sk-core) {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+
   .hero-center {
     flex-grow: 1;
     display: flex;

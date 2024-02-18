@@ -34,7 +34,7 @@
         class="avatar"
         slot="focus"
       />
-      <a href="/dashboard" class="signedin-button">
+      <a href="/dashboard" class="signedin-button" data-sveltekit-preload-data="off">
         Dashboard
       </a>
       <a href={getSignoutUrl()} class="signedin-button">
