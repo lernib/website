@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { ScanCommand } from '@aws-sdk/lib-dynamodb';
 import { dynamo, TABLES } from '$services/db';
-import type { EventInput } from '@fullcalendar/core';
+// import type { EventInput } from '@fullcalendar/core';
 
 const router = Router();
 

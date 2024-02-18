@@ -4,8 +4,11 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
+  import type { PageServerData } from './$types';
 
   let calendarEl: HTMLDivElement;
+
+  export let data: PageServerData
 
   onMount(async () => {
     let calendar = new Calendar(calendarEl, {
@@ -19,7 +22,8 @@
         left: 'prev,next today',
         center: 'title',
         right: 'dayGridMonth,timeGridWeek,listWeek'
-      }
+      },
+      events: data.events
     });
 
     calendar.render();
