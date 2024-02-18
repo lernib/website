@@ -1,6 +1,8 @@
 <script lang="ts">
   import PageHero from '$components/section/Hero.svelte'
   import { goto } from '$app/navigation'
+  import { notifyStore } from '$lib/stores';
+
   import { API_DOMAIN, localWebresAsset } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
   import Footer from '$components/section/Footer.svelte';
@@ -13,7 +15,7 @@
     const content = formData.get('content');
 
     if (name && email && content) {
-      console.log(await fetch(
+      await fetch(
         new URL('/contact', API_DOMAIN),
         {
           method: "POST",
@@ -26,9 +28,22 @@
             content
           })
         }
-      ).then(res => res.status));
-
-      goto('/');
+      ).then(res => {
+        if (!res.ok) {
+          throw new Error("Failed to send contact")
+        } else {
+          notifyStore.update((notifs) => [...notifs, {
+            message: 'Message sent!',
+            color: '#afa'
+          }])
+          goto('/');
+        }
+      }).catch((e) => {
+        notifyStore.update((notifs) => [...notifs, {
+          message: 'Could not send',
+          color: '#faa'
+        }])
+      });
     }
   };
 </script>
@@ -59,8 +74,8 @@
   />
   <form on:submit|preventDefault={onFormSubmit}>
     <h2>Send us a message</h2>
-    <input type="text" name="name" placeholder="Name" />
-    <input type="text" name="email" placeholder="Email" />
+    <input required type="text" name="name" placeholder="Name" />
+    <input required type="email" name="email" placeholder="Email" />
     <textarea name="content" placeholder="Your message" rows=10 cols=50 />
     <button type="submit">Submit</button>
   </form>
@@ -102,41 +117,78 @@
     flex-direction: column;
     justify-content: start;
     align-items: start;
+    align-self: stretch;
+
+    @include config.for-size(tablet-landscape-up) {
+      align-self: normal;
+    }
 
     h2 {
       font-size: 2rem;
       font-weight: 800;
+      margin-top: 1rem;
       margin-bottom: 1rem;
+      text-align: center;
+      width: 100%;
+
+      @include config.for-size(tablet-landscape-up) {
+        text-align: start;
+      }
     }
 
     input, textarea {
-      width: 100%;
+      align-self: stretch;
       resize: none;
       margin-bottom: 0.5rem;
-      padding: 0.25rem;
+      padding: 0.75rem;
+      background: none;
+      border: 2px solid #999;
+      border-radius: 1rem;
+      outline: none;
+
+      &:invalid {
+        background-color: #faa;
+      }
     }
 
     button {
       width: 100%;
-      padding: 1rem 0;
+      padding: 1rem;
+      margin-top: 1rem;
     }
   }
 
   .form-area {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    align-items: start;
     padding: 1.5rem;
     border-radius: 1.5rem;
-    background-color: config.$color2_light;
-    width: fit-content;
-    margin: 2rem 0;
+    align-self: stretch;
+
+    @include config.for-size(tablet-portrait-up) {
+      margin: 2rem 5rem;
+    }
+
+    @include config.for-size(tablet-landscape-up) {
+      align-items: start;
+      flex-direction: row;
+      margin: 2rem 0;
+    }
 
     img {
-      width: 50vw;
       align-self: stretch;
-      margin-right: 2rem;
+      border-radius: 2rem;
+
+      @include config.for-size(tablet-portrait-up) {
+        border-radius: 0;
+      }
+
+      @include config.for-size(tablet-landscape-up) {
+        margin-right: 2rem;
+        width: 50vw;
+      }
     }
   }
 </style>
