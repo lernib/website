@@ -1,7 +1,7 @@
 <script lang="ts">
   import PageNotify from '$components/widgets/PageNotify.svelte';
   import type { LayoutData } from './$types'
-  import { authStore } from '$lib/stores'
+  import { authStore, notifyStore } from '$lib/stores'
   import "$lib/global.scss"
 
   export let data: LayoutData
@@ -10,7 +10,9 @@
 
 <slot />
 <div id="sk-pagenotifs">
-  <PageNotify message="Hello!" />
+  {#each $notifyStore as notify}
+    <PageNotify {...notify} />
+  {/each}
 </div>
 
 <style lang="scss">

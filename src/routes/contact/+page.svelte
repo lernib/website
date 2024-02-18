@@ -1,6 +1,7 @@
 <script lang="ts">
   import PageHero from '$components/section/Hero.svelte'
   import { goto } from '$app/navigation'
+  import { notifyStore } from '$lib/stores';
   import { API_DOMAIN, localWebresAsset } from '$lib/config';
   import type { EventHandler } from 'svelte/elements';
   import Footer from '$components/section/Footer.svelte';
@@ -13,7 +14,7 @@
     const content = formData.get('content');
 
     if (name && email && content) {
-      console.log(await fetch(
+      await fetch(
         new URL('/contact', API_DOMAIN),
         {
           method: "POST",
@@ -26,9 +27,22 @@
             content
           })
         }
-      ).then(res => res.status));
-
-      goto('/');
+      ).then(res => {
+        if (!res.ok) {
+          throw new Error("Failed to send contact")
+        } else {
+          notifyStore.update((notifs) => [...notifs, {
+            message: 'Message sent!',
+            color: '#afa'
+          }])
+          goto('/');
+        }
+      }).catch((e) => {
+        notifyStore.update((notifs) => [...notifs, {
+          message: 'Could not send',
+          color: '#faa'
+        }])
+      });
     }
   };
 </script>

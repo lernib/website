@@ -1,8 +1,9 @@
 <script lang="ts">
   export let message: string;
+  export let color: string;
 </script>
 
-<span class="notification">
+<span class="notification" style="background-color: {color};">
   {message}
 </span>
 
@@ -14,12 +15,11 @@
     display: block;
     visibility: hidden;
     border-radius: 1rem;
-    background-color: #afa;
     width: fit-content;
     padding: 0.5em 2.5em;
     font-weight: bold;
     font-size: 1.5rem;
-    position: relative;
+    position: absolute;
     left: 50%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 
