@@ -1,6 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "scripts": {
+    "dev": "nx run-many -t start",
+    "check:global": "nx run-many -t build,lint,check"
+  },
   "devDependencies": {
     "nx": "17.2.8"
   },
