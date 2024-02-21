@@ -8,8 +8,8 @@
 </span>
 
 <style lang="scss">
-  @use '/website/src/lib/animation';
-  @use '/website/src/lib/config';
+  @use '/src/lib/animation';
+  @use '/src/lib/config';
 
   .notification {
     display: block;
