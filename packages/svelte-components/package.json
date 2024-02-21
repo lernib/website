@@ -1,5 +1,5 @@
 {
-	"name": "svelte-components",
+	"name": "@lernib/svelte-components",
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "vite dev",
@@ -26,6 +26,7 @@
 		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
+		"@lernib/sass-styling": "^0.1.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/package": "^2.0.0",

@@ -12,7 +12,9 @@
   export let data: PageServerData
   let showAddEventModal = false;
 
-  function add_event_modal() {}
+  function add_event_modal() {
+    showAddEventModal = true;
+  }
 
   onMount(async () => {
     let calendar = new Calendar(calendarEl, {
@@ -31,6 +33,11 @@
         addEvent: {
           text: 'Add Event',
           click: add_event_modal
+        }
+      },
+      views: {
+        timeGridWeek: {
+          nowIndicator: true
         }
       },
       events: data.events
