@@ -34,7 +34,11 @@
   "type": "module",
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.503.1",
-    "aws-jwt-verify": "^4.0.0"
+    "aws-jwt-verify": "^4.0.0",
+    "@fullcalendar/core": "^6.1.10",
+    "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/list": "^6.1.10",
+    "@fullcalendar/timegrid": "^6.1.10"
   },
   "nx": {
     "targets": {
