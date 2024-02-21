@@ -6,7 +6,24 @@
     "check:global": "nx run-many -t build,lint,check"
   },
   "devDependencies": {
-    "nx": "17.2.8"
+    "@nx/js": "18.0.4",
+    "@nx/storybook": "^18.0.4",
+    "@nx/web": "18.0.4",
+    "@storybook/addon-essentials": "^7.5.3",
+    "@storybook/addon-interactions": "^7.5.3",
+    "@storybook/core-server": "^7.5.3",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/sveltekit": "^7.5.3",
+    "@storybook/test-runner": "^0.13.0",
+    "@storybook/testing-library": "^0.2.2",
+    "@swc-node/register": "~1.8.0",
+    "@swc/core": "~1.3.85",
+    "@swc/helpers": "~0.5.2",
+    "nx": "17.2.8",
+    "prettier": "^2.6.2",
+    "storybook": "^7.5.3",
+    "ts-node": "10.9.1",
+    "typescript": "~5.3.2"
   },
   "nx": {
     "targets": {
@@ -21,5 +38,9 @@
     "api",
     "website",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
 }
