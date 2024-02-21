@@ -39,15 +39,15 @@ jobs:
       run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/ --recursive
     - name: Copy build artifacts to S3
       run: |
-        aws s3 cp build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/build/ --recursive
+        aws s3 cp website/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/build/ --recursive
         aws s3 cp api/dist s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/dist/ --recursive
     - name: Copy static assets to S3
       run: |
-        aws s3 cp static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/static/ --recursive
-        aws s3 cp static s3://lernib-bucket.webres/static/ --recursive
+        aws s3 cp website/static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/static/ --recursive
+        aws s3 cp website/static s3://lernib-bucket.webres/static/ --recursive
     - name: Copy package.json(s) to S3
       run: |
-        aws s3 cp package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/package.json
+        aws s3 cp website/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/package.json
         aws s3 cp api/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/package.json
 
   deploy:
