@@ -4,11 +4,15 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
+  import Modal from '$components/section/Modal.svelte';
   import type { PageServerData } from './$types';
 
   let calendarEl: HTMLDivElement;
 
   export let data: PageServerData
+  let showAddEventModal = false;
+
+  function add_event_modal() {}
 
   onMount(async () => {
     let calendar = new Calendar(calendarEl, {
@@ -21,7 +25,13 @@
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,listWeek'
+        right: 'dayGridMonth,timeGridWeek,listWeek addEvent'
+      },
+      customButtons: {
+        addEvent: {
+          text: 'Add Event',
+          click: add_event_modal
+        }
       },
       events: data.events
     });
@@ -37,6 +47,8 @@
 <main>
   <div class="calendar" bind:this={calendarEl} />
 </main>
+<Modal show={showAddEventModal}>
+</Modal>
 
 <style lang="scss">
   :global(.sk-core) {
