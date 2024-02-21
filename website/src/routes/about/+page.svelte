@@ -85,7 +85,7 @@
 <Footer />
 
 <style lang="scss">
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   .hero-center {
     flex-grow: 1;

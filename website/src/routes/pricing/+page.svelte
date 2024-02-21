@@ -38,7 +38,7 @@
 <Footer />
 
 <style lang="scss">
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   :global(.sk-core) {
     display: flex;

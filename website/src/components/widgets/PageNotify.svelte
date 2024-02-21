@@ -9,7 +9,7 @@
 
 <style lang="scss">
   @use '/src/lib/animation';
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   .notification {
     display: block;

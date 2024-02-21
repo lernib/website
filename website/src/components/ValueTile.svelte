@@ -11,7 +11,7 @@
 </div>
 
 <style lang="scss">
-  @use "/src/lib/config";
+  @use "@lernib/sass-styling/config";
 
   div {
     width: calc(100% - 4rem);

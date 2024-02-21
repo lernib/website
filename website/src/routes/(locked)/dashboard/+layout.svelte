@@ -37,7 +37,7 @@
 
 <style lang="scss">
   @use 'sass:color';
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   :global(.sk-core) {
     display: flex;

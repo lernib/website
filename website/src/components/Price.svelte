@@ -18,7 +18,7 @@
 </div>
 
 <style lang="scss">
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   .price {
     height: 20rem;

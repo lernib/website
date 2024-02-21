@@ -27,7 +27,7 @@
 </footer>
 
 <style lang="scss">
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   footer {
     background-color: config.$color2;

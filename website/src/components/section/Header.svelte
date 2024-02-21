@@ -45,7 +45,7 @@
 </div>
 
 <style lang="scss">
-  @use "/src/lib/config.scss";
+  @use "@lernib/sass-styling/config";
 
   .header {
     display: flex;
