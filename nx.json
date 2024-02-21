@@ -1,6 +1,7 @@
 {
   "targetDefaults": {
     "build": {
+      "dependsOn": ["^build", "lint"],
       "cache": true
     },
     "lint": {
