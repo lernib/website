@@ -2,7 +2,7 @@
   import PageNotify from '$components/widgets/PageNotify.svelte';
   import type { LayoutData } from './$types'
   import { authStore, notifyStore } from '$lib/stores'
-  import "$lib/global.scss"
+  import '@lernib/sass-styling/global';
 
   export let data: LayoutData
   authStore.set(data.ident)

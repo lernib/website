@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 	).then(res => res.Items);
 
 	if (!data) {
-		return res.status(404).end();
+		return res.status(500).end();
 	}
 
 	res.status(200).json(data);

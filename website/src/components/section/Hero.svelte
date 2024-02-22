@@ -11,7 +11,7 @@
 
 
 <style lang="scss">
-  @use "/src/lib/config.scss";
+  @use "@lernib/sass-styling/config";
 
   .hero {
     width: 100vw;

@@ -1,0 +1,15 @@
+{
+  "name": "@lernib/sass-styling",
+  "version": "0.1.0",
+  "type": "commonjs",
+  "scripts": {
+    "lint": "publint"
+  },
+  "exports": {
+    "./config": "./src/config.scss",
+    "./global": "./src/global.scss"
+  },
+  "devDependencies": {
+    "publint": "^0.2.7"
+  }
+}

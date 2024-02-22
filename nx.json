@@ -1,6 +1,7 @@
 {
   "targetDefaults": {
     "build": {
+      "dependsOn": ["^build", "lint"],
       "cache": true
     },
     "lint": {
@@ -12,5 +13,23 @@
   },
   "affected": {
     "defaultBase": "dev"
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/storybook/plugin",
+      "options": {
+        "buildStorybookTargetName": "build-storybook",
+        "serveStorybookTargetName": "storybook",
+        "testStorybookTargetName": "test-storybook",
+        "staticStorybookTargetName": "static-storybook"
+      }
+    }
+  ],
+  "tasksRunnerOptions": {
+    "default": {
+      "options": {
+        "cacheableOperations": ["build-storybook"]
+      }
+    }
   }
 }

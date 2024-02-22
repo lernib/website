@@ -102,7 +102,7 @@
 
 <style lang="scss">
   @use 'sass:color';
-  @use '/src/lib/config';
+  @use '@lernib/sass-styling/config';
 
   main {
     align-self: stretch;
