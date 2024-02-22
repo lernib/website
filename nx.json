@@ -9,6 +9,9 @@
     },
     "check": {
       "cache": true
+    },
+    "demo": {
+      "dependsOn": ["build", "^demo"]
     }
   },
   "affected": {

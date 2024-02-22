@@ -15,5 +15,8 @@
       "$services/*": ["./src/services/*"],
       "$utilities/*": ["./src/utilities/*"]
     }
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true
   }
 }
