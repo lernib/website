@@ -4,7 +4,7 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
-  import Modal from '$components/section/Modal.svelte';
+  import { Modal } from '@lernib/svelte-components';
   import type { PageServerData } from './$types';
 
   let calendarEl: HTMLDivElement;

@@ -12,7 +12,6 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext"
   },
-  "exclude": ["**/*.stories.ts", "**/*.stories.js"],
   "references": [
     {
       "path": "./tsconfig.storybook.json"
