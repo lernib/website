@@ -4,7 +4,7 @@
   import '@lernib/sass-styling/global';
 
   export const meta = {
-    title: 'Layouts/TextInput',
+    title: 'Widgets/TextInput',
     component: TextInput
   }
 </script>

@@ -1,15 +1,13 @@
 <script context="module" lang="ts">
-  import CalendarInput from './CalendarInput.svelte';
+  import Header from './Header.svelte';
 
   import '@lernib/sass-styling/global';
 
   export const meta = {
-    title: 'Widgets/CalendarInput',
-    component: CalendarInput,
-    argTypes: {
-      mode: {
-        options: ['auto', 'date', 'datetime', 'time']
-      }
+    title: 'Layouts/Header',
+    component: Header,
+    parameters: {
+      layout: 'fullscreen'
     }
   }
 </script>
@@ -18,8 +16,8 @@
   import { Story, Template } from '@storybook/addon-svelte-csf';
 </script>
 
-<Template id="primary" let:args>
-  <CalendarInput {...args} />
+<Template id="primary">
+  <Header />
 </Template>
 
 <Story template="primary" name="Primary" />

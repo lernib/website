@@ -36,6 +36,7 @@
 		"@types/eslint": "8.56.0",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
+		"aws-jwt-verify": "^4.0.1",
 		"eslint": "^8.56.0",
 		"eslint-plugin-svelte": "^2.35.1",
 		"publint": "^0.1.9",
