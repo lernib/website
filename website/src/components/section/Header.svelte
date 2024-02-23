@@ -6,7 +6,8 @@
   const LINKS = [
     ["/contact", "Contact"],
     ["/pricing", "Pricing"],
-    ["/about", "About"]
+    ["/about", "About"],
+    ["/blog", "Blog"]
   ]
 </script>
 
