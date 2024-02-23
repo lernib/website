@@ -4,7 +4,7 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
-  import { Modal } from '@lernib/svelte-components';
+  import { Modal, CalendarInput } from '@lernib/svelte-components';
   import type { PageServerData } from './$types';
 
   let calendarEl: HTMLDivElement;
@@ -37,7 +37,8 @@
       },
       views: {
         timeGridWeek: {
-          nowIndicator: true
+          nowIndicator: true,
+          allDaySlot: false
         }
       },
       events: data.events
@@ -54,7 +55,16 @@
 <main>
   <div class="calendar" bind:this={calendarEl} />
 </main>
-<Modal show={showAddEventModal}>
+<Modal bind:show={showAddEventModal}>
+  <form>
+    <div>
+      Date
+      <CalendarInput mode="date" pickerOnly />
+    </div>
+    <div>
+      <CalendarInput mode="time" pickerOnly minuteIncrement={15} />
+    </div>
+  </form>
 </Modal>
 
 <style lang="scss">
