@@ -1,23 +1,22 @@
 <script lang="ts">
+  import '@lernib/sass-styling/fixes'
+
   export let show = false;
 
   let modal: HTMLDivElement;
 
-  $: show && showChanged();
-
-  const showChanged = () => {
-    modal.style.display = show ? 'block' : 'none';
-  }
+  $: modalStyle = show ? 'block' : 'none';
 
   const hideModal = () => {
     show = false;
-    showChanged();
   }
 </script>
 
-<div class="modal" bind:this={modal}>
+<div class="modal" bind:this={modal} style="display: {modalStyle}">
   <div class="modal-content">
-    <button class="close" on:click={hideModal}>&times;</button>
+    <div class="clearfix">
+      <button class="close" on:click={hideModal}>&times;</button>
+    </div>
     <slot />
   </div>
 </div>
@@ -32,6 +31,7 @@
     width: 100%;
     height: 100%;
     overflow: auto;
+    clear: both;
     background-color: #0006;
   }
 
@@ -45,10 +45,10 @@
 
   .close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
-
+    float: right;
+  
     background-color: transparent;
     border: none;
     padding: 0;
