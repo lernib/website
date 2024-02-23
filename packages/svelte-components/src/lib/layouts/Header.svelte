@@ -1,6 +1,6 @@
 <script lang="ts">
   // import Dropdown from "$components/section/Dropdown.svelte";
-  import { getSigninUrl, getSignoutUrl, localWebresAsset } from '$lib/config';
+  import { getSigninUrl/*, getSignoutUrl, localWebresAsset */ } from '$lib/config';
   import { dev } from '$app/environment';
   import { authStore } from '$lib/stores';
 
