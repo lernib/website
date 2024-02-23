@@ -30,7 +30,7 @@ ${body.content}`;
 
 	await emailClient.send(
 		new SendEmailCommand({
-			Source: 'contact+no-reply@lernib.com',
+			Source: `Contact - ${body.name} <contact-no-reply@lernib.com>`,
 			Destination: {
 				ToAddresses: ['ckieliszewski@lernib.com']
 			},
@@ -41,7 +41,7 @@ ${body.content}`;
 					}
 				},
 				Subject: {
-					Data: 'New notification from contact form!'
+					Data: 'Great news - someone is interested!'
 				}
 			}
 		})

@@ -7,9 +7,9 @@
   <div class="hero-section">
     <h1>
       Unlocking Potential: Your
-      <br />
+      <br class="nomobile" />
       Path to Academic
-      <br />
+      <br class="nomobile" />
       Excellence Starts Here
     </h1>
     <p>
@@ -22,6 +22,8 @@
 <Footer />
 
 <style lang="scss">
+  @use '@lernib/sass-styling/config';
+
   .hero-section {
     display: flex;
     flex-direction: column;
@@ -30,9 +32,17 @@
     flex-grow: 1;
 
     h1 {
-      font-size: 5rem;
+      font-size: 2.5rem;
       font-weight: 900;
       text-align: center;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 3rem;
+      }
+
+      @include config.for-size(tablet-landscape-up) {
+        font-size: 5rem;
+      }
     }
 
     p {
