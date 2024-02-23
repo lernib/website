@@ -3,7 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "nx run-many -t start",
-    "check:global": "nx run-many -t build,lint,check"
+    "check": "nx run-many -t build,lint,check",
+    "storybook": "nx run @lernib/svelte-components:storybook"
   },
   "devDependencies": {
     "@nx/js": "18.0.4",

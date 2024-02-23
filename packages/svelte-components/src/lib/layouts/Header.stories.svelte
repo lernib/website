@@ -20,4 +20,11 @@
   <Header />
 </Template>
 
+<Template id="signed-in" let:args>
+  <Header {...args} />
+</Template>
+
 <Story template="primary" name="Primary" />
+<Story template="signed-in" name="Signed In" args={{
+  forceSignIn: true
+}} />

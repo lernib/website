@@ -1,10 +1,13 @@
 <script lang="ts">
-  // import Dropdown from "$components/section/Dropdown.svelte";
-  import { getSigninUrl/*, getSignoutUrl, localWebresAsset */ } from '$lib/config';
+  import Dropdown from "./Dropdown.svelte";
+  import { getSigninUrl, getSignoutUrl, localWebresAsset } from '$lib/config';
   import { dev } from '$app/environment';
   import { authStore } from '$lib/stores';
 
   import logo from '$lib/assets/logo_colored.png';
+  import avatar from '$lib/assets/avatar.svg';
+
+  export let forceSignIn = false;
 
   const LINKS = [
     ['/contact', 'Contact'],
@@ -23,12 +26,12 @@
       <a href={url} class="nomobile">{text}</a>
     {/each}
   </nav>
-  {#if !$authStore}
+  {#if !$authStore && !forceSignIn}
     <a href={getSigninUrl()} class="signin-button"> Sign In </a>
   {:else}
-    <!-- <Dropdown>
+    <Dropdown force={forceSignIn}>
       <img
-        src={localWebresAsset("/avatar.svg")}
+        src={avatar}
         alt="Avatar"
         class="avatar"
         slot="focus"
@@ -39,7 +42,7 @@
       <a href={getSignoutUrl()} class="signedin-button">
         Sign Out
       </a>
-    </Dropdown> -->
+    </Dropdown>
   {/if}
 </div>
 
@@ -85,7 +88,7 @@
     white-space: nowrap;
   }
 
-/*
+
   .signedin-button {
     color: black;
     padding: 0.75em 1.5em;
@@ -98,5 +101,5 @@
   .avatar {
     height: 3rem;
   }
-*/
+
 </style>
