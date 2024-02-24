@@ -1,6 +1,7 @@
 <script lang="ts">
   import NumberInput from "./NumberInput.svelte";
 
+  export let elClass: string = '';
   export let value: string = "00:00";
 
   let hour = parseInt(value.split(':')[0]);
@@ -17,7 +18,7 @@
   }
 </script>
 
-<div class="widgetR">
+<div class="widgetR {elClass}">
   <NumberInput
     elClass="timeNum5fab469e-7167-4680-aeda-741ff118f5c3"
     maxlength={2}
@@ -45,7 +46,6 @@
     padding: 1em 0.75em;
     background-color: #ddd;
     border-radius: 0.5em;
-    font-size: 2rem;
     font-weight: bold;
     user-select: none;
     border: none;

@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { isValidElement } from "react";
-  import type { FormEventHandler } from "svelte/elements";
-
   export let elClass = '';
   export let value: number = 0;
   export let min: number = -Infinity;
