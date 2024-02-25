@@ -1,21 +1,15 @@
 import { Router } from 'express';
 import emailClient from '$services/email';
-import * as z from 'zod';
 import { SendEmailCommand } from '@aws-sdk/client-ses';
+import * as tst from '@lernib/ts-types';
 
 const router = Router();
-
-const routerPostBody = z.object({
-	name: z.string(),
-	email: z.string().email(),
-	content: z.string()
-});
 
 router.post('/', async (req, res) => {
 	let body;
 
 	try {
-		body = routerPostBody.parse(req.body);
+		body = tst.Api.Contact.Request.Body.parse(req.body);
 	} catch {
 		res.status(400).send();
 		return;
