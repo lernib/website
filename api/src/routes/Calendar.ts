@@ -6,7 +6,7 @@ import { dynamo, TABLES } from '$services/db';
 const router = Router();
 
 router.get('/events', async (req, res) => {
-	const data = await dynamo.send(
+	let data = await dynamo.send(
 		new ScanCommand({
 			TableName: TABLES.calendar
 		})
@@ -16,7 +16,18 @@ router.get('/events', async (req, res) => {
 		return res.status(500).end();
 	}
 
-	res.status(200).json(data);
+	data = data.map((item) => {
+		const { eventid, ...others } = item;
+	
+		return {
+			id: eventid,
+			...others
+		};
+	});
+
+	res.status(200).json(
+		data
+	);
 });
 
 export default router;

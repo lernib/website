@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import * as Db from './db';
 
 export const Contact = {
 
@@ -15,6 +16,58 @@ export const Contact = {
 	Response: {
 
 		Body: z.void()
+
+	}
+
+};
+
+export const Students = {
+
+	Request: {
+
+		Body: z.void()
+
+	},
+
+	Response: {
+
+		Body: Db.Students.Item.array()
+
+	}
+
+};
+
+export const Student = {
+
+	Request: {
+
+		Body: z.void()
+
+	},
+
+	Response: {
+
+		Body: Db.Students.Item
+
+	}
+
+};
+
+export const Calendar = {
+
+	Request: {
+
+		Body: z.void()
+
+	},
+
+	Response: {
+
+		Body: z.object({
+			id: z.string().uuid(),
+			start: z.string().datetime({ offset: true }),
+			end: z.string().datetime({ offset: true })
+		}).array()
 
 	}
 
