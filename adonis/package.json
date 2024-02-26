@@ -5,9 +5,9 @@
   "type": "module",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "node bin/server.js",
+    "preview": "node bin/server.js",
     "build": "node ace build",
-    "dev": "node ace serve --watch",
+    "start": "node ace serve --watch",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",

@@ -9,19 +9,19 @@ export const POST: RequestHandler = async ({ request, params, cookies }) => {
 
   if (access_token?.["cognito:groups"]?.includes('maintenance')) {
     const {
-      student_name,
-      client_name,
+      studentName,
+      clientName,
       timezone
     } = await request.json();
 
-    const response = await fetch(new URL(`/students/${params.userid}`, API_DOMAIN), {
-      method: 'POST',
+    const response = await fetch(new URL(`/student/${params.id}`, API_DOMAIN), {
+      method: 'PATCH',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        student_name,
-        client_name,
+        studentName,
+        clientName,
         timezone
       })
     })
