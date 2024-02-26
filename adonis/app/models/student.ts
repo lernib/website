@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { Timezone } from '#types/enum'
 
 export default class Student extends BaseModel {
   @column({ isPrimary: true })
@@ -16,4 +17,7 @@ export default class Student extends BaseModel {
 
   @column()
   declare client_name: string
+
+  @column()
+  declare timezone: Timezone
 }

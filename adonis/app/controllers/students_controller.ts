@@ -7,10 +7,10 @@ export default class StudentsController {
   }
 
   async store({request}: HttpContext) {
+    const modifiers = request.only(['student_name', 'client_name', 'timezone'])
+
     const student = new Student()
-    student.student_name = request.input('student_name')
-    student.client_name = request.input('client_name')
-    await student.save()
+    await student.merge(modifiers).save()
   }
 
   async show({request}: HttpContext) {
@@ -20,5 +20,12 @@ export default class StudentsController {
   async destroy({request}: HttpContext) {
     const student = await Student.findOrFail(request.param('id'))
     await student.delete()
+  }
+
+  async update({request}: HttpContext) {
+    const modifiers = request.only(['student_name', 'client_name', 'timezone'])
+
+    const student = await Student.findOrFail(request.param('id'))
+    await student.merge(modifiers).save()
   }
 }
