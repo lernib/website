@@ -7,11 +7,11 @@ const CallResponse = tst.Api.Student.Response.Body;
 
 export const load: PageServerLoad = async ({ params }) => {
   const student = CallResponse.parse(
-    await fetch(new URL(`/students/${params.userid}`, API_DOMAIN))
+    await fetch(new URL(`/student/${params.id}`, API_DOMAIN))
       .then((res) => res.json())
   );
     
-  if (student.userid != params.userid) {
+  if (student.id != params.id) {
     throw error(404, "Not Found")
   }
 

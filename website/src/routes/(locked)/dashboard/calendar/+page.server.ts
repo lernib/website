@@ -6,7 +6,7 @@ const CallResponse = tst.Api.Calendar.Response.Body;
 
 export const load: PageServerLoad = async () => {
   const events = CallResponse.parse(
-    await fetch(new URL('/calendar/events', API_DOMAIN))
+    await fetch(new URL('/events', API_DOMAIN))
       .then(res => res.json())
   );
 

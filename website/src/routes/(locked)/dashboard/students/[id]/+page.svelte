@@ -11,19 +11,19 @@
   const TIMEZONE_OPTS = Object.entries(TIMEZONES)
 
   let edit = false;
-  let edit_student_name: string = data.student.student_name;
-  let edit_client_name: string = data.student.client_name;
+  let edit_student_name: string = data.student.studentName;
+  let edit_client_name: string = data.student.clientName;
   let selected: string = data.student.timezone;
 
   async function sendRequestToUpdate() {
-    console.log(await fetch(`/dashboard/students/${data.student.userid}`, {
+    console.log(await fetch(`/dashboard/students/${data.student.id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        student_name: edit_student_name,
-        client_name: edit_client_name,
+        studentName: edit_student_name,
+        clientName: edit_client_name,
         timezone: selected
       })
     }).then(res => res.status))
@@ -42,12 +42,12 @@
 </script>
 
 <svelte:head>
-  <title>{data.student.student_name} | Lernib</title>
+  <title>{data.student.studentName} | Lernib</title>
 </svelte:head>
 
 <main>
   <h1>
-    {data.student.student_name}
+    {data.student.studentName}
   </h1>
   <hr />
 
