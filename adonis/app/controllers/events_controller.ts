@@ -6,23 +6,23 @@ export default class EventsController {
     return await Event.all()
   }
 
-  async store({request}: HttpContext) {
+  async store({ request }: HttpContext) {
     const modifiers = request.only(['begin', 'end'])
 
     const event = new Event()
     await event.merge(modifiers).save()
   }
 
-  async show({request}: HttpContext) {
+  async show({ request }: HttpContext) {
     return await Event.findOrFail(request.param('id'))
   }
 
-  async destroy({request}: HttpContext) {
+  async destroy({ request }: HttpContext) {
     const event = await Event.findOrFail(request.param('id'))
     await event.delete()
   }
 
-  async update({request}: HttpContext) {
+  async update({ request }: HttpContext) {
     const modifiers = request.only(['begin', 'end'])
 
     const event = await Event.findOrFail(request.param('id'))

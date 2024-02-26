@@ -8,8 +8,8 @@
 */
 
 import router from '@adonisjs/core/services/router'
-import StudentsController from '#controllers/students_controller'
-import EventsController from '#controllers/events_controller'
+const StudentsController = () => import('#controllers/students_controller')
+const EventsController = () => import('#controllers/events_controller')
 
 router.get('/students', [StudentsController, 'index'])
 router.get('/student/:id', [StudentsController, 'show'])

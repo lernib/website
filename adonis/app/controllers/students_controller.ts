@@ -6,23 +6,23 @@ export default class StudentsController {
     return await Student.all()
   }
 
-  async store({request}: HttpContext) {
+  async store({ request }: HttpContext) {
     const modifiers = request.only(['student_name', 'client_name', 'timezone'])
 
     const student = new Student()
     await student.merge(modifiers).save()
   }
 
-  async show({request}: HttpContext) {
+  async show({ request }: HttpContext) {
     return await Student.findOrFail(request.param('id'))
   }
 
-  async destroy({request}: HttpContext) {
+  async destroy({ request }: HttpContext) {
     const student = await Student.findOrFail(request.param('id'))
     await student.delete()
   }
 
-  async update({request}: HttpContext) {
+  async update({ request }: HttpContext) {
     const modifiers = request.only(['student_name', 'client_name', 'timezone'])
 
     const student = await Student.findOrFail(request.param('id'))

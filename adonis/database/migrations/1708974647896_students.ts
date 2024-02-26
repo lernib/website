@@ -6,9 +6,7 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.enum('timezone', Object.values(Timezone))
-        .defaultTo(Timezone.UNKNOWN)
-        .notNullable()
+      table.enum('timezone', Object.values(Timezone)).defaultTo(Timezone.UNKNOWN).notNullable()
     })
   }
 }
