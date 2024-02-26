@@ -40,7 +40,7 @@ jobs:
     - name: Copy build artifacts to S3
       run: |
         aws s3 cp website/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/build/ --recursive
-        aws s3 cp api/dist s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/dist/ --recursive
+        aws s3 cp adonis/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/build/ --recursive
     - name: Copy static assets to S3
       run: |
         aws s3 cp website/static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/static/ --recursive
@@ -48,7 +48,6 @@ jobs:
     - name: Copy package.json(s) to S3
       run: |
         aws s3 cp website/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/package.json
-        aws s3 cp api/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/package.json
 
   deploy:
     name: Deploy to AWS

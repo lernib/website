@@ -1,15 +1,16 @@
-export interface ApiStudentContact {
-  name: string,
-  phone: string | null,
-  email: string | null
+export enum Timezone {
+  EST = "nfive",
+  CST = "nsix",
+  MST = "nseven",
+  PST = "neight",
+  UNKNOWN = "na"
 }
 
 export interface ApiStudent {
-  userid: string,
-  student_name: string,
-  client_name: string,
-  timezone: "-5" | "-6" | "-7" | "-8" | "NA",
-  contacts: ApiStudentContact[]
+  id: string,
+  studentName: string,
+  clientName: string,
+  timezone: Timezone
 }
 
 export interface Notify {

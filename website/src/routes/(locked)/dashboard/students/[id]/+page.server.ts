@@ -5,10 +5,10 @@ import { error } from "@sveltejs/kit";
 
 
 export const load: PageServerLoad = async ({ params }) => {
-  const student: ApiStudent = await fetch(new URL(`/students/${params.userid}`, API_DOMAIN))
+  const student: ApiStudent = await fetch(new URL(`/student/${params.id}`, API_DOMAIN))
     .then((res) => res.json())
     
-  if (student.userid != params.userid) {
+  if (student.id != params.id) {
     throw error(404, "Not Found")
   }
 
