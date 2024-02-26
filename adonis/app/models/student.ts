@@ -1,7 +1,5 @@
-import User from '#models/user'
 import { DateTime } from 'luxon'
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Student extends BaseModel {
   @column({ isPrimary: true })
@@ -14,11 +12,8 @@ export default class Student extends BaseModel {
   declare updatedAt: DateTime
 
   @column()
-  declare name: string
+  declare student_name: string
 
   @column()
-  declare clientUserId: number
-
-  @belongsTo(() => User)
-  declare clientUser: BelongsTo<typeof User>
+  declare client_name: string
 }

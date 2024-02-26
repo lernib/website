@@ -10,8 +10,8 @@ export default class extends BaseSchema {
       table.timestamp('created_at')
       table.timestamp('updated_at')
 
-      table.string('name').notNullable()
-      table.integer('client_user_id').unsigned().references('users.id').onDelete('CASCADE')
+      table.string('student_name').notNullable()
+      table.string('client_name').notNullable()
     })
   }
 
