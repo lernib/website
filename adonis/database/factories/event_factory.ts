@@ -3,7 +3,7 @@ import Event from '#models/event'
 import { DateTime } from 'luxon'
 
 export const EventFactory = factory
-  .define(Event, async ({ faker }) => {
+  .define(Event, async () => {
     const eventStart = DateTime.now()
       .set({ minute: 0 })
       .plus({ days: 1 })

@@ -1,5 +1,4 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
-import { EventFactory } from '#database/factories/event_factory'
 
 export default class extends BaseSchema {
   protected tableName = 'events'
