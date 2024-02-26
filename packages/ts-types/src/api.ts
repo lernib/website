@@ -63,11 +63,7 @@ export const Calendar = {
 
 	Response: {
 
-		Body: z.object({
-			id: z.string().uuid(),
-			start: z.string().datetime({ offset: true }),
-			end: z.string().datetime({ offset: true })
-		}).array()
+		Body: Db.Calendar.Item.array()
 
 	}
 
