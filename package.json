@@ -35,6 +35,7 @@
     }
   },
   "workspaces": [
+    "adonis",
     "api",
     "website",
     "packages/*"
