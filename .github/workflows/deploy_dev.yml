@@ -1,0 +1,83 @@
+---
+name: Deploy
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  AWS_REGION: us-east-1
+  AWS_DEFAULT_OUTPUT: json
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_DEPLOY_ROLE }}
+        role-session-name: myGithubActions
+    - name: Install NodeJS 20.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+    - name: Install nx
+      run: npm i -g nx
+    - name: Install dependencies
+      run: npm ci
+    - name: Build SvelteKit
+      run: nx run-many -t build,lint
+    - name: Remove old artifacts
+      run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/ --recursive
+    - name: Copy build artifacts to S3
+      run: |
+        aws s3 cp website/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/build/ --recursive
+        aws s3 cp adonis/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/build/ --recursive
+    - name: Copy static assets to S3
+      run: |
+        aws s3 cp website/static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/static/ --recursive
+        aws s3 cp website/static s3://lernib-bucket.webres/static/ --recursive
+    - name: Copy package.json(s) to S3
+      run: |
+        aws s3 cp website/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/package.json
+
+  deploy:
+    name: Deploy to AWS
+    needs: build
+    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_DEPLOY_ROLE }}
+          role-session-name: myGithubActions
+      - name: Create bundle
+        run: python aws/codedeploy/prepare_dev.py
+      - name: Upload CodeDeploy bundle
+        run: aws s3 cp aws/codedeploy/archive_dev.zip s3://lernib-bucket.build/codedeploy/archive_dev.zip
+      - name: Create Deployment
+        run: |
+          commit_hash=`git rev-parse HEAD`
+          aws deploy create-deployment \
+            --application-name "LernibDeploy-Website" \
+            --deployment-group-name "LernibDeployGroup-DevWebsite" \
+            --s3-location bucket=lernib-bucket.build,bundleType=zip,key=codedeploy/archive_dev.zip \
+            --ignore-application-stop-failures
