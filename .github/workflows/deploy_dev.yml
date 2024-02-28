@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - dev
 
 env:
   AWS_REGION: us-east-1
@@ -34,22 +34,26 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Move configurations
-      run: mv -f website/.circe/env/dev/override/* website
-    - name: Build SvelteKit
+      run: |
+        mv -f website/src/.circe/env/dev/override/* website/src
+        cp -f adonis/.circe/env/dev/override/* adonis
+    - name: Build projects
       run: nx run-many -t build,lint
+    - name: Add Adonis env
+      run: cp -f adonis/.circe/env/dev/override/.env adonis/build
     - name: Remove old artifacts
-      run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/ --recursive
+      run: aws s3 rm s3://lernib-bucket.build/ec2/ --recursive
     - name: Copy build artifacts to S3
       run: |
-        aws s3 cp website/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/build/ --recursive
-        aws s3 cp adonis/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/build/ --recursive
+        aws s3 cp website/build s3://lernib-bucket.build/ec2/sveltekit/artifacts/build/ --recursive
+        aws s3 cp adonis/build s3://lernib-bucket.build/ec2/api/artifacts/build/ --recursive
     - name: Copy static assets to S3
       run: |
-        aws s3 cp website/static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/static/ --recursive
+        aws s3 cp website/static s3://lernib-bucket.build/ec2/sveltekit/static/ --recursive
         aws s3 cp website/static s3://lernib-bucket.webres/static/ --recursive
     - name: Copy package.json(s) to S3
       run: |
-        aws s3 cp website/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/package.json
+        aws s3 cp website/package.json s3://lernib-bucket.build/ec2/sveltekit/artifacts/package.json
 
   deploy:
     name: Deploy to AWS
@@ -61,12 +65,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.AWS_DEPLOY_ROLE }}
           role-session-name: myGithubActions
-      - run: |
+      - name: Create bundle
+        run: python aws/codedeploy/prepare_dev.py
+      - name: Upload CodeDeploy bundle
+        run: aws s3 cp aws/codedeploy/archive_dev.zip s3://lernib-bucket.build/codedeploy/archive_dev.zip
+      - name: Create Deployment
+        run: |
           commit_hash=`git rev-parse HEAD`
-          aws deploy create-deployment --application-name "LernibDeploy-Website" --deployment-group-name "LernibDeployGroup-Website" --github-location repository=$GITHUB_REPOSITORY,commitId=$commit_hash --ignore-application-stop-failures
+          aws deploy create-deployment \
+            --application-name "LernibDeploy-Website" \
+            --deployment-group-name "LernibDeployGroup-DevWebsite" \
+            --s3-location bucket=lernib-bucket.build,bundleType=zip,key=codedeploy/archive_dev.zip \
+            --ignore-application-stop-failures
