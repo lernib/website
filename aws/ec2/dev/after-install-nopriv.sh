@@ -2,6 +2,7 @@
 
 mkdir ~/app
 mkdir ~/api
+mkdir ~/api/tmp
 
 aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/static/herobg.jpg ~/app
 aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/artifacts/ ~/app --recursive
