@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /usr/local/codedeployresources
+hooks:
+  BeforeInstall:
+    - location: scripts/before-install.sh
+      timeout: 300
+      runas: root
+    - location: scripts/before-install-nopriv.sh
+      timeout: 300
+      runas: ec2-user
+  AfterInstall:
+    - location: scripts/dev/after-install.sh
+      timeout: 300
+      runas: root
+    - location: scripts/after-install-nopriv.sh
+      timeout: 300
+      runas: ec2-user
