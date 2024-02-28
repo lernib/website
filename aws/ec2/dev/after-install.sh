@@ -21,7 +21,7 @@ cp $RESPATH/dev/api-ssl.conf /etc/httpd/conf.d/api-ssl.conf.disabled
 
 
 yum install certbot python3-certbot-apache -y
-certbot certonly --apache --non-interactive --agree-tos --email support@lernib.com -d dev.lernib.com -d www.lernib.com
+certbot certonly --apache --non-interactive --agree-tos --email support@lernib.com -d dev.lernib.com
 certbot certonly --apache --non-interactive --agree-tos --email support@lernib.com -d api.dev.lernib.com
 
 mv /etc/httpd/conf.d/site-ssl.conf.disabled /etc/httpd/conf.d/site-ssl.conf
