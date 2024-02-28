@@ -8,7 +8,7 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
   const access_token = await accessTokenPayload(cookies.get('access_token'));
 
   if (access_token?.["cognito:groups"]?.includes('maintenance')) {
-    const response = await fetch(new URL("/students", API_DOMAIN), {
+    const response = await fetch(new URL("/student", API_DOMAIN), {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

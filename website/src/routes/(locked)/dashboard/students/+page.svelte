@@ -29,6 +29,7 @@
       })
     }).then(res => res.status))
 
+    showAddModal = true;
     showAddModal = false;
     invalidateAll()
   }
@@ -66,39 +67,41 @@
   </button>
 </main>
 
-<Modal bind:show={showAddModal}>
-  <table
-    cellspacing=0
-  >
-    <tr>
-      <td>
-        Client Name
-      </td>
-      <td>
-        <EditableText edit bind:value={client_name} />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Student Name
-      </td>
-      <td>
-        <EditableText edit bind:value={student_name} />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Timezone
-      </td>
-      <td>
-        <EditableOption edit bind:value={timezone} options={Object.entries(TIMEZONES)} />
-      </td>
-    </tr>
-  </table>
-  <EditableButton edit click={insertStudent}>
-    Insert
-  </EditableButton>
-</Modal>
+{#if showAddModal}
+  <Modal bind:show={showAddModal}>
+    <table
+      cellspacing=0
+    >
+      <tr>
+        <td>
+          Client Name
+        </td>
+        <td>
+          <EditableText edit bind:value={client_name} />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Student Name
+        </td>
+        <td>
+          <EditableText edit bind:value={student_name} />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Timezone
+        </td>
+        <td>
+          <EditableOption edit bind:value={timezone} options={Object.entries(TIMEZONES)} />
+        </td>
+      </tr>
+    </table>
+    <EditableButton edit click={insertStudent}>
+      Insert
+    </EditableButton>
+  </Modal>
+{/if}
 
 <style lang="scss">
   @use 'sass:color';
