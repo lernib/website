@@ -54,8 +54,10 @@
 <main>
   <div class="calendar" bind:this={calendarEl} />
 </main>
-<Modal show={showAddEventModal}>
-</Modal>
+{#if showAddEventModal}
+  <Modal show={showAddEventModal}>
+  </Modal>
+{/if}
 
 <style lang="scss">
   :global(.sk-core) {

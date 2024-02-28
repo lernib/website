@@ -1,21 +1,12 @@
 <script lang="ts">
   export let show = false;
 
-  let modal: HTMLDivElement;
-
-  $: show && showChanged();
-
-  const showChanged = () => {
-    modal.style.display = show ? 'block' : 'none';
-  }
-
   const hideModal = () => {
     show = false;
-    showChanged();
   }
 </script>
 
-<div class="modal" bind:this={modal}>
+<div class="modal">
   <div class="modal-content">
     <button class="close" on:click={hideModal}>&times;</button>
     <slot />
@@ -24,7 +15,6 @@
 
 <style lang="scss">
   .modal {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -53,5 +43,6 @@
     border: none;
     padding: 0;
     margin: 0;
+    cursor: pointer;
   }
 </style>
