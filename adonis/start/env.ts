@@ -10,8 +10,14 @@
 */
 
 import { Env } from '@adonisjs/core/env'
+import { get_secret } from './secrets.js'
 
-export default await Env.create(new URL('../', import.meta.url), {
+interface PostgresSecret {
+  username: string
+  password: string
+}
+
+let appEnv = await Env.create(new URL('../', import.meta.url), {
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
   PORT: Env.schema.number(),
   APP_KEY: Env.schema.string(),
@@ -35,4 +41,22 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_USER: Env.schema.string(),
   DB_PASSWORD: Env.schema.string.optional(),
   DB_DATABASE: Env.schema.string(),
+  RUN_ENV: Env.schema.enum(['local', 'dev', 'prod'] as const),
 })
+
+let runEnv = appEnv.get('RUN_ENV')
+
+switch (runEnv) {
+  case 'dev':
+    {
+      let secret: PostgresSecret = await get_secret(
+        'rds!db-0373f312-1c56-4d36-8a83-87eb01851688'
+      ).then((res) => JSON.parse(res))
+
+      appEnv.set('DB_USER', secret.username)
+      appEnv.set('DB_PASSWORD', secret.password)
+    }
+    break
+}
+
+export default appEnv

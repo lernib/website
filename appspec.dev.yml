@@ -12,9 +12,9 @@ hooks:
       timeout: 300
       runas: ec2-user
   AfterInstall:
-    - location: scripts/after-install.sh
+    - location: dev/after-install.sh
       timeout: 300
       runas: root
-    - location: scripts/after-install-nopriv.sh
+    - location: dev/after-install-nopriv.sh
       timeout: 300
       runas: ec2-user

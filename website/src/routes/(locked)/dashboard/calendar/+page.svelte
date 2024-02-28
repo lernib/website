@@ -55,18 +55,21 @@
 <main>
   <div class="calendar" bind:this={calendarEl} />
 </main>
-<Modal bind:show={showAddEventModal}>
-  <form>
-    <div class="labeled-input">
-      Date
-      <DateInput mode="date" startDate={new Date(Date.now())} />
-    </div>
-    <div class="labeled-input">
-      Time
-      <TimeInput elClass='TimeInputda40b68c-73b4-404d-a729-f97af47f90fb' />
-    </div>
-  </form>
-</Modal>
+
+{#if showAddEventModal}
+  <Modal bind:show={showAddEventModal}>
+    <form>
+      <div class="labeled-input">
+        Date
+        <DateInput mode="date" startDate={new Date(Date.now())} />
+      </div>
+      <div class="labeled-input">
+        Time
+        <TimeInput elClass='TimeInputda40b68c-73b4-404d-a729-f97af47f90fb' />
+      </div>
+    </form>
+  </Modal>
+{/if}
 
 <style lang="scss">
   :global(.sk-core) {

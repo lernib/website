@@ -3,16 +3,12 @@
 
   export let show = false;
 
-  let modal: HTMLDivElement;
-
-  $: modalStyle = show ? 'block' : 'none';
-
   const hideModal = () => {
     show = false;
   }
 </script>
 
-<div class="modal" bind:this={modal} style="display: {modalStyle}">
+<div class="modal">
   <div class="modal-content">
     <div class="clearfix">
       <button class="close" on:click={hideModal}>&times;</button>
@@ -23,7 +19,6 @@
 
 <style lang="scss">
   .modal {
-    display: none;
     position: fixed;
     z-index: 5;
     left: 0;
@@ -53,5 +48,6 @@
     border: none;
     padding: 0;
     margin: 0;
+    cursor: pointer;
   }
 </style>
