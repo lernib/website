@@ -35,12 +35,15 @@ jobs:
       run: npm ci
     - name: Move configurations
       run: |
-        mv -f website/src/.circe/env/dev/override/* website/src
+        shopt -s dotglob
+        mv -f website/.circe/env/dev/override/.env website
         cp -f adonis/.circe/env/dev/override/* adonis
     - name: Build projects
       run: nx run-many -t build,lint
     - name: Add Adonis env
-      run: cp -f adonis/.circe/env/dev/override/.env adonis/build
+      run: |
+        shopt -s dotglob
+        cp -f adonis/.circe/env/dev/override/.env adonis/build
     - name: Remove old artifacts
       run: aws s3 rm s3://lernib-bucket.build/ec2/ --recursive
     - name: Copy build artifacts to S3
