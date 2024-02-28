@@ -29,7 +29,7 @@ mv /etc/httpd/conf.d/api-ssl.conf.disabled /etc/httpd/conf.d/api-ssl.conf
 systemctl restart httpd
 
 mv $RESPATH/site.service /etc/systemd/system/site.service
-mv $RESPATH/api.service /etc/systemd/system/api.service
+mv $RESPATH/dev/api.service /etc/systemd/system/api.service
 
 systemctl enable site
 systemctl restart site
