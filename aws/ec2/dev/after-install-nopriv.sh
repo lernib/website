@@ -17,8 +17,8 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 nvm install 20
 
 cd ~/app
-npm i --omit=dev
+npm i
 
 cd ~/api
-npm i --omit=dev
+npm i
 node ace migration:run
