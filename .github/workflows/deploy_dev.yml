@@ -37,7 +37,7 @@ jobs:
       run: |
         shopt -s dotglob
         mv -f website/.circe/env/dev/override/.env website
-        cp -f adonis/.circe/env/dev/override/* adonis
+        cp -f adonis/.circe/env/dev/override/.env adonis
     - name: Build projects
       run: nx run-many -t build,lint
     - name: Add Adonis env
