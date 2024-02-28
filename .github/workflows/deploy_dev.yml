@@ -34,22 +34,24 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Move configurations
-      run: mv -f website/.circe/env/dev/override/* website
+      run: |
+        mv -f website/src/.circe/env/dev/override/* website/src
+        mv -f adonis/.circe/env/dev/override/* adonis
     - name: Build SvelteKit
       run: nx run-many -t build,lint
     - name: Remove old artifacts
-      run: aws s3 rm s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/ --recursive
+      run: aws s3 rm s3://lernib-bucket.build/ec2/ --recursive
     - name: Copy build artifacts to S3
       run: |
-        aws s3 cp website/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/build/ --recursive
-        aws s3 cp adonis/build s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/api/artifacts/build/ --recursive
+        aws s3 cp website/build s3://lernib-bucket.build/ec2/sveltekit/artifacts/build/ --recursive
+        aws s3 cp adonis/build s3://lernib-bucket.build/ec2/api/artifacts/build/ --recursive
     - name: Copy static assets to S3
       run: |
-        aws s3 cp website/static s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/static/ --recursive
+        aws s3 cp website/static s3://lernib-bucket.build/ec2/sveltekit/static/ --recursive
         aws s3 cp website/static s3://lernib-bucket.webres/static/ --recursive
     - name: Copy package.json(s) to S3
       run: |
-        aws s3 cp website/package.json s3://${{ secrets.AWS_BUCKET_NAME }}/ec2/sveltekit/artifacts/package.json
+        aws s3 cp website/package.json s3://lernib-bucket.build/ec2/sveltekit/artifacts/package.json
 
   deploy:
     name: Deploy to AWS
