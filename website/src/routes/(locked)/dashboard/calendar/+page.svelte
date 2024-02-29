@@ -41,7 +41,10 @@
           allDaySlot: false
         }
       },
-      events: data.events
+      events: data.events.map((item) => ({
+        ...item,
+        id: `${item.id}`
+      }))
     });
 
     calendar.render();

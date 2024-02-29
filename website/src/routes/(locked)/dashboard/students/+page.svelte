@@ -22,9 +22,8 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        userid: student_name.toLowerCase().replace(' ', '.').trimStart().trimEnd(),
-        student_name,
-        client_name,
+        studentName: student_name,
+        clientName: client_name,
         timezone
       })
     }).then(res => res.status))

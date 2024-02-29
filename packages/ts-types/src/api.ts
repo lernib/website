@@ -39,6 +39,16 @@ export const Students = {
 
 export const Student = {
 
+	Post: {
+
+		Request: {
+
+			Body: Db.Students.Item.omit({ id: true })
+
+		}
+
+	},
+
 	Request: {
 
 		Body: z.void()

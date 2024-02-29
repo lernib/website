@@ -13,10 +13,10 @@ export default class Student extends BaseModel {
   declare updatedAt: DateTime
 
   @column()
-  declare student_name: string
+  declare studentName: string
 
   @column()
-  declare client_name: string
+  declare clientName: string
 
   @column()
   declare timezone: Timezone
