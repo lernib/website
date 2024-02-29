@@ -1,4 +1,6 @@
 <script lang="ts">
+  import '@lernib/sass-styling/fixes'
+
   export let show = false;
 
   const hideModal = () => {
@@ -8,7 +10,9 @@
 
 <div class="modal">
   <div class="modal-content">
-    <button class="close" on:click={hideModal}>&times;</button>
+    <div class="clearfix">
+      <button class="close" on:click={hideModal}>&times;</button>
+    </div>
     <slot />
   </div>
 </div>
@@ -16,12 +20,13 @@
 <style lang="scss">
   .modal {
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
+    clear: both;
     background-color: #0006;
   }
 
@@ -35,10 +40,10 @@
 
   .close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
-
+    float: right;
+  
     background-color: transparent;
     border: none;
     padding: 0;

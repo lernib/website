@@ -4,7 +4,7 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
-  import Modal from '$components/section/Modal.svelte';
+  import { Modal, DateInput, TimeInput } from '@lernib/svelte-components';
   import type { PageServerData } from './$types';
 
   let calendarEl: HTMLDivElement;
@@ -37,10 +37,14 @@
       },
       views: {
         timeGridWeek: {
-          nowIndicator: true
+          nowIndicator: true,
+          allDaySlot: false
         }
       },
-      events: data.events
+      events: data.events.map((item) => ({
+        ...item,
+        id: `${item.id}`
+      }))
     });
 
     calendar.render();
@@ -54,8 +58,19 @@
 <main>
   <div class="calendar" bind:this={calendarEl} />
 </main>
+
 {#if showAddEventModal}
-  <Modal show={showAddEventModal}>
+  <Modal bind:show={showAddEventModal}>
+    <form>
+      <div class="labeled-input">
+        Date
+        <DateInput mode="date" startDate={new Date(Date.now())} />
+      </div>
+      <div class="labeled-input">
+        Time
+        <TimeInput elClass='TimeInputda40b68c-73b4-404d-a729-f97af47f90fb' />
+      </div>
+    </form>
   </Modal>
 {/if}
 
@@ -80,5 +95,21 @@
       align-self: stretch;
       flex-grow: 1;
     }
+  }
+
+  .labeled-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    column-gap: 2rem;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  :global(.TimeInputda40b68c-73b4-404d-a729-f97af47f90fb input) {
+    font-size: 1.25rem;
   }
 </style>

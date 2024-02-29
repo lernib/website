@@ -1,11 +1,15 @@
 import type { PageServerLoad } from "./$types";
-import type { ApiStudent } from "$lib/types";
 import { API_DOMAIN } from "$lib/config";
+import * as tst from '@lernib/ts-types';
+
+const CallResponse = tst.Api.Students.Response.Body;
 
 export const load: PageServerLoad = async () => {
-  let students: [ApiStudent] = await fetch(new URL("/students", API_DOMAIN))
-    .then((res) => res.json())
-  
+  let students = CallResponse.parse(
+    await fetch(new URL("/students", API_DOMAIN))
+      .then((res) => res.json())
+  )
+
   students = students.sort((a, b) => {
     const [fa, la] = a.studentName.split(' ')
     const [fb, lb] = b.studentName.split(' ')

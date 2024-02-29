@@ -7,7 +7,7 @@ export default class StudentsController {
   }
 
   async store({ request }: HttpContext) {
-    const modifiers = request.only(['student_name', 'client_name', 'timezone'])
+    const modifiers = request.only(['studentName', 'clientName', 'timezone'])
 
     const student = new Student()
     await student.merge(modifiers).save()
@@ -23,7 +23,7 @@ export default class StudentsController {
   }
 
   async update({ request }: HttpContext) {
-    const modifiers = request.only(['student_name', 'client_name', 'timezone'])
+    const modifiers = request.only(['studentName', 'clientName', 'timezone'])
 
     const student = await Student.findOrFail(request.param('id'))
     await student.merge(modifiers).save()

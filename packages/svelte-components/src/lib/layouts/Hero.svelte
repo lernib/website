@@ -1,5 +1,5 @@
 <script lang="ts">
-  import PageHeader from '$components/section/Header.svelte';
+  import PageHeader from './Header.svelte';
 
   export let half = false;
   export let noImage = false;
@@ -9,7 +9,6 @@
   <PageHeader />
   <slot />
 </div>
-
 
 <style lang="scss">
   @use "@lernib/sass-styling/config";

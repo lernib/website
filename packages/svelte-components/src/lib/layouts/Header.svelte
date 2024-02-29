@@ -1,37 +1,37 @@
 <script lang="ts">
-  import Dropdown from "$components/section/Dropdown.svelte";
-  import { getSigninUrl, getSignoutUrl, localWebresAsset } from "$lib/config"
-  import { dev } from "$app/environment"
-  import { authStore } from "$lib/stores"
+  import Dropdown from "./Dropdown.svelte";
+  import { getSigninUrl, getSignoutUrl } from '$lib/config';
+  import { dev } from '$app/environment';
+  import { authStore } from '$lib/stores';
+
+  import logo from '$lib/assets/logo_colored.png';
+  import avatar from '$lib/assets/avatar.svg';
+
+  export let forceSignIn = false;
 
   const LINKS = [
-    ["/contact", "Contact"],
-    ["/pricing", "Pricing"],
-    ["/about", "About"],
-    ...dev ? [["/blog", "Blog"]] : []
-  ]
+    ['/contact', 'Contact'],
+    ['/pricing', 'Pricing'],
+    ['/about', 'About'],
+    ...(dev ? [['/blog', 'Blog']] : []),
+  ];
 </script>
 
 <div class="header">
   <a href="/">
-    <img class="header-img"
-      src={localWebresAsset("/logo128.png")}
-      alt="logo"
-    />
+    <img class="header-img" src={logo} alt="logo" />
   </a>
   <nav class="nomobile">
     {#each LINKS as [url, text]}
       <a href={url} class="nomobile">{text}</a>
     {/each}
   </nav>
-  {#if !$authStore}
-    <a href={getSigninUrl()} class="signin-button">
-      Sign In
-    </a>
+  {#if !$authStore && !forceSignIn}
+    <a href={getSigninUrl()} class="signin-button"> Sign In </a>
   {:else}
-    <Dropdown>
+    <Dropdown force={forceSignIn}>
       <img
-        src={localWebresAsset("/avatar.svg")}
+        src={avatar}
         alt="Avatar"
         class="avatar"
         slot="focus"
@@ -47,7 +47,7 @@
 </div>
 
 <style lang="scss">
-  @use "@lernib/sass-styling/config";
+  @use '@lernib/sass-styling/config';
 
   .header {
     display: flex;
@@ -88,6 +88,7 @@
     white-space: nowrap;
   }
 
+
   .signedin-button {
     color: black;
     padding: 0.75em 1.5em;
@@ -100,4 +101,5 @@
   .avatar {
     height: 3rem;
   }
+
 </style>
