@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && tsc-alias",
-    "start:nomore": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
     "lint": "eslint ."
   },
   "devDependencies": {
