@@ -65,6 +65,16 @@ export const Student = {
 
 export const Calendar = {
 
+	Post: {
+
+		Request: {
+
+			Body: Db.Calendar.Item.omit({ id: true })
+
+		}
+
+	},
+
 	Request: {
 
 		Body: z.void()
