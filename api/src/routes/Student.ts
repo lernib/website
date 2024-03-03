@@ -1,10 +1,13 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
+import { Endpoint, ErrorStatus } from '#engine';
 import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { dynamo, TABLES } from '$services/db';
+import * as tst from '@lernib/ts-types';
+import * as z from 'zod';
 
-const router = Router();
-
-router.get('/:userid', async (req, res) => {
+const GetZ = tst.Api.Student.Response.Body;
+type GetEndpoint = z.infer<typeof GetZ>;
+async function getHandler(req: Request): Promise<GetEndpoint> {
 	const data = await dynamo.send(
 		new GetCommand({
 			TableName: TABLES.students,
@@ -15,14 +18,17 @@ router.get('/:userid', async (req, res) => {
 	).then(res => res.Item);
 
 	if (!data) {
-		return res.status(500).end();
+		throw new ErrorStatus(404, 'Student does not exist');
 	}
 
-	res.status(200).json(data);
-});
+	return GetZ.parse(data);
+}
 
-router.post('/:userid', async (req, res) => {
-	const contents = req.body;
+const PatchZ = tst.Api.Student.Patch.Response.Body;
+const PatchReqZ = tst.Api.Student.Patch.Request.Body;
+type PatchEndpoint = z.infer<typeof PatchZ>;
+async function patchHandler(req: Request): Promise<PatchEndpoint> {
+	const contents = PatchReqZ.parse(req.body);
 
 	const keys = Object.keys(contents);
 
@@ -60,8 +66,15 @@ router.post('/:userid', async (req, res) => {
 			ReturnValues: 'ALL_NEW'
 		})
 	);
+}
 
-	return res.status(200).end();
-});
+const GET = new Endpoint<GetEndpoint>('GET', '/student/:userid')
+	.executor(getHandler);
 
-export default router;
+const PATCH = new Endpoint<PatchEndpoint>('PATCH', '/student/:userid')
+	.executor(patchHandler);
+
+export default function inject(router: Router) {
+	GET.build(router);
+	PATCH.build(router);
+}

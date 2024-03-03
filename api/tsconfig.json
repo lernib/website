@@ -4,17 +4,25 @@
     "src/**/*.ts"
   ],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "outDir": "dist",
     "baseUrl": ".",
-    "sourceMap": true,
     "paths": {
       "$routes/*": ["./src/routes/*"],
       "$services/*": ["./src/services/*"],
-      "$utilities/*": ["./src/utilities/*"]
-    }
+      "$utilities/*": ["./src/utilities/*"],
+      "#engine": ["./src/engine/index"]
+    },
+    "allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "outDir": "dist"
   },
   "tsc-alias": {
     "resolveFullPaths": true

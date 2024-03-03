@@ -49,11 +49,11 @@
     {#each data.students as student}
       <tr>
         <td>
-          <a href={`/dashboard/students/${student.id}`}>
-            {student.studentName}
+          <a href={`/dashboard/students/${student.userid}`}>
+            {student.student_name}
           </a>
         </td>
-        <td>{student.clientName}</td>
+        <td>{student.client_name}</td>
       </tr>
     {/each}
   </table>

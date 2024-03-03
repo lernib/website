@@ -49,7 +49,7 @@
       },
       events: data.events.map((item) => ({
         ...item,
-        id: `${item.id}`
+        id: `${item.eventid}`
       }))
     });
 

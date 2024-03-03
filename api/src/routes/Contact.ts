@@ -1,19 +1,15 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
+import { Endpoint } from '#engine';
 import emailClient from '$services/email';
 import { SendEmailCommand } from '@aws-sdk/client-ses';
 import * as tst from '@lernib/ts-types';
+import * as z from 'zod';
 
-const router = Router();
-
-router.post('/', async (req, res) => {
-	let body;
-
-	try {
-		body = tst.Api.Contact.Request.Body.parse(req.body);
-	} catch {
-		res.status(400).send();
-		return;
-	}
+const PostZ = tst.Api.Contact.Response.Body;
+const PostReqZ = tst.Api.Contact.Request.Body;
+type PostEndpoint = z.infer<typeof PostZ>;
+async function postHandler(req: Request): Promise<PostEndpoint> {
+	const body = PostReqZ.parse(req.body);
 
 	const message = `You got a new message!
 
@@ -40,8 +36,11 @@ ${body.content}`;
 			}
 		})
 	).catch((e) => console.log(e));
+}
 
-	return res.status(200).send();
-});
+const POST = new Endpoint<PostEndpoint>('POST', '/contact')
+	.executor(postHandler);
 
-export default router;
+export default function inject(router: Router) {
+	POST.build(router);
+}

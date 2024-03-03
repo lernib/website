@@ -1,33 +1,29 @@
 import { Router } from 'express';
+import { Endpoint, ErrorStatus } from '#engine';
 import { ScanCommand } from '@aws-sdk/lib-dynamodb';
 import { dynamo, TABLES } from '$services/db';
-// import type { EventInput } from '@fullcalendar/core';
+import * as tst from '@lernib/ts-types';
+import * as z from 'zod';
 
-const router = Router();
-
-router.get('/events', async (req, res) => {
-	let data = await dynamo.send(
+const GetZ = tst.Api.Events.Response.Body;
+type GetEndpoint = z.infer<typeof GetZ>;
+async function getHandler(): Promise<GetEndpoint> {
+	const data = await dynamo.send(
 		new ScanCommand({
 			TableName: TABLES.calendar
 		})
 	).then(res => res.Items);
 
 	if (!data) {
-		return res.status(500).end();
+		throw new ErrorStatus(500, 'Could not get events');
 	}
 
-	data = data.map((item) => {
-		const { eventid, ...others } = item;
-	
-		return {
-			id: eventid,
-			...others
-		};
-	});
+	return GetZ.parse(data);
+}
 
-	res.status(200).json(
-		data
-	);
-});
+const GET = new Endpoint<GetEndpoint>('GET', '/events')
+	.executor(getHandler);
 
-export default router;
+export default function inject(router: Router) {
+	GET.build(router);
+}
