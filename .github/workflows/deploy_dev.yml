@@ -44,7 +44,7 @@ jobs:
     - name: Run package.json mod
       run: |
         node website/.circe/env/dev/modify/package_json.js
-        node api/.circe/env/dev/modify/package_json.js
+        node api/.circe/env/dev/modify/package_json.mjs
     - name: Copy build artifacts to S3
       run: |
         aws s3 cp website/build s3://lernib-bucket.build/ec2/sveltekit/artifacts/build/ --recursive
