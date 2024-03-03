@@ -7,9 +7,9 @@ export const Regex = {
 };
 
 export const Timezone = z.enum([
-	'nfive', // EST
-	'nsix', // CST
-	'nseven', // MST
-	'neight', // PST
-	'na'  // Unknown
+	'-5', // EST
+	'-6', // CST
+	'-7', // MST
+	'-8', // PST
+	'NA'  // Unknown
 ]);

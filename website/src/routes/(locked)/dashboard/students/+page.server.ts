@@ -11,8 +11,8 @@ export const load: PageServerLoad = async () => {
   )
 
   students = students.sort((a, b) => {
-    const [fa, la] = a.studentName.split(' ')
-    const [fb, lb] = b.studentName.split(' ')
+    const [fa, la] = a.student_name.split(' ')
+    const [fb, lb] = b.student_name.split(' ')
 
     if (la == lb) return fa.localeCompare(fb)
     return la.localeCompare(lb)

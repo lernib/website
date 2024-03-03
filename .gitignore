@@ -11,3 +11,5 @@ vite.config.ts.timestamp-*
 .nx/cache
 
 storybook-static
+
+*.session.sql

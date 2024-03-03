@@ -43,7 +43,29 @@ export const Student = {
 
 		Request: {
 
-			Body: Db.Students.Item.omit({ id: true })
+			Body: Db.Students.Item.omit({ userid: true })
+
+		},
+
+		Response: {
+
+			Body: z.void()
+
+		}
+
+	},
+
+	Patch: {
+
+		Request: {
+
+			Body: Db.Students.Item
+
+		},
+
+		Response: {
+
+			Body: z.void()
 
 		}
 
@@ -65,6 +87,22 @@ export const Student = {
 
 export const Calendar = {
 
+	Post: {
+
+		Request: {
+
+			Body: Db.Calendar.Item.omit({ eventid: true })
+
+		},
+
+		Response: {
+
+			Body: z.void()
+
+		}
+
+	},
+
 	Request: {
 
 		Body: z.void()
@@ -78,3 +116,5 @@ export const Calendar = {
 	}
 
 };
+
+export const Events = Calendar;

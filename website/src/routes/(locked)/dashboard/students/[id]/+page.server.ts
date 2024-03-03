@@ -11,7 +11,7 @@ export const load: PageServerLoad = async ({ params }) => {
       .then((res) => res.json())
   );
     
-  if (student.id != params.id) {
+  if (student.userid != params.id) {
     throw error(404, "Not Found")
   }
 

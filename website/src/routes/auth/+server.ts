@@ -1,5 +1,5 @@
 import type { RequestHandler } from "./$types";
-import { getTokens } from "$lib/auth/helpers";
+import { getTokens } from "$lib/auth";
 import { error, redirect } from "@sveltejs/kit";
 
 export const GET: RequestHandler = async ({ url, cookies }) => {
@@ -29,7 +29,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 			// have to log in again
 			const refreshExpire = new Date();
 			refreshExpire.setDate(refreshExpire.getDate() + 29);
-			cookies.set("refresh_token", tokens.refresh_token, {
+			cookies.set("NIBAUTHR", tokens.refresh_token, {
 				path: "/",
 				expires: refreshExpire
 			});
@@ -38,8 +38,8 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 			// and set a cookie.
 			const idExpires = new Date();
 			idExpires.setSeconds(idExpires.getSeconds() + tokens.expires_in);
-			cookies.set("id_token", tokens.id_token, { path: "/", expires: idExpires });
-			cookies.set("access_token", tokens.access_token, { path: "/", expires: idExpires })
+			cookies.set("NIBAUTHI", tokens.id_token, { path: "/", expires: idExpires });
+			cookies.set("NIBAUTHA", tokens.access_token, { path: "/", expires: idExpires })
 
 			// Redirect back to the home page
 			throw redirect(307, "/");
@@ -51,9 +51,9 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 			throw error(403, "Unauthorized to sign out")
 		}
 
-		cookies.delete("id_token", { path: "/" })
-		cookies.delete("refresh_token", { path: "/" })
-		cookies.delete("acces_token", { path: "/" })
+		cookies.delete("NIBAUTHI", { path: "/" })
+		cookies.delete("NIBAUTHA", { path: "/" })
+		cookies.delete("NIBAUTHR", { path: "/" })
 
 		throw redirect(307, "/")
 	} else {

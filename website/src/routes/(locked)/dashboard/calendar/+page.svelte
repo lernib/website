@@ -4,13 +4,19 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
-  import { Modal, DateInput, TimeInput } from '@lernib/svelte-components';
+  import { Modal, DateInput } from '@lernib/svelte-components';
   import type { PageServerData } from './$types';
+  import { DateTime } from 'luxon';
+  import { invalidateAll } from '$app/navigation';
+  import EditableButton from "$components/widgets/form/EditableButton.svelte";
 
   let calendarEl: HTMLDivElement;
 
   export let data: PageServerData
   let showAddEventModal = false;
+
+  let dateInput: string;
+  let timeInput: string;
 
   function add_event_modal() {
     showAddEventModal = true;
@@ -43,12 +49,32 @@
       },
       events: data.events.map((item) => ({
         ...item,
-        id: `${item.id}`
+        id: `${item.eventid}`
       }))
     });
 
     calendar.render();
   });
+
+  async function insertEvent() {
+    let start = DateTime.fromFormat(`${dateInput} ${timeInput}`, 'yyyy-MM-dd HH:mm');
+    let end = start.plus({ hours: 1 })
+
+    console.log(await fetch(`/dashboard/calendar`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        start,
+        end
+      })
+    }).then(res => res.status))
+
+    showAddEventModal = true;
+    showAddEventModal = false;
+    invalidateAll();
+  }
 </script>
 
 <svelte:head>
@@ -61,16 +87,19 @@
 
 {#if showAddEventModal}
   <Modal bind:show={showAddEventModal}>
-    <form>
+    <div>
       <div class="labeled-input">
         Date
-        <DateInput mode="date" startDate={new Date(Date.now())} />
+        <DateInput mode="date" startDate={new Date(Date.now())} bind:value={dateInput} />
       </div>
       <div class="labeled-input">
         Time
-        <TimeInput elClass='TimeInputda40b68c-73b4-404d-a729-f97af47f90fb' />
+        <DateInput mode="time" format="hh:ii" minuteIncrement={5} bind:value={timeInput} />
       </div>
-    </form>
+      <EditableButton edit click={insertEvent}>
+        Insert
+      </EditableButton>
+    </div>
   </Modal>
 {/if}
 

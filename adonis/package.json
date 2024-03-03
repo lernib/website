@@ -7,7 +7,7 @@
   "scripts": {
     "preview": "node bin/server.js",
     "build": "node ace build",
-    "start": "node ace serve --watch --no-clear",
+    "start:nomore": "node ace serve --watch --no-clear",
     "test": "node ace test",
     "lint": "eslint .",
     "format": "prettier --write .",

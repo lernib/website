@@ -7,7 +7,7 @@ export default class EventsController {
   }
 
   async store({ request }: HttpContext) {
-    const modifiers = request.only(['begin', 'end'])
+    const modifiers = request.only(['start', 'end'])
 
     const event = new Event()
     await event.merge(modifiers).save()
@@ -23,7 +23,7 @@ export default class EventsController {
   }
 
   async update({ request }: HttpContext) {
-    const modifiers = request.only(['begin', 'end'])
+    const modifiers = request.only(['start', 'end'])
 
     const event = await Event.findOrFail(request.param('id'))
     await event.merge(modifiers).save()
