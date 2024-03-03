@@ -87,7 +87,7 @@
 
 {#if showAddEventModal}
   <Modal bind:show={showAddEventModal}>
-    <form>
+    <div>
       <div class="labeled-input">
         Date
         <DateInput mode="date" startDate={new Date(Date.now())} bind:value={dateInput} />
@@ -99,7 +99,7 @@
       <EditableButton edit click={insertEvent}>
         Insert
       </EditableButton>
-    </form>
+    </div>
   </Modal>
 {/if}
 

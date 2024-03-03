@@ -1,7 +1,7 @@
 import { Router, Request } from 'express';
 import { Endpoint, ErrorStatus } from '#engine';
 import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
-import { dynamo, TABLES } from '$services/db';
+import { dynamo, TABLES, updateCommander } from '$services/db';
 import * as tst from '@lernib/ts-types';
 import * as z from 'zod';
 
@@ -30,29 +30,11 @@ type PatchEndpoint = z.infer<typeof PatchZ>;
 async function patchHandler(req: Request): Promise<PatchEndpoint> {
 	const contents = PatchReqZ.parse(req.body);
 
-	const keys = Object.keys(contents);
-
-	const updateCommand = Object.entries(contents).reduce((acc, [key]) => {
-		let next = `#${String.fromCharCode(keys.indexOf(key) + 'A'.charCodeAt(0))} = :${key.toLowerCase()}`;
-
-		if (acc != 'SET ') {
-			next = `, ${next}`;
-		}
-
-		return `${acc}${next}`;
-	}, 'SET ');
-
-	const expressionValues = Object.entries(contents).reduce((acc: Record<string, any>, [key, value]) => {
-		acc[`:${key.toLowerCase()}`] = value;
-		return acc;
-	}, {});
-
-	const expressionKeys = keys.reduce((acc: any, key, idx) => {
-		acc[`#${
-			String.fromCharCode(idx + 'A'.charCodeAt(0))
-		}`] = key;
-		return acc;
-	}, {});
+	const {
+		command,
+		values,
+		keys
+	} = updateCommander(contents);
 
 	await dynamo.send(
 		new UpdateCommand({
@@ -60,9 +42,9 @@ async function patchHandler(req: Request): Promise<PatchEndpoint> {
 			Key: {
 				userid: req.params.userid
 			},
-			UpdateExpression: updateCommand,
-			ExpressionAttributeValues: expressionValues,
-			ExpressionAttributeNames: expressionKeys,
+			UpdateExpression: command,
+			ExpressionAttributeValues: values,
+			ExpressionAttributeNames: keys,
 			ReturnValues: 'ALL_NEW'
 		})
 	);

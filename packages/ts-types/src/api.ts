@@ -93,6 +93,12 @@ export const Calendar = {
 
 			Body: Db.Calendar.Item.omit({ eventid: true })
 
+		},
+
+		Response: {
+
+			Body: z.void()
+
 		}
 
 	},

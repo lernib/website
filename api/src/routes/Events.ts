@@ -1,7 +1,7 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
 import { Endpoint, ErrorStatus } from '#engine';
-import { ScanCommand } from '@aws-sdk/lib-dynamodb';
-import { dynamo, TABLES } from '$services/db';
+import { ScanCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { dynamo, TABLES, updateCommander } from '$services/db';
 import * as tst from '@lernib/ts-types';
 import * as z from 'zod';
 
@@ -21,9 +21,40 @@ async function getHandler(): Promise<GetEndpoint> {
 	return GetZ.parse(data);
 }
 
+const PostZ = tst.Api.Events.Post.Response.Body;
+const PostReqZ = tst.Api.Events.Post.Request.Body;
+type PostEndpoint = z.infer<typeof PostZ>;
+async function postHandler(req: Request): Promise<PostEndpoint> {
+	const body = PostReqZ.parse(req.body);
+	const eventid = crypto.randomUUID();
+
+	const {
+		command,
+		keys,
+		values
+	} = updateCommander(body);
+
+	await dynamo.send(
+		new UpdateCommand({
+			TableName: TABLES.calendar,
+			Key: {
+				eventid
+			},
+			UpdateExpression: command,
+			ExpressionAttributeValues: values,
+			ExpressionAttributeNames: keys,
+			ReturnValues: 'ALL_NEW'
+		})
+	);
+}
+
 const GET = new Endpoint<GetEndpoint>('GET', '/events')
 	.executor(getHandler);
 
+const POST = new Endpoint<PostEndpoint>('POST', '/event')
+	.executor(postHandler);
+
 export default function inject(router: Router) {
 	GET.build(router);
+	POST.build(router);
 }
