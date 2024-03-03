@@ -2,6 +2,7 @@ import type { CognitoAccessTokenPayload, CognitoIdTokenPayload } from 'aws-jwt-v
 import { CognitoJwtVerifier } from 'aws-jwt-verify';
 import * as config from '$lib/config'
 import * as secrets from '$lib/secrets'
+import type { Cookies } from '@sveltejs/kit';
 
 interface Tokens {
 	access_token: string;
@@ -51,7 +52,7 @@ const cognitoIdVerifier = CognitoJwtVerifier.create({
  * If a refresh token is provided, only the access/id token is updated.
  * @see https://docs.aws.amazon.com/cognito/latest/developerguide/token-endpoint.html
  */
-export async function getTokens(options: TokenOptions) {
+export async function getTokens(options: TokenOptions): Promise<Tokens> {
 	const baseUrl = config.COGNITO_BASE_URI;
 	const clientId = config.COGNITO_CLIENT_ID;
 	const clientSecret = secrets.COGNITO_CLIENT_SECRET;
@@ -95,46 +96,86 @@ export async function getTokens(options: TokenOptions) {
 	return (await response.json()) as Tokens;
 }
 
-/**
- * @deprecated Use isValidXToken instead.
- */
-export async function verifyTokens(access_token: string): Promise<boolean> {
-	const url = new URL("/oauth2/userInfo", config.COGNITO_BASE_URI);
-
-	const response = await fetch(url.toString(), {
-		headers: {
-			"Content-Type": "application/x-amz-json-1.1",
-			Authorization: `Bearer ${access_token}`
+export async function handleAuthCookiesA(cookies: Cookies): Promise<CognitoAccessTokenPayload | null> {
+	// Check access token first
+	const access = cookies.get('NIBAUTHA');
+	if (access) {
+		// Check validity
+		try {
+			return await cognitoAccessVerifier.verify(access);
+		} catch {
+			console.log("[ACCESS TOKEN EXPIRED]")
 		}
-	})
-
-	if (!response.ok) {
-		console.error(await response.text())
 	}
 
-	return response.ok
+	// Check for refresh token
+	const refresh = cookies.get('NIBAUTHR')
+	if (refresh) {
+		try {
+			const tokens = await getTokens({ refreshToken: refresh });
+
+			const idExpires = new Date();
+			idExpires.setSeconds(idExpires.getSeconds() + tokens.expires_in);
+			cookies.set('NIBAUTHA', tokens.access_token, { path: "/", expires: idExpires });
+			cookies.set('NIBAUTHI', tokens.id_token, { path: "/", expires: idExpires });
+
+			if (tokens.refresh_token) {
+				const refreshExpire = new Date();
+				refreshExpire.setDate(refreshExpire.getDate() + 29);
+				cookies.set('NIBAUTHR', tokens.refresh_token, {
+					path: '/',
+					expires: refreshExpire
+				});
+			}
+
+			return await cognitoAccessVerifier.verify(tokens.access_token);
+		} catch {
+			console.log("[REFRESH TOKEN EXPIRED]")
+		}
+	}
+
+	// No way to get auth tokens
+	return null;
 }
 
-export async function accessTokenPayload(access_token: string | void): Promise<CognitoAccessTokenPayload | null> {
-	if (!access_token) {
-		return null;
+export async function handleAuthCookiesI(cookies: Cookies): Promise<CognitoIdTokenPayload | null> {
+	// Check id token first
+	const id = cookies.get('NIBAUTHI');
+	if (id) {
+		// Check validity
+		try {
+			return await cognitoIdVerifier.verify(id);
+		} catch {
+			console.log("[ACCESS TOKEN EXPIRED]")
+		}
 	}
 
-	try {
-		return await cognitoAccessVerifier.verify(access_token);
-	} catch {
-		return null;
-	}
-}
+	// Check for refresh token
+	const refresh = cookies.get('NIBAUTHR')
+	if (refresh) {
+		try {
+			const tokens = await getTokens({ refreshToken: refresh });
 
-export async function idTokenPayload(id_token: string | void): Promise<CognitoIdTokenPayload | null> {
-	if (!id_token) {
-		return null;
+			const idExpires = new Date();
+			idExpires.setSeconds(idExpires.getSeconds() + tokens.expires_in);
+			cookies.set('NIBAUTHA', tokens.access_token, { path: "/", expires: idExpires });
+			cookies.set('NIBAUTHI', tokens.id_token, { path: "/", expires: idExpires });
+
+			if (tokens.refresh_token) {
+				const refreshExpire = new Date();
+				refreshExpire.setDate(refreshExpire.getDate() + 29);
+				cookies.set('NIBAUTHR', tokens.refresh_token, {
+					path: '/',
+					expires: refreshExpire
+				});
+			}
+
+			return await cognitoIdVerifier.verify(tokens.id_token);
+		} catch {
+			console.log("[REFRESH TOKEN EXPIRED]")
+		}
 	}
 
-	try {
-		return await cognitoIdVerifier.verify(id_token);
-	} catch {
-		return null;
-	}
+	// No way to get auth tokens
+	return null;
 }

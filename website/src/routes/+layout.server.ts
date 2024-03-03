@@ -1,10 +1,10 @@
 import type { LayoutServerLoad } from "./$types";
-import { idTokenPayload } from "$lib/auth/helpers";
+import { handleAuthCookiesI } from "$lib/auth";
 
 export const prerender = false;
 
 export const load: LayoutServerLoad = async ({ cookies }) => {
-  const idToken = await idTokenPayload(cookies.get('id_token'));
+  const idToken = await handleAuthCookiesI(cookies);
 
   if (idToken) {
     return {
