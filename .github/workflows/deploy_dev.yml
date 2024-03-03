@@ -48,7 +48,7 @@ jobs:
     - name: Copy build artifacts to S3
       run: |
         aws s3 cp website/build s3://lernib-bucket.build/ec2/sveltekit/artifacts/build/ --recursive
-        aws s3 cp api/dist s3://lernib-bucket.build/ec2/api/artifacts/build/ --recursive
+        aws s3 cp api/dist s3://lernib-bucket.build/ec2/api/artifacts/dist/ --recursive
     - name: Copy static assets to S3
       run: |
         aws s3 cp website/static s3://lernib-bucket.build/ec2/sveltekit/static/ --recursive
