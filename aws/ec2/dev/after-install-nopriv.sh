@@ -21,4 +21,3 @@ npm i
 
 cd ~/api
 npm i
-node ace migration:run
