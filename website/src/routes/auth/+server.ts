@@ -47,7 +47,7 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 			return new Response(JSON.stringify(tokens), { status: 500 });
 		}
 	} else if (action == "logout") {
-		if (!cookies.get("id_token")) {
+		if (!cookies.get("NIBAUTHI")) {
 			throw error(403, "Unauthorized to sign out")
 		}
 
