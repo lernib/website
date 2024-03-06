@@ -85,13 +85,6 @@
 <style lang="scss">
   @use '@lernib/sass-styling/config';
 
-  :global(.sk-core) {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-  }
-
   .hero-center {
     flex-grow: 1;
     display: flex;

@@ -13,33 +13,35 @@
   ]
 </script>
 
-<div class="sidebar">
-  <a href="/" data-sveltekit-reload>
-    <img
-      src={localWebresAsset("/logo128_white.png")}
-      alt="Logo"
-    />
-  </a>
+<div id="sk-core__dashboard">
+  <div class="sidebar">
+    <a href="/">
+      <img
+        src={localWebresAsset("/logo128_white.png")}
+        alt="Logo"
+      />
+    </a>
 
-  <nav>
-    {#each sidebarOptions as opt}
-      <a href={opt.href}>
-        {opt.inner}
-      </a>
-    {/each}
-  </nav>
+    <nav>
+      {#each sidebarOptions as opt}
+        <a href={opt.href}>
+          {opt.inner}
+        </a>
+      {/each}
+    </nav>
 
-  <a class="sign-out" href={getSignoutUrl()}>
-    Sign Out
-  </a>
+    <a class="sign-out" href={getSignoutUrl()}>
+      Sign Out
+    </a>
+  </div>
+  <slot />
 </div>
-<slot />
 
 <style lang="scss">
   @use 'sass:color';
   @use '@lernib/sass-styling/config';
 
-  :global(.sk-core) {
+  #sk-core__dashboard {
     display: flex;
     flex-direction: row;
     justify-content: stretch;

@@ -8,14 +8,23 @@
   authStore.set(data.ident)
 </script>
 
-<slot />
-<div id="sk-pagenotifs">
-  {#each $notifyStore as notify}
-    <PageNotify {...notify} />
-  {/each}
+<div id="sk-core">
+  <slot />
+  <div id="sk-pagenotifs">
+    {#each $notifyStore as notify}
+      <PageNotify {...notify} />
+    {/each}
+  </div>
 </div>
 
 <style lang="scss">
+  #sk-core {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+
   #sk-pagenotifs {
     position: fixed;
     left: 0;

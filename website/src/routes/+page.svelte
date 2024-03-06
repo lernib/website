@@ -159,13 +159,6 @@
   @use "@lernib/sass-styling/config";
   @use "sass:color";
 
-  :global(.sk-core) {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-  }
-
   .hero-center {
     flex-grow: 1;
     display: flex;
