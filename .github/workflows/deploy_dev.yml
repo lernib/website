@@ -84,7 +84,6 @@ jobs:
         run: aws s3 cp aws/codedeploy/archive_dev.zip s3://lernib-bucket.build/codedeploy/archive_dev.zip
       - name: Create Deployment
         run: |
-          commit_hash=`git rev-parse HEAD`
           aws deploy create-deployment \
             --application-name "LernibDeploy-Website" \
             --deployment-group-name "LernibDeployGroup-DevWebsite" \
