@@ -35,6 +35,10 @@ jobs:
       run: npm ci
     - name: Move configurations
       run: mv -f website/.circe/env/dev/override/* website
+    - name: Move configurations
+      run: |
+        shopt -s dotglob
+        mv -f website/.circe/env/prod/override/.env website
     - name: Build SvelteKit
       run: nx run-many -t build,lint
     - name: Remove old artifacts
