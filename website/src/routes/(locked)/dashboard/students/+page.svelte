@@ -22,8 +22,8 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        studentName: student_name,
-        clientName: client_name,
+        student_name: student_name,
+        client_name: client_name,
         timezone
       })
     }).then(res => res.status))

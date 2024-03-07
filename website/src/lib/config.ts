@@ -39,11 +39,11 @@ export function getRedirectUrl(): string {
 }
 
 export const TIMEZONES = {
-  "nfive": "EST",
-  "nsix": "CST",
-  "nseven": "MST",
-  "neight": "PST",
-  "na": "Unknown"
+  "-5": "EST",
+  "-6": "CST",
+  "-7": "MST",
+  "-8": "PST",
+  "NA": "Unknown"
 }
 
 export function localWebresAsset(url: string): string {
