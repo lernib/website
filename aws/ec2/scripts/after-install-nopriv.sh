@@ -7,7 +7,7 @@ aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/static/herobg.jpg ~/app
 aws s3 cp s3://lernib-bucket.build/ec2/sveltekit/artifacts/ ~/app --recursive
 
 aws s3 cp s3://lernib-bucket.build/ec2/api/static/ ~/api --recursive
-aws s3 cp s3://lernib-bucket.build/ec2/api/artifacts/build ~/api --recursive
+aws s3 cp s3://lernib-bucket.build/ec2/api/artifacts ~/api --recursive
 
 ##############################
 # INSTALL NODE
