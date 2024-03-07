@@ -59,7 +59,23 @@ export const Student = {
 
 		Request: {
 
-			Body: Db.Students.Item
+			Body: Db.Students.Item.omit({ userid: true })
+
+		},
+
+		Response: {
+
+			Body: z.void()
+
+		}
+
+	},
+
+	Delete: {
+
+		Request: {
+
+			Body: z.void()
 
 		},
 

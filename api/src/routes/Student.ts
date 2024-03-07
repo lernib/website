@@ -1,6 +1,6 @@
 import { Router, Request } from 'express';
 import { Endpoint, ErrorStatus } from '#engine';
-import { GetCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { GetCommand, UpdateCommand, DeleteCommand } from '@aws-sdk/lib-dynamodb';
 import { dynamo, TABLES, updateCommander } from '$services/db';
 import * as tst from '@lernib/ts-types';
 import * as z from 'zod';
@@ -50,13 +50,30 @@ async function patchHandler(req: Request): Promise<PatchEndpoint> {
 	);
 }
 
+const DeleteZ = tst.Api.Student.Delete.Response.Body;
+type DeleteEndpoint = z.infer<typeof DeleteZ>;
+async function deleteHandler(req: Request): Promise<DeleteEndpoint> {
+	await dynamo.send(
+		new DeleteCommand({
+			TableName: TABLES.students,
+			Key: {
+				userid: req.params.userid
+			}
+		})
+	);
+}
+
 const GET = new Endpoint<GetEndpoint>('GET', '/student/:userid')
 	.executor(getHandler);
 
 const PATCH = new Endpoint<PatchEndpoint>('PATCH', '/student/:userid')
 	.executor(patchHandler);
 
+const DELETE = new Endpoint<DeleteEndpoint>('DELETE', '/student/:userid')
+	.executor(deleteHandler);
+
 export default function inject(router: Router) {
 	GET.build(router);
 	PATCH.build(router);
+	DELETE.build(router);
 }

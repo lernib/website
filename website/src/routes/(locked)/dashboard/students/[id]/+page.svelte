@@ -1,10 +1,11 @@
 <script lang="ts">
   import type { PageServerData } from "./$types";
   import { TIMEZONES } from "$lib/config";
-  import { invalidateAll } from "$app/navigation";
+  import { goto, invalidateAll } from "$app/navigation";
   import EditableText from "$components/widgets/form/EditableText.svelte";
   import EditableOption from "$components/widgets/form/EditableOption.svelte";
   import EditableButton from "$components/widgets/form/EditableButton.svelte";
+  import { createNotification } from "$lib/notify";
 
   export let data: PageServerData;
 
@@ -17,19 +18,32 @@
 
   async function sendRequestToUpdate() {
     console.log(await fetch(`/dashboard/students/${data.student.userid}`, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        studentName: edit_student_name,
-        clientName: edit_client_name,
+        student_name: edit_student_name,
+        client_name: edit_client_name,
         timezone: selected
       })
     }).then(res => res.status))
 
     edit = false;
     invalidateAll()
+  }
+
+  async function deleteStudent() {
+    if (await fetch(`/dashboard/students/${data.student.userid}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(res => res.status) == 200) {
+      goto('./')
+    } else {
+      createNotification('Failed to delete student', '#faa');
+    }
   }
 
   function setView() {
@@ -87,6 +101,9 @@
   </EditableButton>
   <EditableButton edit={!edit} click={setEdit}>
     Edit
+  </EditableButton>
+  <EditableButton edit={!edit} click={deleteStudent}>
+    Delete
   </EditableButton>
 </main>
 

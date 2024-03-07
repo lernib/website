@@ -24,9 +24,14 @@ async function getHandler(): Promise<GetEndpoint> {
 }
 
 const PostZ = tst.Api.Student.Post.Response.Body;
+const PostReqZ = tst.Api.Student.Post.Request.Body;
 type PostEndpoint = z.infer<typeof PostZ>;
 async function postHandler(req: Request): Promise<PostEndpoint> {
-	const contents = req.body;
+	const body = PostReqZ.parse(req.body);
+	const contents = {
+		...body,
+		userid: body.student_name.replace(' ', '.').toLowerCase()
+	};
 
 	await dynamo.send(
 		new PutCommand({
