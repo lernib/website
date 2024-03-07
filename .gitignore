@@ -4,7 +4,6 @@ node_modules
 /.svelte-kit
 /package
 .env
-.env.*
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
@@ -12,3 +11,5 @@ vite.config.ts.timestamp-*
 .nx/cache
 
 storybook-static
+
+*.session.sql

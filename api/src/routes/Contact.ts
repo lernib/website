@@ -1,25 +1,15 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
+import { Endpoint } from '#engine';
 import emailClient from '$services/email';
-import * as z from 'zod';
 import { SendEmailCommand } from '@aws-sdk/client-ses';
+import * as tst from '@lernib/ts-types';
+import * as z from 'zod';
 
-const router = Router();
-
-const routerPostBody = z.object({
-	name: z.string(),
-	email: z.string().email(),
-	content: z.string()
-});
-
-router.post('/', async (req, res) => {
-	let body;
-
-	try {
-		body = routerPostBody.parse(req.body);
-	} catch {
-		res.status(400).send();
-		return;
-	}
+const PostZ = tst.Api.Contact.Response.Body;
+const PostReqZ = tst.Api.Contact.Request.Body;
+type PostEndpoint = z.infer<typeof PostZ>;
+async function postHandler(req: Request): Promise<PostEndpoint> {
+	const body = PostReqZ.parse(req.body);
 
 	const message = `You got a new message!
 
@@ -30,7 +20,7 @@ ${body.content}`;
 
 	await emailClient.send(
 		new SendEmailCommand({
-			Source: 'contact+no-reply@lernib.com',
+			Source: `Contact - ${body.name} <contact-no-reply@lernib.com>`,
 			Destination: {
 				ToAddresses: ['ckieliszewski@lernib.com']
 			},
@@ -41,13 +31,16 @@ ${body.content}`;
 					}
 				},
 				Subject: {
-					Data: 'New notification from contact form!'
+					Data: 'Great news - someone is interested!'
 				}
 			}
 		})
 	).catch((e) => console.log(e));
+}
 
-	return res.status(200).send();
-});
+const POST = new Endpoint<PostEndpoint>('POST', '/contact')
+	.executor(postHandler);
 
-export default router;
+export default function inject(router: Router) {
+	POST.build(router);
+}

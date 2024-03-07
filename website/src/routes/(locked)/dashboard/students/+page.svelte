@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageServerData } from "./$types";
-  import Modal from "$components/section/Modal.svelte";
+  import { Modal } from "@lernib/svelte-components";
   import EditableText from "$components/widgets/form/EditableText.svelte";
   import EditableOption from "$components/widgets/form/EditableOption.svelte";
   import EditableButton from "$components/widgets/form/EditableButton.svelte";
@@ -22,13 +22,13 @@
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        userid: student_name.toLowerCase().replace(' ', '.').trimStart().trimEnd(),
-        student_name,
-        client_name,
+        student_name: student_name,
+        client_name: client_name,
         timezone
       })
     }).then(res => res.status))
 
+    showAddModal = true;
     showAddModal = false;
     invalidateAll()
   }
@@ -49,11 +49,11 @@
     {#each data.students as student}
       <tr>
         <td>
-          <a href={`/dashboard/students/${student.id}`}>
-            {student.studentName}
+          <a href={`/dashboard/students/${student.userid}`}>
+            {student.student_name}
           </a>
         </td>
-        <td>{student.clientName}</td>
+        <td>{student.client_name}</td>
       </tr>
     {/each}
   </table>
@@ -66,39 +66,41 @@
   </button>
 </main>
 
-<Modal bind:show={showAddModal}>
-  <table
-    cellspacing=0
-  >
-    <tr>
-      <td>
-        Client Name
-      </td>
-      <td>
-        <EditableText edit bind:value={client_name} />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Student Name
-      </td>
-      <td>
-        <EditableText edit bind:value={student_name} />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Timezone
-      </td>
-      <td>
-        <EditableOption edit bind:value={timezone} options={Object.entries(TIMEZONES)} />
-      </td>
-    </tr>
-  </table>
-  <EditableButton edit click={insertStudent}>
-    Insert
-  </EditableButton>
-</Modal>
+{#if showAddModal}
+  <Modal bind:show={showAddModal}>
+    <table
+      cellspacing=0
+    >
+      <tr>
+        <td>
+          Client Name
+        </td>
+        <td>
+          <EditableText edit bind:value={client_name} />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Student Name
+        </td>
+        <td>
+          <EditableText edit bind:value={student_name} />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Timezone
+        </td>
+        <td>
+          <EditableOption edit bind:value={timezone} options={Object.entries(TIMEZONES)} />
+        </td>
+      </tr>
+    </table>
+    <EditableButton edit click={insertStudent}>
+      Insert
+    </EditableButton>
+  </Modal>
+{/if}
 
 <style lang="scss">
   @use 'sass:color';

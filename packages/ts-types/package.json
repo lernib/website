@@ -1,0 +1,25 @@
+{
+  "name": "@lernib/ts-types",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@tsconfig/node-lts": "^20.1.1",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "tsc-alias": "^1.8.8",
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  }
+}

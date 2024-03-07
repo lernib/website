@@ -7,7 +7,8 @@
   },
   "exports": {
     "./config": "./src/config.scss",
-    "./global": "./src/global.scss"
+    "./global": "./src/global.scss",
+    "./fixes": "./src/fixes.scss"
   },
   "devDependencies": {
     "publint": "^0.2.7"

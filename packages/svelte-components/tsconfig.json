@@ -9,10 +9,8 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "Bundler"
   },
-  "exclude": ["**/*.stories.ts", "**/*.stories.js"],
   "references": [
     {
       "path": "./tsconfig.storybook.json"

@@ -1,12 +1,14 @@
 <script lang="ts">
   import Dropdown from "$components/section/Dropdown.svelte";
   import { getSigninUrl, getSignoutUrl, localWebresAsset } from "$lib/config"
+  import { dev } from "$app/environment"
   import { authStore } from "$lib/stores"
 
   const LINKS = [
     ["/contact", "Contact"],
     ["/pricing", "Pricing"],
-    ["/about", "About"]
+    ["/about", "About"],
+    ...dev ? [["/blog", "Blog"]] : []
   ]
 </script>
 
@@ -34,7 +36,7 @@
         class="avatar"
         slot="focus"
       />
-      <a href="/dashboard" class="signedin-button" data-sveltekit-preload-data="off">
+      <a href="/dashboard" class="signedin-button">
         Dashboard
       </a>
       <a href={getSignoutUrl()} class="signedin-button">

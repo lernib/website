@@ -2,9 +2,10 @@
   import PageHeader from '$components/section/Header.svelte';
 
   export let half = false;
+  export let noImage = false;
 </script>
 
-<div class="hero" style="{half ? '--height: 50vh' : '--height: 100vh'}">
+<div class="hero {noImage || 'with-image'}" style="{half ? '--height: 50vh' : '--height: 100vh'}">
   <PageHeader />
   <slot />
 </div>
@@ -18,7 +19,6 @@
     height: fit-content;
     max-width: 100vw;
     max-height: fit-content;
-    background-image: url('/herobg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -32,6 +32,10 @@
 
     @include config.for-size(tablet-portrait-up) {
       min-height: var(--height);
+    }
+
+    &.with-image {
+      background-image: url('/herobg.jpg');
     }
   }
 </style>

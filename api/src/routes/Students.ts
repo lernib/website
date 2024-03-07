@@ -1,11 +1,15 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
+import { Endpoint, ErrorStatus } from '#engine';
 import { ScanCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { dynamo, TABLES } from '$services/db';
-import studentRouter from './Student';
+import * as tst from '@lernib/ts-types';
+import * as z from 'zod';
 
-const router = Router();
+import studentInjector from './Student';
 
-router.get('/', async (req, res) => {
+const GetZ = tst.Api.Students.Response.Body;
+type GetEndpoint = z.infer<typeof GetZ>;
+async function getHandler(): Promise<GetEndpoint> {
 	const data = await dynamo.send(
 		new ScanCommand({
 			TableName: TABLES.students
@@ -13,14 +17,21 @@ router.get('/', async (req, res) => {
 	).then(res => res.Items);
 
 	if (!data) {
-		return res.status(500).end();
+		throw new ErrorStatus(500, 'No data exists');
 	}
 
-	res.status(200).json(data);
-});
+	return GetZ.parse(data);
+}
 
-router.post('/', async (req, res) => {
-	const contents = req.body;
+const PostZ = tst.Api.Student.Post.Response.Body;
+const PostReqZ = tst.Api.Student.Post.Request.Body;
+type PostEndpoint = z.infer<typeof PostZ>;
+async function postHandler(req: Request): Promise<PostEndpoint> {
+	const body = PostReqZ.parse(req.body);
+	const contents = {
+		...body,
+		userid: body.student_name.replace(' ', '.').toLowerCase()
+	};
 
 	await dynamo.send(
 		new PutCommand({
@@ -28,10 +39,17 @@ router.post('/', async (req, res) => {
 			Item: contents
 		})
 	);
+}
 
-	return res.status(200).end();
-});
+const GET = new Endpoint<GetEndpoint>('GET', '/students')
+	.executor(getHandler);
 
-router.use('/', studentRouter);
+const POST = new Endpoint<PostEndpoint>('POST', '/student')
+	.executor(postHandler);
 
-export default router;
+export default function inject(router: Router) {
+	GET.build(router);
+	POST.build(router);
+
+	studentInjector(router);
+}

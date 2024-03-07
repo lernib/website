@@ -1,19 +1,22 @@
 import type { RequestHandler } from "./$types";
-import { accessTokenPayload } from "$lib/auth/helpers";
+import { handleAuthCookiesA } from "$lib/auth";
 import { API_DOMAIN } from "$lib/config";
 import { error } from "@sveltejs/kit";
+import * as tst from '@lernib/ts-types';
 
-
+const PostBody = tst.Api.Student.Post.Request.Body;
 export const POST: RequestHandler = async ({ request, cookies }) => {
-  const access_token = await accessTokenPayload(cookies.get('access_token'));
+  const access_token = await handleAuthCookiesA(cookies);
 
   if (access_token?.["cognito:groups"]?.includes('maintenance')) {
-    const response = await fetch(new URL("/students", API_DOMAIN), {
+    const body = PostBody.parse(await request.json());
+
+    const response = await fetch(new URL("/student", API_DOMAIN), {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
-      body: await request.text()
+      body: JSON.stringify(body)
     });
 
     return response;
