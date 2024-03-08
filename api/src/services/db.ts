@@ -1,51 +1,21 @@
-import { DynamoDB } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocument } from '@aws-sdk/lib-dynamodb';
+import { DynamoTable } from '#engine';
+import * as tst from '@lernib/ts-types';
+import * as z from 'zod';
 
-const dynamo = DynamoDBDocument.from(new DynamoDB({
-	region: 'us-east-1'
-}));
+const StudentTableZ = tst.Db.Students.Item;
+type StudentTableType = DynamoTable<
+	z.infer<typeof StudentTableZ>,
+	'userid',
+	string
+>;
+const StudentTable: StudentTableType = new DynamoTable('LernibData-Students', 'userid');
 
-const TABLES = {
-	students: 'LernibData-Students',
-	calendar: 'LernibData-Calendar'
-};
+const CalendarTableZ = tst.Db.Calendar.Item;
+type CalendarTableType = DynamoTable<
+	z.infer<typeof CalendarTableZ>,
+	'eventid',
+	string
+>;
+const CalendarTable: CalendarTableType = new DynamoTable('LernibData-Calendar', 'eventid');
 
-interface UpdateCommander {
-	command: string
-	values: Record<string, any>
-	keys: Record<string, any>
-}
-
-function updateCommander(map: Record<string, any>): UpdateCommander {
-	const keys = Object.keys(map);
-
-	const updateCommand = Object.entries(map).reduce((acc, [key]) => {
-		let next = `#${String.fromCharCode(keys.indexOf(key) + 'A'.charCodeAt(0))} = :${key.toLowerCase()}`;
-
-		if (acc != 'SET ') {
-			next = `, ${next}`;
-		}
-
-		return `${acc}${next}`;
-	}, 'SET ');
-
-	const expressionValues = Object.entries(map).reduce((acc: Record<string, any>, [key, value]) => {
-		acc[`:${key.toLowerCase()}`] = value;
-		return acc;
-	}, {});
-
-	const expressionKeys = keys.reduce((acc: Record<string, any>, key, idx) => {
-		acc[`#${
-			String.fromCharCode(idx + 'A'.charCodeAt(0))
-		}`] = key;
-		return acc;
-	}, {});
-
-	return {
-		command: updateCommand,
-		values: expressionValues,
-		keys: expressionKeys
-	};
-}
-
-export { dynamo, TABLES, updateCommander };
+export { StudentTable, CalendarTable };

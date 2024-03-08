@@ -1,21 +1,13 @@
 import { Router, Request } from 'express';
 import { Endpoint, ErrorStatus } from '#engine';
-import { GetCommand, UpdateCommand, DeleteCommand } from '@aws-sdk/lib-dynamodb';
-import { dynamo, TABLES, updateCommander } from '$services/db';
+import { StudentTable } from '$services/db';
 import * as tst from '@lernib/ts-types';
 import * as z from 'zod';
 
 const GetZ = tst.Api.Student.Response.Body;
 type GetEndpoint = z.infer<typeof GetZ>;
 async function getHandler(req: Request): Promise<GetEndpoint> {
-	const data = await dynamo.send(
-		new GetCommand({
-			TableName: TABLES.students,
-			Key: {
-				userid: req.params.userid
-			}
-		})
-	).then(res => res.Item);
+	const data = await StudentTable.get(req.params.userid);
 
 	if (!data) {
 		throw new ErrorStatus(404, 'Student does not exist');
@@ -30,37 +22,13 @@ type PatchEndpoint = z.infer<typeof PatchZ>;
 async function patchHandler(req: Request): Promise<PatchEndpoint> {
 	const contents = PatchReqZ.parse(req.body);
 
-	const {
-		command,
-		values,
-		keys
-	} = updateCommander(contents);
-
-	await dynamo.send(
-		new UpdateCommand({
-			TableName: TABLES.students,
-			Key: {
-				userid: req.params.userid
-			},
-			UpdateExpression: command,
-			ExpressionAttributeValues: values,
-			ExpressionAttributeNames: keys,
-			ReturnValues: 'ALL_NEW'
-		})
-	);
+	await StudentTable.update(req.params.userid, contents);
 }
 
 const DeleteZ = tst.Api.Student.Delete.Response.Body;
 type DeleteEndpoint = z.infer<typeof DeleteZ>;
 async function deleteHandler(req: Request): Promise<DeleteEndpoint> {
-	await dynamo.send(
-		new DeleteCommand({
-			TableName: TABLES.students,
-			Key: {
-				userid: req.params.userid
-			}
-		})
-	);
+	await StudentTable.delete(req.params.userid);
 }
 
 const GET = new Endpoint<GetEndpoint>('GET', '/student/:userid')
