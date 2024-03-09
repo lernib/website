@@ -13,7 +13,10 @@ async function getHandler(): Promise<GetEndpoint> {
 		throw new ErrorStatus(500, 'Could not get events');
 	}
 
-	return GetZ.parse(data);
+	return data.map((event) => ({
+		students: [],
+		...event
+	}));
 }
 
 const PostZ = tst.Api.Events.Post.Response.Body;

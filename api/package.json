@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rollup -c",
     "start": "nodemon src/index.ts",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "check": "tsc --noEmit --incremental"
   },
   "devDependencies": {
     "@fullcalendar/core": "^6.1.10",

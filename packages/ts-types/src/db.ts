@@ -17,7 +17,8 @@ export const Calendar = {
 	Item: z.object({
 		eventid: z.string().uuid(),
 		start: z.string().datetime({ offset: true }),
-		end: z.string().datetime({ offset: true })
+		end: z.string().datetime({ offset: true }),
+		students: z.string().array().optional()
 	})
 
 };

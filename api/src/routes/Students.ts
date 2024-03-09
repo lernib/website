@@ -15,7 +15,7 @@ async function getHandler(): Promise<GetEndpoint> {
 		throw new ErrorStatus(500, 'No data exists');
 	}
 
-	return GetZ.parse(data);
+	return data;
 }
 
 const PostZ = tst.Api.Student.Post.Response.Body;

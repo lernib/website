@@ -107,7 +107,7 @@ export const Calendar = {
 
 		Request: {
 
-			Body: Db.Calendar.Item.omit({ eventid: true })
+			Body: Db.Calendar.Item.omit({ eventid: true }).required({ students: true })
 
 		},
 
@@ -127,7 +127,7 @@ export const Calendar = {
 
 	Response: {
 
-		Body: Db.Calendar.Item.array()
+		Body: Db.Calendar.Item.required({ students: true }).array()
 
 	}
 

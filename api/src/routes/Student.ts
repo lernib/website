@@ -13,7 +13,7 @@ async function getHandler(req: Request): Promise<GetEndpoint> {
 		throw new ErrorStatus(404, 'Student does not exist');
 	}
 
-	return GetZ.parse(data);
+	return data;
 }
 
 const PatchZ = tst.Api.Student.Patch.Response.Body;
