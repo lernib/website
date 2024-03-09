@@ -4,6 +4,7 @@
   import EditableText from "$components/widgets/form/EditableText.svelte";
   import EditableOption from "$components/widgets/form/EditableOption.svelte";
   import EditableButton from "$components/widgets/form/EditableButton.svelte";
+  import StudentSummary from "$components/widgets/StudentSummary.svelte";
   import { TIMEZONES } from "$lib/config";
   import { invalidateAll } from "$app/navigation";
 
@@ -28,7 +29,6 @@
       })
     }).then(res => res.status))
 
-    showAddModal = true;
     showAddModal = false;
     invalidateAll()
   }
@@ -39,31 +39,15 @@
 </svelte:head>
 
 <main>
-  <table
-    cellspacing=0
-  >
-    <tr>
-      <th>Student</th>
-      <th>Client</th>
-    </tr>
-    {#each data.students as student}
-      <tr>
-        <td>
-          <a href={`/dashboard/students/${student.userid}`}>
-            {student.student_name}
-          </a>
-        </td>
-        <td>{student.client_name}</td>
-      </tr>
-    {/each}
-  </table>
-
-  <button on:click={() => {
-    showAddModal = false
+  <button class="add-student" on:click={() => {
     showAddModal = true
   }}>
     Add Student
   </button>
+
+  {#each data.students as student}
+    <StudentSummary data={student} />
+  {/each}
 </main>
 
 {#if showAddModal}
@@ -112,23 +96,14 @@
     padding: 2rem;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: start;
     align-items: start;
-    column-gap: 1rem;
+    row-gap: 1rem;
   }
 
-  th {
-    font-weight: bold;
-  }
-
-  tr:nth-child(2n) {
-    background-color: color.adjust(config.$color1, $lightness: 30%)
-  }
-
-  td {
-    padding: 0.2em 0;
-    padding-right: 4rem;
-    padding-left: 1rem;
+  button.add-student {
+    padding: 1rem 0.5rem;
+    align-self: stretch;
   }
 </style>

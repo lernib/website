@@ -1,6 +1,6 @@
 @use 'sass:color';
 
-$color1: #FBF9FA;
+$color1: #FAFAFA;
 $color2: #054CC0;
 $color3: #FC5836;
 $color4: #FEC305;
@@ -13,6 +13,11 @@ $color3_light: color.adjust($color3, $lightness: 40%);
 $color4_light: color.adjust($color4, $lightness: 40%);
 $color5_light: color.adjust($color5, $lightness: 40%);
 
+$color1_dark: color.adjust($color1, $lightness: -40%);
+$color2_dark: color.adjust($color2, $lightness: -40%);
+$color3_dark: color.adjust($color3, $lightness: -40%);
+$color4_dark: color.adjust($color4, $lightness: -40%);
+$color5_dark: color.adjust($color5, $lightness: -40%);
 
 @mixin for-size($size) {
   @if $size == phone-only {
