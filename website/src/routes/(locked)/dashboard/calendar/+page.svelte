@@ -4,10 +4,11 @@
   import dayGridPlugin from '@fullcalendar/daygrid';
   import timeGridPlugin from '@fullcalendar/timegrid';
   import listPlugin from '@fullcalendar/list';
-  import { Modal, DateInput } from '@lernib/svelte-components';
   import type { PageServerData } from './$types';
   import { DateTime } from 'luxon';
   import { invalidateAll } from '$app/navigation';
+  import Modal from '$components/layouts/Modal.svelte';
+  import DateInput from "svelty-picker";
   import EditableButton from "$components/widgets/form/EditableButton.svelte";
 
   let calendarEl: HTMLDivElement;
