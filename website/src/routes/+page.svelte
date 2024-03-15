@@ -3,7 +3,8 @@
   import PageHero from '$components/section/Hero.svelte'
   import Benefit from '$components/Benefit.svelte'
   import SuccessTile from '$components/SuccessTile.svelte'
-  import Footer from '$components/section/Footer.svelte';
+  import Footer from '$components/section/Footer.svelte'
+  import Subject from '$components/Subject.svelte'
 </script>
 
 <svelte:head>
@@ -116,13 +117,33 @@
     </Benefit>
   </div>
 </div>
-<!-- <div class="subjects">
-  <h1>
-    Find excellent tutors
-    <br />
-    in any of the following categories
-  </h1>
-</div> -->
+<div class="subjects">
+  <div class="col">
+    <h2>
+      Excellent tutorship
+      <br />
+      in all of the following
+      <br />
+      classes
+    </h2>
+    <p>
+      I specialize in cases where students have unique or
+      <br />
+      unusual requirements. To ensure you get the right
+      <br />
+      support, I start by understanding your needs, then I
+      <br />
+      come up with a personalized a learning plan for you,
+      <br />
+      to help you reach your goals with confidence.
+    </p>
+  </div>
+  <div class="col">
+    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Computer Science" />
+    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="SAT tutoring" />
+    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Study skills support" />
+  </div>
+</div>
 <!-- <div class="our-aim">
   <div class="aim-panel">
     <h1>
@@ -272,6 +293,7 @@
     position: relative;
     top: -25px;
     border: 1px solid black;
+    z-index: 1;
 
     height: fit-content;
     flex-direction: column;
@@ -313,6 +335,40 @@
     }
 
     padding-bottom: 2rem;
+  }
+
+  .subjects {
+    align-self: stretch;
+
+    background-color: color.adjust(config.$color1, $lightness: -70%);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+    padding: 4rem 3rem 3rem;
+    column-gap: 4rem;
+
+    position: relative;
+    top: -35px;
+    
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    > .col {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+    }
   }
 
   // .our-aim {
