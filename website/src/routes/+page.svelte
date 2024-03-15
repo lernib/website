@@ -255,7 +255,7 @@
       }
       
       > a {
-        background-color: config.$color2;
+        background-color: color.adjust(config.$color1, $lightness: -70%);
         color: config.$color1;
         font-weight: bold;
         padding: 1rem 1.5rem;
@@ -295,7 +295,7 @@
 
   .benefits {
     width: fit-content;
-    background-color: config.$color1_2;
+    background-color: color.adjust(config.$color1, $lightness: -20%);
     display: flex;
     justify-content: center;
     align-items: start;
@@ -305,7 +305,6 @@
 
     position: relative;
     top: -25px;
-    border: 1px solid black;
     z-index: 1;
 
     height: fit-content;
