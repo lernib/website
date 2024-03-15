@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - dev
+      - next
 
 env:
   AWS_REGION: us-east-1
@@ -13,9 +13,11 @@ jobs:
   build:
     name: Build Application
     runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
+    if: github.repository == 'lernib/website'
     permissions:
       id-token: write
       contents: read
+    environment: Development
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -36,42 +38,39 @@ jobs:
     - name: Move configurations
       run: |
         shopt -s dotglob
-        mv -f website/.circe/env/dev/override/.env website
-    - name: Build projects
+        mv -f website/.circe/env/prod/override/.env website
+    - name: Build SvelteKit
       run: nx run-many -t build,lint
     - name: Remove old artifacts
-      run: aws s3 rm s3://lernib-bucket.build/ec2/ --recursive
+      run: aws s3 rm s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/ --recursive
     - name: Run package.json mod
       run: |
-        node website/.circe/env/dev/modify/package_json.js
-        node api/.circe/env/dev/modify/package_json.mjs
+        node website/.circe/env/prod/modify/package_json.js
+        node api/.circe/env/prod/modify/package_json.mjs
     - name: Copy build artifacts to S3
       run: |
-        aws s3 cp website/build s3://lernib-bucket.build/ec2/sveltekit/artifacts/build/ --recursive
-        aws s3 cp api/dist s3://lernib-bucket.build/ec2/api/artifacts/dist/ --recursive
+        aws s3 cp website/build s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/sveltekit/artifacts/build/ --recursive
+        aws s3 cp api/dist s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/api/artifacts/dist/ --recursive
     - name: Copy static assets to S3
       run: |
-        aws s3 cp website/static s3://lernib-bucket.build/ec2/sveltekit/static/ --recursive
-        aws s3 cp website/static s3://lernib-bucket.webres/static/ --recursive
+        aws s3 cp website/static s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/sveltekit/static/ --recursive
+        aws s3 cp website/static s3://${{ vars.S3_WEBRES_BUCKET }}/dev/static/ --recursive
     - name: Copy package.json(s) to S3
       run: |
-        aws s3 cp website/package.json s3://lernib-bucket.build/ec2/sveltekit/artifacts/package.json
-        aws s3 cp api/package.json s3://lernib-bucket.build/ec2/api/artifacts/package.json
+        aws s3 cp website/package.json s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/sveltekit/artifacts/package.json
+        aws s3 cp api/package.json s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/api/artifacts/package.json
 
   deploy:
     name: Deploy to AWS
     needs: build
     runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
+    environment: Development
     permissions:
       id-token: write
       contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -81,11 +80,12 @@ jobs:
       - name: Create bundle
         run: python aws/codedeploy/prepare_dev.py
       - name: Upload CodeDeploy bundle
-        run: aws s3 cp aws/codedeploy/archive_dev.zip s3://lernib-bucket.build/codedeploy/archive_dev.zip
+        run: aws s3 cp aws/codedeploy/archive_dev.zip s3://${{ vars.S3_BUILD_BUCKET }}/codedeploy/archive_dev.zip
       - name: Create Deployment
         run: |
           aws deploy create-deployment \
             --application-name "LernibDeploy-Website" \
-            --deployment-group-name "LernibDeployGroup-DevWebsite" \
-            --s3-location bucket=lernib-bucket.build,bundleType=zip,key=codedeploy/archive_dev.zip \
+            --deployment-group-name "LernibDeployGroup-Website" \
+            --s3-location bucket=${{ vars.S3_BUILD_BUCKET }},bundleType=zip,key=codedeploy/archive_dev.zip \
             --ignore-application-stop-failures
+  
