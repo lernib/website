@@ -17,13 +17,13 @@
     "@fullcalendar/list": "^6.1.10",
     "@fullcalendar/timegrid": "^6.1.10",
     "@lernib/sass-styling": "^0.1.0",
-    "@lernib/svelte-components": "^0.0.1",
     "@lernib/ts-types": "^0.0.0",
     "@sveltejs/adapter-auto": "^3.0.0",
     "@sveltejs/adapter-node": "^4.0.1",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@types/eslint": "8.56.0",
+    "@types/luxon": "^3.4.2",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.56.0",
@@ -40,7 +40,8 @@
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.503.1",
     "aws-jwt-verify": "^4.0.0",
-    "luxon": "^3.4.4"
+    "luxon": "^3.4.4",
+    "svelty-picker": "^5.2.5"
   },
   "nx": {
     "targets": {
