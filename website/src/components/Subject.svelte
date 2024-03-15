@@ -4,20 +4,23 @@
 </script>
 
 <div class="component">
-  <div class="top">
-    <img {src} alt="Benefit Icon" />
-    <h1>{title}</h1>
+  <img {src} alt="Benefit Icon" />
+  <h1>{title}</h1>
+  <div class="desc">
+    <slot />
   </div>
-  <slot />
 </div>
 
 <style lang="scss">
   @use "@lernib/sass-styling/config";
 
   .component {
-    display: flex;
-    flex-direction: column;
-    row-gap: 0.5rem;
+    display: grid;
+    grid-template-areas:
+      "img title"
+      "x desc";
+    grid-template-rows: 2.5rem 1fr;
+    column-gap: 2rem;
 
     justify-content: center;
     align-items: center;
@@ -33,16 +36,17 @@
     }
   }
 
+  img {
+    grid-area: img;
+  }
+
   h1 {
     font-size: 1.5rem;
     font-weight: bold;
+    grid-area: title;
   }
 
-  .top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    column-gap: 2rem;
+  .desc {
+    grid-area: desc;
   }
 </style>

@@ -138,10 +138,28 @@
       to help you reach your goals with confidence.
     </p>
   </div>
-  <div class="col">
-    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Computer Science" />
-    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="SAT tutoring" />
-    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Study skills support" />
+  <div class="col col-subjects">
+    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Computer Science">
+      We teach like a caring parent,
+      <br />
+      and never like a monotone
+      <br />
+      lecture hall professor.
+    </Subject>
+    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="SAT tutoring">
+      We teach like a caring parent,
+      <br />
+      and never like a monotone
+      <br />
+      lecture hall professor.
+    </Subject>
+    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Study skills support">
+      We teach like a caring parent,
+      <br />
+      and never like a monotone
+      <br />
+      lecture hall professor.
+    </Subject>
   </div>
 </div>
 <!-- <div class="our-aim">
@@ -205,6 +223,7 @@
 
     margin-top: 2.5rem;
     padding: 4rem;
+    padding-bottom: 7rem;
 
     @include config.for-size(tablet-landscape-up) {
       justify-content: center;
@@ -257,7 +276,7 @@
     flex-grow: 1;
   }
 
-  .hero-promo {
+  /* .hero-promo {
     width: 100%;
     padding: 1em 0;
     background-color: config.$color4;
@@ -278,7 +297,7 @@
     > a {
       display: inline;
     }
-  }
+  } */
 
   .benefits {
     width: fit-content;
@@ -346,11 +365,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: start;
-    padding: 4rem 3rem 3rem;
-    column-gap: 4rem;
+    padding: 5rem 3rem 3rem;
+    column-gap: 8rem;
 
     position: relative;
-    top: -35px;
+    top: -50px;
     
     h2 {
       font-size: 2rem;
@@ -368,6 +387,10 @@
       flex-direction: column;
       justify-content: start;
       align-items: start;
+    }
+
+    > .col-subjects {
+      row-gap: 2rem;
     }
   }
 
@@ -432,9 +455,9 @@
     }
   }
 
-  .promo-link {
-    color: blue;
-  }
+  // .promo-link {
+  //   color: blue;
+  // }
 
   @mixin title-span($col) {
     border: 3px dashed $col;
