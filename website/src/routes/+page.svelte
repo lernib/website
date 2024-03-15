@@ -10,7 +10,7 @@
   <title>Homepage | Lernib</title>
 </svelte:head>
 
-<PageHero>
+<PageHero noImage>
   <div class="hero-center">
     <div class="hero-center-col">
       <h1>
@@ -39,18 +39,18 @@
         <br />
         dedicated tutoring support built just for you.
       </h2>
-      <a href="/about">Learn More</a>
+      <a href="/about">Get Started Today</a>
     </div>
     <div class="hero-image" />
   </div>
-  <span class="hero-promo">
+  <!-- <span class="hero-promo">
     Get your first session free of charge.
     <br class="mobile" />
     <a href="/contact" class="promo-link">
       Contact us
     </a>
     to get started.
-  </span>
+  </span> -->
 </PageHero>
 <div class="benefits">
   <div>
@@ -182,7 +182,7 @@
     align-items: start;
 
     margin-top: 2.5rem;
-    padding: 2rem;
+    padding: 4rem;
 
     @include config.for-size(tablet-landscape-up) {
       justify-content: center;
