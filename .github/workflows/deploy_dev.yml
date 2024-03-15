@@ -85,7 +85,7 @@ jobs:
         run: |
           aws deploy create-deployment \
             --application-name "LernibDeploy-Website" \
-            --deployment-group-name "LernibDeployGroup-Website" \
+            --deployment-group-name "LernibDeployGroup-DevWebsite" \
             --s3-location bucket=${{ vars.S3_BUILD_BUCKET }},bundleType=zip,key=codedeploy/archive_dev.zip \
             --ignore-application-stop-failures
   
