@@ -12,23 +12,36 @@
 
 <PageHero>
   <div class="hero-center">
-    <h1>
-      Learn <span class="title-span n1">faster</span> and
-      <br class="nomobile tablet-portrait n2" />
-      <span class="title-span n2">better</span>
-      <br class="nomobile notablet-portrait" />
-      through personalized
-      <br />
-      tutoring
-    </h1>
-    <h2>
-      Connect with excellent tutors on our platform. Learn the way
-      <br />
-      you want, wherever and however you like. Our students
-      <br />
-      consistently ace their exams!
-    </h2>
-    <a href="/about">Learn More</a>
+    <div class="hero-center-col">
+      <h1>
+        <!-- Learn <span class="title-span n1">faster</span> and
+        <br class="nomobile tablet-portrait n2" />
+        <span class="title-span n2">better</span>
+        <br class="nomobile notablet-portrait" />
+        through personalized
+        <br />
+        tutoring -->
+        Helping you reach
+        <br />
+        your learning goals
+        <br />
+        - one step at a time.
+      </h1>
+      <h2>
+        <!-- Connect with excellent tutors on our platform. Learn the way
+        <br />
+        you want, wherever and however you like. Our students
+        <br />
+        consistently ace their exams! -->
+        Going for your goals can be overwhelming. We
+        <br />
+        help you get it done one step at a time, with
+        <br />
+        dedicated tutoring support built just for you.
+      </h2>
+      <a href="/about">Learn More</a>
+    </div>
+    <div class="hero-image" />
   </div>
   <span class="hero-promo">
     Get your first session free of charge.
@@ -161,52 +174,65 @@
 
   .hero-center {
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-self: stretch;
 
+    display: flex;
+    flex-direction: row;
     justify-content: start;
+    align-items: start;
+
     margin-top: 2.5rem;
+    padding: 2rem;
 
     @include config.for-size(tablet-landscape-up) {
       justify-content: center;
       margin-top: 0;
     }
-    
-    > h1 {
-      font-size: 2.5rem;
-      text-align: center;
-      font-family: "Filson Pro", sans-serif;
 
-      @include config.for-size(tablet-portrait-up) {
-        font-size: 4rem;
+    .hero-center-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+
+      > h1 {
+        font-size: 2.5rem;
+        text-align: start;
+        font-family: "Filson Pro", sans-serif;
+
+        @include config.for-size(tablet-portrait-up) {
+          font-size: 4rem;
+        }
       }
+      
+      > h2 {
+        font-size: 1.25rem;
+        text-align: start;
+        margin: 0 2rem;
+        margin-top: 1.5rem;
 
-      @include config.for-size(tablet-landscape-up) {
-        font-size: 5rem;
+        @include config.for-size(tablet-portrait-up) {
+          font-size: 1.5rem;
+          margin: 0;
+          margin-top: 1.5rem;
+        }
+
+      }
+      
+      > a {
+        background-color: config.$color2;
+        color: config.$color1;
+        font-weight: bold;
+        padding: 1rem 1.5rem;
+        border-radius: 9999px;
+        margin-top: 2rem;
+        font-size: 1.1rem;
       }
     }
-    
-    > h2 {
-      font-size: 1.25rem;
-      text-align: center;
-      margin: 0 2rem;
-      margin-top: 1.5rem;
+  }
 
-      @include config.for-size(tablet-portrait-up) {
-        font-size: 1.5rem;
-      }
-    }
-    
-    > a {
-      background-color: config.$color2;
-      color: config.$color1;
-      font-weight: bold;
-      padding: 1rem 1.5rem;
-      border-radius: 9999px;
-      margin-top: 2rem;
-      font-size: 1.1rem;
-    }
+  .hero-image {
+    flex-grow: 1;
   }
 
   .hero-promo {
@@ -358,16 +384,16 @@
     background-position: 0px 0px, 200px 100px, 0px 100px, 200px 0px;
   }
 
-  .title-span.n1 {
-    @include title-span(config.$color3);
-  }
+  // .title-span.n1 {
+  //   @include title-span(config.$color3);
+  // }
 
-  .title-span.n2 {
-    @include title-span(config.$color5);
-    margin-top: 1rem;
+  // .title-span.n2 {
+  //   @include title-span(config.$color5);
+  //   margin-top: 1rem;
 
-    @include config.for-size(tablet-landscape-up) {
-      margin-top: 0;
-    }
-  }
+  //   @include config.for-size(tablet-landscape-up) {
+  //     margin-top: 0;
+  //   }
+  // }
 </style>
