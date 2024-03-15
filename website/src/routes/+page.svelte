@@ -173,6 +173,7 @@
   @use "sass:color";
 
   .hero-center {
+    background-color: color.adjust(config.$color1, $lightness: -5%);
     flex-grow: 1;
     align-self: stretch;
 
@@ -259,13 +260,18 @@
   }
 
   .benefits {
-    width: 100vw;
+    width: fit-content;
     background-color: config.$color1_2;
     display: flex;
     justify-content: center;
     align-items: start;
+    padding: 0 3rem;
     padding-top: 2rem;
     column-gap: 4rem;
+
+    position: relative;
+    top: -25px;
+    border: 1px solid black;
 
     height: fit-content;
     flex-direction: column;
