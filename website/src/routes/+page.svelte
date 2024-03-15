@@ -174,21 +174,12 @@
   </div>
 </div> -->
 <div class="success">
-  <h1>Success stories from past students</h1>
+  <h1>
+    Student success is
+    <br />
+    the goal for us
+  </h1>
   <div class="tiles">
-    <SuccessTile first>
-      <span>
-        Lernib has successfully
-        <br />
-        tutored many
-        <br />
-        students to achieve
-        <br />
-        their goals and unlock
-        <br />
-        their full potential.
-      </span>
-    </SuccessTile>
     <SuccessTile name="Logan Horton">
       Logan was hesitant to work with a tutor but
       after meeting Carlos he was more optimistic
@@ -204,6 +195,9 @@
       become interested in codine through coding games.
     </SuccessTile>
   </div>
+  <a href="/success">
+    See More
+  </a>
 </div>
 <Footer />
 
@@ -430,28 +424,27 @@
     
     h1 {
       text-align: center;
-      font-size: 1.3rem;
+      font-size: 2rem;
       font-weight: bold;
       margin-bottom: 3rem;
     }
 
     .tiles {
       width: fit-content;
-      display: grid;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
       margin: 0 3rem;
       gap: 1rem;
-      grid-template-columns: 1fr;
-      grid-template-rows: repeat(3, 1fr);
+    }
 
-      @include config.for-size(tablet-portrait) {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-      }
-
-      @include config.for-size(tablet-landscape-up) {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: 1fr;
-      }
+    > a {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      border: 2px solid black;
+      padding: 0.75rem 1.5rem;
+      font-weight: bold;
     }
   }
 
