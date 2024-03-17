@@ -24,6 +24,7 @@
   "workspaces": [
     "api",
     "website",
-    "packages/*"
+    "packages/*",
+    "tools/autopr"
   ]
 }
