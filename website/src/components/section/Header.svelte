@@ -25,7 +25,7 @@
     {/each}
   </nav>
   {#if !$authStore}
-    <a href={getSigninUrl()} class="signin-button">
+    <a href={getSigninUrl()} class="signin-button rightbound">
       Sign In
     </a>
   {:else}
@@ -33,7 +33,7 @@
       <img
         src={localWebresAsset("/avatar.svg")}
         alt="Avatar"
-        class="avatar"
+        class="avatar rightbound"
         slot="focus"
       />
       <a href="/dashboard" class="signedin-button">
@@ -52,10 +52,10 @@
   .header {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: start;
     align-items: center;
-    width: calc(100vw - 3rem);
-    padding: 1.5rem;
+    width: calc(100vw - 5rem);
+    padding: 0.5rem 2.5rem;
     background-color: config.$color1;
   }
 
@@ -68,13 +68,14 @@
     flex-direction: row-reverse;
     justify-content: end;
     align-items: center;
-    column-gap: 2rem;
+    column-gap: 1.5rem;
+    font-weight: bold;
+    margin-left: 3rem;
 
     a {
       padding: 0.5em 1em;
-      border: 3px solid config.$color2;
-      border-radius: 9999px;
-      font-weight: bold;
+//      border: 3px solid config.$color2;
+//      border-radius: 9999px;
     }
   }
 
@@ -99,5 +100,9 @@
 
   .avatar {
     height: 3rem;
+  }
+
+  .rightbound {
+    margin-left: auto;
   }
 </style>
