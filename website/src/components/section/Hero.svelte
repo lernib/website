@@ -5,7 +5,7 @@
   export let noImage = false;
 </script>
 
-<div class="hero {noImage || 'with-image'}" style="{half ? '--height: 50vh' : '--height: 100vh'}">
+<div class="hero {noImage || 'with-image'}" style="{half ? '--height: 50vh' : '--height: fit-content'}">
   <PageHeader />
   <slot />
 </div>

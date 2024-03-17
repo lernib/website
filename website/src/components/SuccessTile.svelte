@@ -1,63 +1,49 @@
 <script lang="ts">
   export let name: string = "";
-  export let first = false;
 </script>
 
 <div>
-  <slot />
   <span class={name ? "name" : ""}>
-    {#if !first}
-      {name}
-    {/if}
+    {name}
   </span>
+  <hr />
+  <p>
+    <slot />
+  </p>
 </div>
 
 <style lang="scss">
   @use "@lernib/sass-styling/config";
+  @use "sass:color";
 
   div {
     max-width: 350px;
-    border-radius: 2rem;
     font-size: 1.5rem;
     padding: 2rem;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: config.$color3;
+    background-color: color.adjust(config.$color1, $lightness: -75%);
     color: config.$color1;
 
-    &:nth-child(n+2) {
-      color: black;
+    font-size: 1.25rem;
+    justify-content: start;
+    align-items: start;
+
+    align-self: stretch;
+
+    hr {
+      width: 100%;
+      margin: 1rem 0;
     }
 
-    &:nth-child(2) {
-      background-color: config.$color2_light;
-    }
+    .name {
+      font-weight: bold;
+      display: block;
 
-    &:nth-child(3) {
-      background-color: config.$color5_light;
-    }
-
-    &:not(:first-child) {
-      font-size: 1.25rem;
-      justify-content: start;
-      align-items: start;
-
-      .name {
-        margin-top: auto;
-        font-weight: bold;
-        display: block;
-
-        @include config.for-size(phone-only) {
-          padding-top: 2rem;
-        }
+      @include config.for-size(phone-only) {
+        padding-top: 2rem;
       }
-    }
-
-    @include config.for-size(tablet-portrait-up) {
-      aspect-ratio: 1 / 1;
     }
   }
 </style>
