@@ -1,6 +1,7 @@
 {
   "name": "@lernib/autopr",
   "private": true,
+  "main": "dist/index.js",
   "scripts": {
     "build": "ncc build src/index.ts -o dist"
   },
@@ -10,6 +11,7 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
-    "@octokit/rest": "^20.0.2"
+    "@octokit/rest": "^20.0.2",
+    "dotenv": "^16.4.5"
   }
 }
