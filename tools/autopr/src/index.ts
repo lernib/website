@@ -1,8 +1,9 @@
 import { Octokit } from '@octokit/rest';
 import { cac } from 'cac';
-import { loadenv, getenv } from './env';
+import { getenv, globalCtx } from './env';
+import { config } from './config';
 
-loadenv();
+await globalCtx();
 
 const cli = cac('autopr');
 cli.option('--github <token>', 'GitHub authentication token');
@@ -31,4 +32,8 @@ async function get_all_branches() {
   }).then((res) => res.data)
 }
 
-console.info(await get_all_branches())
+async function on_push() {
+  console.info(await get_all_branches())
+}
+
+console.info(await config())
