@@ -1,20 +1,10 @@
 import { Octokit } from '@octokit/rest';
 import { cac } from 'cac';
-import { config as dotenvConfig } from 'dotenv';
+import { loadenv, getenv } from './env';
 
-function load_dotenv() {
-  const res = dotenvConfig();
-
-  if (res.error) {
-    console.error(res.error);
-    process.exit(1);
-  }
-}
-
-load_dotenv();
+loadenv();
 
 const cli = cac('autopr');
-
 cli.option('--github <token>', 'GitHub authentication token');
 
 const parsed = cli.parse();
@@ -24,17 +14,7 @@ const octokit = new Octokit({
   auth
 });
 
-function env_required(key: string): string {
-  const res = process.env[key];
-
-  if (!res) {
-    throw new Error(`Environment variable ${key} not set.`);
-  }
-
-  return res;
-}
-
-const [REPO_OWNER, REPO_NAME] = env_required('GITHUB_REPOSITORY').split('/');
+const [REPO_OWNER, REPO_NAME] = getenv('GITHUB_REPOSITORY').split('/');
 // const BRANCH = env_required('GITHUB_REF_NAME');
 // const ROOT = env_required('GITHUB_WORKSPACE');
 
