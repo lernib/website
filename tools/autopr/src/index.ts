@@ -1,3 +1,4 @@
+import * as actionsCore from '@actions/core';
 import * as github from '@actions/github';
 import { cac } from 'cac';
 import { globalCtx } from './env';
@@ -41,7 +42,7 @@ async function get_all_branches() {
 
 async function fully_merge_pr(head: string, base: string) {
   if (simulate) {
-    console.info(`[GITSIM] Create pull request ${head} => ${base}`);
+    actionsCore.info(`[GITSIM] Create pull request ${head} => ${base}`);
     return;
   }
 
@@ -55,16 +56,16 @@ async function fully_merge_pr(head: string, base: string) {
 
   // null does NOT mean 'not mergeable', only false means that
   if (pr.data.mergeable === false) {
-    console.warn(`Could not merge sync-fork: ${head} => ${base}`);
+    actionsCore.info(`Could not merge sync-fork: ${head} => ${base}`);
   } else {
     await ghub.rest.pulls.merge({
       owner: gcontext.repo.owner,
       repo: gcontext.repo.repo,
       pull_number: pr.data.number
     }).then(() => {
-      console.info(`Successfully merged: ${head} => ${base}`)
+      actionsCore.info(`Successfully merged: ${head} => ${base}`)
     }).catch(() => {
-      console.warn(`Could not merge sync-fork: ${head} => ${base}`);
+      actionsCore.info(`Could not merge sync-fork: ${head} => ${base}`);
     })
   }
 }
@@ -89,10 +90,10 @@ async function on_push() {
   const affects = getAffects(cfg, names, pr_base.ref)
     .filter(name => name != last_pr?.head.ref);
   
-  console.log(`Creating sync-pull requests for ${affects.length} branches`)
+  actionsCore.info(`Creating sync-pull requests for ${affects.length} branches`)
 
   if (simulate) {
-    console.warn(`Push event is simulated, no sync-pulls sent to GitHub`);
+    actionsCore.info(`Push event is simulated, no sync-pulls sent to GitHub`);
   }
 
   // Create pull requests
