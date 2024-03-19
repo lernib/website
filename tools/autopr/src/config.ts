@@ -2,12 +2,16 @@ import { globalCtx } from "./env";
 import * as fs from 'fs/promises';
 import * as path from 'path';
 
-async function config_path(): Promise<string> {
-  return path.join((await globalCtx()).root, '.github/autopr.conf');
+interface Config {
+  affects: Record<string, string>
 }
 
-export async function config(): Promise<string> {
+async function config_path(): Promise<string> {
+  return path.join((await globalCtx()).root, '.github/autopr.json');
+}
+
+export async function config(): Promise<Config> {
   const contents = await fs.readFile(await config_path(), 'utf-8');
 
-  return contents;
+  return JSON.parse(contents);
 }
