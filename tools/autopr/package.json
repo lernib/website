@@ -3,7 +3,7 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "build": "ncc build src/index.ts -o dist"
+    "build": "ncc build -s src/index.ts -o dist"
   },
   "devDependencies": {
     "@actions/core": "^1.10.1",
