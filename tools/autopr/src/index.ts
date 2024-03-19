@@ -18,6 +18,8 @@ const simulate: boolean = parsed.options.simulate
 const ghub = github.getOctokit(auth);
 const gcontext = github.context;
 
+actionsCore.info(`Repository: ${gcontext.repo.owner}/${gcontext.repo.repo}`);
+
 async function get_last_pr() {
   // Get pull request with correct sha
   const resp = await ghub.rest.pulls.list({
@@ -71,6 +73,8 @@ async function fully_merge_pr(head: string, base: string) {
 }
 
 async function on_push() {
+  actionsCore.info('Running push...')
+
   // Get config
   const cfg = await config();
 
