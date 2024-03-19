@@ -86,7 +86,8 @@ async function on_push() {
     .then(p => p.data);
 
   const names = branches.map(p => p.name);
-  const affects = getAffects(cfg, names, pr_base.ref);
+  const affects = getAffects(cfg, names, pr_base.ref)
+    .filter(name => name != last_pr?.head.ref);
   
   console.log(`Creating sync-pull requests for ${affects.length} branches`)
 
