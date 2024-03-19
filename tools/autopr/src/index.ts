@@ -1,4 +1,4 @@
-import { Octokit } from '@octokit/rest';
+import * as github from '@actions/github';
 import { cac } from 'cac';
 import { getenv, globalCtx } from './env';
 import { config } from './config';
@@ -6,26 +6,22 @@ import { config } from './config';
 await globalCtx();
 
 const cli = cac('autopr');
-cli.option('--github <token>', 'GitHub authentication token');
+cli.option('github <token>', 'GitHub authentication token');
+cli.option('last-pr <number>', 'Number of the last pull request');
 
 const parsed = cli.parse();
 const auth: string = process.env.AUTOPR_PAT || parsed.options.github;
 
-const octokit = new Octokit({
-  auth
-});
+const ghub = github.getOctokit(auth);
+const gcontext = github.context;
 
-const [REPO_OWNER, REPO_NAME] = getenv('GITHUB_REPOSITORY').split('/');
-// const BRANCH = env_required('GITHUB_REF_NAME');
-// const ROOT = env_required('GITHUB_WORKSPACE');
-
-console.info(`Repository owner: ${REPO_OWNER}`)
-console.info(`Repository name: ${REPO_NAME}`)
+console.info(`Repository owner: ${gcontext.repo.owner}`)
+console.info(`Repository name: ${gcontext.repo.repo}`)
 
 async function get_all_branches() {
-  return await octokit.request('GET /repos/{owner}/{repo}/branches', {
-    owner: REPO_OWNER,
-    repo: REPO_NAME,
+  return await ghub.request('GET /repos/{owner}/{repo}/branches', {
+    owner: gcontext.repo.owner,
+    repo: gcontext.repo.repo,
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
     }
@@ -37,3 +33,5 @@ async function on_push() {
 }
 
 console.info(await config())
+
+await on_push();
