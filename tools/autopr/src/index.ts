@@ -58,7 +58,7 @@ async function fully_merge_pr(head: string, base: string) {
 
   // null does NOT mean 'not mergeable', only false means that
   if (pr.data.mergeable === false) {
-    actionsCore.info(`Could not merge sync-fork: ${head} => ${base}`);
+    actionsCore.warning(`Could not merge sync-fork: ${head} => ${base}`);
   } else {
     await ghub.rest.pulls.merge({
       owner: gcontext.repo.owner,
@@ -97,7 +97,7 @@ async function on_push() {
   actionsCore.info(`Creating sync-pull requests for ${affects.length} branches`)
 
   if (simulate) {
-    actionsCore.info(`Push event is simulated, no sync-pulls sent to GitHub`);
+    actionsCore.warning(`Push event is simulated, no sync-pulls sent to GitHub`);
   }
 
   // Create pull requests

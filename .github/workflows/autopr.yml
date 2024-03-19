@@ -27,4 +27,4 @@ jobs:
         cd tools/autopr
         npm i
         npm run build
-        node . --github ${{ secrets.AUTOPR_PAT }} --simulate
+        node . --github ${{ secrets.AUTOPR_PAT }}
