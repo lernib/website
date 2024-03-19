@@ -14,7 +14,7 @@ async function init_globalCtx(): Promise<GlobalCtx> {
   
   return {
     // The root of the repository is the same folder with the package-lock.json in it
-    root: await package_lock_json_dir()
+    root: process.env.GITHUB_WORKSPACE || await package_lock_json_dir()
   };
 }
 
