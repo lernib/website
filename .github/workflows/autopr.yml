@@ -27,4 +27,5 @@ jobs:
         cd tools/autopr
         npm i
         npm run build
-        node . --github ${{ secrets.AUTOPR_PAT }}
+    - name: Run AutoPR
+      run: node $GITHUB_WORKSPACE/tools/autopr/dist/index.js --github ${{ secrets.AUTOPR_PAT }}
