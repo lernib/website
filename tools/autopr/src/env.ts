@@ -21,10 +21,11 @@ async function init_globalCtx(): Promise<GlobalCtx> {
 function loadenv() {
   const res = dotenvConfig();
 
-  if (res.error) {
-    console.error(res.error);
-    process.exit(1);
-  }
+  // Give error when local, make this dynamic somehow
+  // if (res.error) {
+  //   console.error(res.error);
+  //   process.exit(1);
+  // }
 }
 
 export function getenv(name: string): string {
