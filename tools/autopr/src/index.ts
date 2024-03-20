@@ -1,56 +1,48 @@
-import * as actionsCore from '@actions/core';
-import * as github from '@actions/github';
-import { cac } from 'cac';
 import { globalCtx } from './env';
 import { config, getAffects } from './config';
 
-await globalCtx();
 
-const cli = cac('autopr');
-cli.option('github <token>', 'GitHub authentication token');
-cli.option('simulate', 'Simulate pull requests instead of actually doing it');
+const context = await globalCtx();
 
-const parsed = cli.parse();
+const API = context.github.api;
+const ACTCTX = context.github.context;
+const OWNER = context.github.context.repo.owner;
+const REPO  = context.github.context.repo.repo;
 
-const auth: string = process.env.AUTOPR_PAT || parsed.options.github;
-const simulate: boolean = parsed.options.simulate
+context.info(`Repository: ${OWNER}/${REPO}`);
 
-const ghub = github.getOctokit(auth);
-const gcontext = github.context;
-
-actionsCore.info(`Repository: ${gcontext.repo.owner}/${gcontext.repo.repo}`);
-
-async function get_last_pr() {
+type MergedPr = Awaited<ReturnType<typeof API.rest.pulls.list>>["data"][number]
+async function get_merged_pr(): Promise<MergedPr | null> {
   // Get pull request with correct sha
-  const resp = await ghub.rest.pulls.list({
-    owner: gcontext.repo.owner,
-    repo: gcontext.repo.repo,
+  const resp = await API.rest.pulls.list({
+    owner: OWNER,
+    repo: REPO,
     state: 'closed',
     sort: 'updated',
     direction: 'desc',
     per_page: 100
   });
 
-  const pull = resp.data.find(p => p.merge_commit_sha == gcontext.sha);
+  const pull = resp.data.find(p => p.merge_commit_sha == ACTCTX.sha);
   return pull || null;
 }
 
 async function get_all_branches() {
-  return ghub.request('GET /repos/{owner}/{repo}/branches', {
-    owner: gcontext.repo.owner,
-    repo: gcontext.repo.repo
+  return API.request('GET /repos/{owner}/{repo}/branches', {
+    owner: OWNER,
+    repo: REPO
   });
 }
 
 async function fully_merge_pr(head: string, base: string) {
-  if (simulate) {
-    actionsCore.info(`[GITSIM] Create pull request ${head} => ${base}`);
+  if (context.simulate) {
+    context.info(`[GITSIM] Create pull request ${head} => ${base}`);
     return;
   }
 
-  const pr = await ghub.rest.pulls.create({
-    owner: gcontext.repo.owner,
-    repo: gcontext.repo.repo,
+  const pr = await API.rest.pulls.create({
+    owner: OWNER,
+    repo: REPO,
     head,
     base,
     title: `AutoPR ${head} => ${base}`
@@ -58,32 +50,32 @@ async function fully_merge_pr(head: string, base: string) {
 
   // null does NOT mean 'not mergeable', only false means that
   if (pr.data.mergeable === false) {
-    actionsCore.warning(`Could not merge sync-fork: ${head} => ${base}`);
+    context.warn(`Could not merge sync-fork: ${head} => ${base}`);
   } else {
-    await ghub.rest.pulls.merge({
-      owner: gcontext.repo.owner,
-      repo: gcontext.repo.repo,
+    await API.rest.pulls.merge({
+      owner: OWNER,
+      repo: REPO,
       pull_number: pr.data.number
     }).then(() => {
-      actionsCore.info(`Successfully merged: ${head} => ${base}`)
+      context.info(`Successfully merged: ${head} => ${base}`)
     }).catch(() => {
-      actionsCore.info(`Could not merge sync-fork: ${head} => ${base}`);
+      context.info(`Could not merge sync-fork: ${head} => ${base}`);
     })
   }
 }
 
 async function on_push() {
-  actionsCore.info('Running push...')
+  context.info('Running push...')
 
   // Get config
   const cfg = await config();
 
   // Get last pull request
-  const last_pr = await get_last_pr();
+  const last_pr = await get_merged_pr();
   const pr_base = last_pr?.base;
 
   // Pull request base must match current branch
-  if (pr_base?.ref != gcontext.ref) {
+  if (pr_base?.ref != ACTCTX.ref) {
     return null;
   }
 
@@ -94,10 +86,10 @@ async function on_push() {
   const affects = getAffects(cfg, names, pr_base.ref)
     .filter(name => name != last_pr?.head.ref);
   
-  actionsCore.info(`Creating sync-pull requests for ${affects.length} branches`)
+  context.info(`Creating sync-pull requests for ${affects.length} branches`)
 
-  if (simulate) {
-    actionsCore.warning(`Push event is simulated, no sync-pulls sent to GitHub`);
+  if (context.simulate) {
+    context.warn(`Push event is simulated, no sync-pulls sent to GitHub`);
   }
 
   // Create pull requests
