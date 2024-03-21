@@ -1,8 +1,6 @@
-import { dev } from '$app/environment'
-import { PUBLIC_DOMAIN, PUBLIC_API_DOMAIN } from '$env/static/public'
+import { PUBLIC_DOMAIN, PUBLIC_API_DOMAIN, PUBLIC_WEBRES_ROOT } from '$env/static/public'
 
 export { PUBLIC_API_DOMAIN as API_DOMAIN }
-export const WEBRES_DOMAIN = dev ? '' : 'https://webres.lernib.com'
 export const COGNITO_BASE_URI = 'https://auth.lernib.com'
 export const COGNITO_CLIENT_ID = '5gcpvrejmvp27lukikktdi021p'
 export const COGNITO_USER_POOL_ID = 'us-east-1_YGpBl2H1U'
@@ -47,5 +45,5 @@ export const TIMEZONES = {
 }
 
 export function localWebresAsset(url: string): string {
-  return !dev ? (`${WEBRES_DOMAIN}/static${url}`) : url
+  return `${PUBLIC_WEBRES_ROOT}${url}`
 }
