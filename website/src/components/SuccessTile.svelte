@@ -5,6 +5,7 @@
 <div>
   <span class={name ? "name" : ""}>
     {name}
+    <span class="stars">⭐⭐⭐⭐⭐</span>
   </span>
   <hr />
   <p>
@@ -23,8 +24,8 @@
 
     display: flex;
     flex-direction: column;
-    background-color: color.adjust(config.$color1, $lightness: -75%);
-    color: config.$color1;
+    background-color: color.adjust(config.$color1, $lightness: -20%);
+    color: black;
 
     font-size: 1.25rem;
     justify-content: start;
@@ -38,12 +39,22 @@
     }
 
     .name {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+
       font-weight: bold;
-      display: block;
 
       @include config.for-size(phone-only) {
         padding-top: 2rem;
       }
     }
+  }
+
+  .stars {
+    display: block;
+    letter-spacing: 0.5ch;
   }
 </style>

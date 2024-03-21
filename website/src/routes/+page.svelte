@@ -174,11 +174,11 @@
   </div>
 </div> -->
 <div class="success">
-  <h1>
-    Student success is
+  <h2>
+    <span>Student success</span> is
     <br />
-    the goal for us
-  </h1>
+    the goal for me
+  </h2>
   <div class="tiles">
     <SuccessTile name="Logan Horton">
       Logan was hesitant to work with a tutor but
@@ -188,11 +188,10 @@
       Logan and sharing his own experiences in
       learning.
     </SuccessTile>
-    <SuccessTile name="Skylar Peng">
-      Carlos is a very professional tutor.
-      He trained my six-year-old daughter,
-      basic skills of coding and helped her
-      become interested in codine through coding games.
+    <SuccessTile name="Max Doyle">
+      Carlos is easygoing and engages well with my
+      son which makes him more open to learning. We
+      are grateful for his hard work.
     </SuccessTile>
   </div>
   <a href="/success">
@@ -206,7 +205,7 @@
   @use "sass:color";
 
   .hero-center {
-    background-color: color.adjust(config.$color1, $lightness: -5%);
+    background-color: color.adjust(config.$color2, $lightness: 60%);
     flex-grow: 1;
     align-self: stretch;
 
@@ -255,7 +254,7 @@
       }
       
       > a {
-        background-color: color.adjust(config.$color1, $lightness: -70%);
+        background-color: color.adjust(config.$color2, $lightness: -5%);
         color: config.$color1;
         font-weight: bold;
         padding: 1rem 1.5rem;
@@ -294,7 +293,9 @@
   } */
 
   .benefits {
-    $color: color.adjust(config.$color1, $lightness: -20%);
+    $color:
+      // color.adjust(config.$color1, $lightness: -20%);
+      config.$color1;
 
     align-self: stretch;
     background-color: $color;
@@ -309,7 +310,7 @@
     flex-direction: column;
     align-items: center;
 
-    border: 1rem inset color.adjust($color, $lightness: -10%);
+    border-bottom: 1rem inset color.adjust($color, $lightness: -10%);
 
     @include config.for-size(tablet-portrait) {
       flex-direction: row;
@@ -418,9 +419,9 @@
     justify-content: start;
     align-items: center;
     
-    h1 {
+    h2 {
       text-align: center;
-      font-size: 2rem;
+      font-size: 2.25rem;
       font-weight: bold;
       margin-bottom: 3rem;
     }
@@ -441,6 +442,10 @@
       border: 2px solid black;
       padding: 0.75rem 1.5rem;
       font-weight: bold;
+    }
+
+    span {
+      color: config.$color2;
     }
   }
 
