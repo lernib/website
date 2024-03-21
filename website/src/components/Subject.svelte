@@ -23,15 +23,11 @@
       "x desc";
     grid-template-rows: 2.5rem 1fr;
     column-gap: 2rem;
+    row-gap: 1rem;
 
     justify-content: center;
     align-items: center;
     margin-top: 3rem;
-
-    @include config.for-size(tablet-portrait) {
-      justify-content: start;
-      align-items: start;
-    }
 
     @include config.for-size(tablet-landscape-up) {
       margin-top: 0;

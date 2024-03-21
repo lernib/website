@@ -23,9 +23,9 @@
         <br />
         tutoring -->
         Helping you reach
-        <br />
+        <br class="nomobile" />
         your learning goals
-        <br />
+        <br class="nomobile" />
         - one step at a time.
       </h1>
       <h2>
@@ -214,9 +214,12 @@
     justify-content: start;
     align-items: start;
 
-    margin-top: 2.5rem;
     padding: 4rem;
     padding-bottom: 7rem;
+
+    @include config.for-size(tablet-landscape-up) {
+      margin-top: 2.5rem;
+    }
 
     @include config.for-size(tablet-landscape-up) {
       justify-content: center;
@@ -242,10 +245,10 @@
       > h2 {
         font-size: 1.25rem;
         text-align: start;
-        margin: 0 2rem;
         margin-top: 1.5rem;
 
         @include config.for-size(tablet-portrait-up) {
+          margin: 0 2rem;
           font-size: 1.5rem;
           margin: 0;
           margin-top: 1.5rem;
@@ -347,7 +350,11 @@
       }
     }
 
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
+
+    @include config.for-size(tablet-landscape-up) {
+      padding-bottom: 2rem;
+    }
   }
 
   .subjects {
@@ -356,11 +363,15 @@
     background-color: config.$color2;
     color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: start;
     padding: 5rem 3rem 3rem;
     column-gap: 8rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      flex-direction: row;
+    }
     
     h2 {
       font-size: 2rem;
@@ -429,11 +440,15 @@
     .tiles {
       width: fit-content;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       margin: 0 3rem;
       gap: 1rem;
+
+      @include config.for-size(tablet-portrait-up) {
+        flex-direction: row;
+      }
     }
 
     > a {
