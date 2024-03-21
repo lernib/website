@@ -24,9 +24,12 @@
   @use "sass:color";
 
   div {
-    max-width: 350px;
     font-size: 1.5rem;
     padding: 2rem;
+
+    @include config.for-size(tablet-portrait-up) {
+      max-width: min(350px, 35vw);
+    }
 
     display: flex;
     flex-direction: column;
@@ -49,7 +52,7 @@
       width: 100%;
       flex-direction: row;
       justify-content: space-between;
-      align-items: start;
+      align-items: center;
 
       font-weight: bold;
 

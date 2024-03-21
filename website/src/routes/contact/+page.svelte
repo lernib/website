@@ -59,9 +59,9 @@
     </h1>
     <h2>
       We understand that learning something new isn't easy, and you
-      <br />
+      <br class="nomobile" />
       want a tutor who is just right. We offer the first session free of
-      <br />
+      <br class="nomobile" />
       charge - just send us a message and we will reach out to you.
     </h2>
   </div>
@@ -91,11 +91,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    padding: 2rem;
+
     > h1 {
-      font-size: 5rem;
+      font-size: 3.5rem;
       text-align: center;
       font-family: "Filson Pro", sans-serif;
+
+      @include config.for-size(tablet-portrait-up) {
+        font-size: 5rem;
+      }
     }
     
     > h2 {
