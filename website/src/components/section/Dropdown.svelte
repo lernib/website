@@ -1,8 +1,8 @@
 <script lang="ts">
-
+  export let className = "";
 </script>
 
-<div class="dropdown">
+<div class="dropdown {className}">
   <slot name="focus" />
   <div class="dropdown-contents">
     <slot />
@@ -15,7 +15,7 @@
 
   .dropdown {
     position: relative;
-    display: inline-block;
+    display: block;
 
     &:hover .dropdown-contents {
       display: flex;

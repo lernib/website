@@ -38,15 +38,15 @@ jobs:
     - name: Move configurations
       run: |
         shopt -s dotglob
-        mv -f website/.circe/env/prod/override/.env website
+        mv -f website/.circe/env/dev/override/.env website
     - name: Build SvelteKit
       run: nx run-many -t build,lint
     - name: Remove old artifacts
       run: aws s3 rm s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/ --recursive
     - name: Run package.json mod
       run: |
-        node website/.circe/env/prod/modify/package_json.js
-        node api/.circe/env/prod/modify/package_json.mjs
+        node website/.circe/env/dev/modify/package_json.js
+        node api/.circe/env/dev/modify/package_json.mjs
     - name: Copy build artifacts to S3
       run: |
         aws s3 cp website/build s3://${{ vars.S3_BUILD_BUCKET }}/dev/ec2/sveltekit/artifacts/build/ --recursive

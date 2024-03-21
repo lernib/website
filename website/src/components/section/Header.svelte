@@ -29,11 +29,11 @@
       Sign In
     </a>
   {:else}
-    <Dropdown>
+    <Dropdown className="rightbound">
       <img
         src={localWebresAsset("/avatar.svg")}
         alt="Avatar"
-        class="avatar rightbound"
+        class="avatar"
         slot="focus"
       />
       <a href="/dashboard" class="signedin-button">
@@ -100,9 +100,5 @@
 
   .avatar {
     height: 3rem;
-  }
-
-  .rightbound {
-    margin-left: auto;
   }
 </style>
