@@ -1,11 +1,17 @@
 <script lang="ts">
+    import { localWebresAsset } from "$lib/config";
+
   export let name: string = "";
 </script>
 
 <div>
   <span class={name ? "name" : ""}>
     {name}
-    <span class="stars">⭐⭐⭐⭐⭐</span>
+    <img
+      class="stars"
+      src={localWebresAsset('/five_stars.png')}
+      alt="five stars"
+    />
   </span>
   <hr />
   <p>
@@ -56,5 +62,6 @@
   .stars {
     display: block;
     letter-spacing: 0.5ch;
+    height: 1.25em;
   }
 </style>
