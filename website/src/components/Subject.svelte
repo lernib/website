@@ -14,6 +14,8 @@
 <style lang="scss">
   @use "@lernib/sass-styling/config";
 
+  $head-text-size: 1.5rem;
+
   .component {
     display: grid;
     grid-template-areas:
@@ -38,10 +40,18 @@
 
   img {
     grid-area: img;
+    background-color: config.$color1;
+    padding: 0.5rem;
+
+    $img-size: $head-text-size * 1.5;
+    height: $img-size;
+    width: $img-size;
+
+    border-radius: 1rem;
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: $head-text-size;
     font-weight: bold;
     grid-area: title;
   }

@@ -139,21 +139,21 @@
     </p>
   </div>
   <div class="col col-subjects">
-    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Computer Science">
+    <Subject src={localWebresAsset("/icons/computer_science.svg")} title="Computer Science">
       We teach like a caring parent,
       <br />
       and never like a monotone
       <br />
       lecture hall professor.
     </Subject>
-    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="SAT tutoring">
+    <Subject src={localWebresAsset("/icons/sat.svg")} title="SAT tutoring">
       We teach like a caring parent,
       <br />
       and never like a monotone
       <br />
       lecture hall professor.
     </Subject>
-    <Subject src={localWebresAsset("/icons/accomodating.svg")} title="Study skills support">
+    <Subject src={localWebresAsset("/icons/study_skills.svg")} title="Study skills support">
       We teach like a caring parent,
       <br />
       and never like a monotone
@@ -352,7 +352,7 @@
   .subjects {
     align-self: stretch;
 
-    background-color: color.adjust(config.$color1, $lightness: -70%);
+    background-color: config.$color2;
     color: white;
     display: flex;
     flex-direction: row;
