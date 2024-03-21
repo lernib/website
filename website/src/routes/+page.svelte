@@ -294,8 +294,10 @@
   } */
 
   .benefits {
-    width: fit-content;
-    background-color: color.adjust(config.$color1, $lightness: -20%);
+    $color: color.adjust(config.$color1, $lightness: -20%);
+
+    align-self: stretch;
+    background-color: $color;
     display: flex;
     justify-content: center;
     align-items: start;
@@ -303,13 +305,11 @@
     padding-top: 2rem;
     column-gap: 4rem;
 
-    position: relative;
-    top: -25px;
-    z-index: 1;
-
     height: fit-content;
     flex-direction: column;
     align-items: center;
+
+    border: 1rem inset color.adjust($color, $lightness: -10%);
 
     @include config.for-size(tablet-portrait) {
       flex-direction: row;
@@ -360,9 +360,6 @@
     align-items: start;
     padding: 5rem 3rem 3rem;
     column-gap: 8rem;
-
-    position: relative;
-    top: -50px;
     
     h2 {
       font-size: 2rem;
