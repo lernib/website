@@ -52,7 +52,7 @@
   <title>Contact | Lernib</title>
 </svelte:head>
 
-<PageHero half>
+<PageHero mode='fit'>
   <div class="hero-center">
     <h1>
       Contact Us

@@ -3,7 +3,7 @@
   import Footer from '$components/section/Footer.svelte'
 </script>
 
-<Hero noImage>
+<Hero noImage mode='full'>
   <div class="hero-section">
     <h1>
       Unlocking Potential: Your

@@ -6,25 +6,28 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+  <title>oopsie | Lernib</title>
 </svelte:head>
 
-<span class="emoji">😣</span>
-<h1>
-  Sorry about that!
-</h1>
-<p>
-  {$page.status} {$page.error?.message}
-</p>
+<div class="center">
+  <span class="emoji">😣</span>
+  <h1>
+    Sorry about that!
+  </h1>
+  <p>
+    {$page.status} {$page.error?.message}
+  </p>
+</div>
 
 <style lang="scss">
   @use '@lernib/sass-styling/config';
 
-  :global(.sk-core) {
+  .center {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: config.$color1;
+    height: 100vh;
   }
 
   .emoji {

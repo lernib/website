@@ -8,7 +8,7 @@
   <title>Pricing | Lernib</title>
 </svelte:head>
 
-<PageHero half>
+<PageHero mode='half'>
   <div class="hero-center">
     <h1>
       Plans &amp; Pricing

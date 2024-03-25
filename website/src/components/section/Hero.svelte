@@ -1,11 +1,17 @@
 <script lang="ts">
   import PageHeader from '$components/section/Header.svelte';
 
-  export let half = false;
+  export let mode: 'half' | 'full' | 'fit' = 'fit';
   export let noImage = false;
+
+  const height = {
+    half: '50vh',
+    full: '100vh',
+    fit: 'fit-content'
+  }[mode];
 </script>
 
-<div class="hero {noImage || 'with-image'}" style="{half ? '--height: 50vh' : '--height: fit-content'}">
+<div class="hero {noImage || 'with-image'}" style="--height: {height}">
   <PageHeader />
   <slot />
 </div>
