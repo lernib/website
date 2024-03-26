@@ -1,3 +1,6 @@
+import * as z from 'zod'
+
+
 export enum Timezone {
   EST = "nfive",
   CST = "nsix",
@@ -17,3 +20,20 @@ export interface Notify {
   message: string;
   color: string;
 }
+
+export const StoryCommon = z.object({
+  student: z.string(),
+  subject: z.string()
+});
+
+export const Story = z.union([
+  StoryCommon.extend({
+    review: z.string()
+  }),
+  StoryCommon.extend({
+    theme: z.string()
+  }),
+  StoryCommon.extend({
+    project: z.string()
+  })
+]);

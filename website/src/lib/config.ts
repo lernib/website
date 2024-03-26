@@ -1,10 +1,13 @@
 import { PUBLIC_DOMAIN, PUBLIC_API_DOMAIN, PUBLIC_WEBRES_ROOT } from '$env/static/public'
 
-export { PUBLIC_API_DOMAIN as API_DOMAIN }
 export const COGNITO_BASE_URI = 'https://auth.lernib.com'
 export const COGNITO_CLIENT_ID = '5gcpvrejmvp27lukikktdi021p'
 export const COGNITO_USER_POOL_ID = 'us-east-1_YGpBl2H1U'
 export const DOMAIN_SIGNOUT_URI = new URL('/auth?action=logout', PUBLIC_DOMAIN).toString()
+export {
+  PUBLIC_API_DOMAIN as API_DOMAIN,
+  PUBLIC_DOMAIN as DOMAIN
+}
 
 export function getSigninUrl() {
   const out = new URL('/oauth2/authorize', COGNITO_BASE_URI)

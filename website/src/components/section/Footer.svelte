@@ -15,7 +15,7 @@
     <h2>Browse</h2>
     <a href="/">Home</a>
     <a href="/about">About Us</a>
-    <a href="/contact">Contact Us</a>
+    <a href="/success">Success</a>
   </div>
   <div class="n3">
     <h2>Services</h2>
@@ -23,6 +23,7 @@
   </div>
   <div class="n4">
     <h2>Contact</h2>
+    <a href="/contact">Contact Us</a>
   </div>
 </footer>
 
